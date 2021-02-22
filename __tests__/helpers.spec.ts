@@ -1,4 +1,4 @@
-const { createVinyl, normaliseEOL } = require("./helpers");
+import { normaliseEOL } from "./helpers";
 
 describe("test helpers", () => {
   it("should normalise EOL", () => {

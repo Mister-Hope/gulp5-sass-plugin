@@ -10,21 +10,23 @@ import replaceExtension = require("replace-ext");
 
 const PLUGIN_NAME = "gulp-sass";
 
-interface SassObject {
-  css: string;
-  map: any;
-}
+namespace GulpSass {
+  export interface SassObject {
+    css: string;
+    map: any;
+  }
 
-interface SassError extends Error {
-  messageFormatted: string;
-  messageOriginal: string;
-  file: string;
-  formatted: string;
-  relativePath: string;
+  export interface SassError extends Error {
+    messageFormatted: string;
+    messageOriginal: string;
+    file: string;
+    formatted: string;
+    relativePath: string;
+  }
 }
 
 // Main Gulp Sass function
-const gulpSass = (options: Options, sync = true) =>
+const GulpSass = (options: Options = {}, sync = true) =>
   new Transform({
     objectMode: true,
     transform(chunk, _enc, callback) {
@@ -43,7 +45,7 @@ const gulpSass = (options: Options, sync = true) =>
         return callback(null, chunk);
       }
 
-      const opts = clonedeep(options || {});
+      const opts = clonedeep(options);
 
       opts.data = chunk.contents.toString();
 
@@ -68,7 +70,7 @@ const gulpSass = (options: Options, sync = true) =>
       }
 
       // Handles returning the file to the stream
-      const filePush = (sassObj: SassObject) => {
+      const filePush = (sassObj: GulpSass.SassObject) => {
         let sassMap: { file: string; sources: string[] };
         let sassMapFile;
         let sassFileSrc;
@@ -114,7 +116,7 @@ const gulpSass = (options: Options, sync = true) =>
       };
 
       // Handles error message
-      const errorHandler = (error: SassError) => {
+      const errorHandler = (error: GulpSass.SassError) => {
         const filePath =
           (error.file === "stdin" ? chunk.path : error.file) || chunk.path;
         const relativePath = relative(process.cwd(), filePath);
@@ -131,25 +133,28 @@ const gulpSass = (options: Options, sync = true) =>
       // Sync Sass render
       if (sync)
         try {
-          filePush(gulpSass.compiler.renderSync(opts));
+          filePush(GulpSass.compiler.renderSync(opts));
         } catch (error) {
           return errorHandler(error);
         }
       // Async Sass render
       else
-        gulpSass.compiler.render(opts, (error: SassError, obj: SassObject) => {
-          if (error) return errorHandler(error);
+        GulpSass.compiler.render(
+          opts,
+          (error: GulpSass.SassError, obj: GulpSass.SassObject) => {
+            if (error) return errorHandler(error);
 
-          filePush(obj);
-        });
+            filePush(obj);
+          }
+        );
     },
   });
 
 // Sync Sass render
-gulpSass.sync = (options: Options) => gulpSass(options, true);
+GulpSass.sync = (options?: Options) => GulpSass(options, true);
 
 // Log errors nicely
-gulpSass.logError = function logError(error: SassError) {
+GulpSass.logError = function logError(error: GulpSass.SassError) {
   const message = new PluginError("sass", error.messageFormatted).toString();
 
   process.stderr.write(`${message}\n`);
@@ -157,6 +162,6 @@ gulpSass.logError = function logError(error: SassError) {
 };
 
 // Store compiler in a prop
-gulpSass.compiler = require("sass");
+GulpSass.compiler = require("sass");
 
-module.exports = gulpSass;
+export = GulpSass;

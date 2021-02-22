@@ -1,14 +1,14 @@
-const { join } = require("path");
-const fs = require("fs");
-const sass = require("../dist");
-const rimraf = require("rimraf");
-const gulp = require("gulp");
-const autoprefixer = require("autoprefixer");
-const postcss = require("gulp-postcss");
-const sourcemaps = require("gulp-sourcemaps");
-const tap = require("gulp-tap");
-const globule = require("globule");
-const { createVinyl, normaliseEOL } = require("./helpers");
+import { join } from "path";
+import { statSync } from "fs";
+import sass = require("../src");
+import rimraf = require("rimraf");
+import gulp = require("gulp");
+// import autoprefixer = require("autoprefixer");
+// import postcss = require("gulp-postcss");
+// import sourcemaps = require("gulp-sourcemaps");
+// import tap = require("gulp-tap");
+// import globule = require("globule");
+import { createVinyl, normaliseEOL } from "./helpers";
 
 afterAll((done) => {
   rimraf(join(__dirname, "results"), done);
@@ -98,7 +98,7 @@ describe("gulp-sass -- sync compile", () => {
     const errorFile = createVinyl("error.scss");
     const stream = sass.sync();
 
-    stream.on("error", (err) => {
+    stream.on("error", (err: sass.SassError) => {
       // Error must include original error message
       expect(err.messageOriginal).toContain('expected "{".');
       // Error must include relativePath property
@@ -242,7 +242,7 @@ describe("gulp-sass -- sync compile", () => {
       .pipe(gulp.dest(join(__dirname, "results")))
 
       .on("end", () => {
-        const stat = fs.statSync(join(__dirname, "results", "empty.css"));
+        const stat = statSync(join(__dirname, "results", "empty.css"));
         expect(stat.size).toEqual(0);
         done();
       });

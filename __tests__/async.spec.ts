@@ -1,6 +1,6 @@
-const { basename, join } = require("path");
-const sass = require("../dist");
-const { createVinyl, normaliseEOL } = require("./helpers");
+import { basename, join } from "path";
+import sass = require("../src");
+import { createVinyl, normaliseEOL } from "./helpers";
 
 describe("gulp-sass -- async compile", () => {
   it("should pass file when it isNull()", (done) => {
@@ -103,7 +103,7 @@ describe("gulp-sass -- async compile", () => {
     const errorFile = createVinyl("error.scss");
     const stream = sass();
 
-    stream.on("error", (err) => {
+    stream.on("error", (err: sass.SassError) => {
       // Error must include original error message
       expect(err.messageOriginal).toContain('expected "{".');
       // Error must include relativePath property
