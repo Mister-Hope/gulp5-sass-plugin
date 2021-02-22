@@ -1,0 +1,110 @@
+root: true
+
+env:
+  mocha: true
+  node: true
+
+extends:
+  - eslint:recommended
+  - plugin:prettier/recommended
+
+plugins:
+  - prettier
+
+ignorePatterns:
+  - dist/
+
+rules:
+  eqeqeq: error
+  line-comment-position: error
+  no-duplicate-imports: error
+  object-shorthand: error
+  padding-line-between-statements:
+    - error
+    - blankLine: always
+      prev: "*"
+      next: return
+    - blankLine: always
+      prev:
+        - const
+        - let
+      next: "*"
+    - blankLine: any
+      prev:
+        - const
+        - let
+      next:
+        - const
+        - let
+  prefer-destructuring:
+    - error
+    - object: true
+
+  prefer-template: error
+
+overrides:
+  - files:
+      - "*.ts"
+
+    extends:
+      - "plugin:@typescript-eslint/eslint-recommended"
+      - "plugin:@typescript-eslint/recommended"
+      - "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      - plugin:prettier/recommended
+
+    plugins:
+      - "@typescript-eslint"
+
+    parserOptions:
+      parser: "@typescript-eslint/parser"
+      project:
+        - "./tsconfig.json"
+
+    rules:
+      "@typescript-eslint/explicit-function-return-type":
+        - warn
+        - allowTypedFunctionExpressions: true
+
+      "@typescript-eslint/naming-convention":
+        - warn
+        - selector: default
+          format:
+            - camelCase
+          leadingUnderscore: allow
+          trailingUnderscore: allow
+
+        - selector:
+            - variable
+          format:
+            - camelCase
+            - UPPER_CASE
+          leadingUnderscore: allow
+          trailingUnderscore: allow
+
+        - selector:
+            - parameter
+          format:
+            - camelCase
+            - PascalCase
+          leadingUnderscore: allow
+          trailingUnderscore: allow
+
+        - selector:
+            - property
+          format:
+            - camelCase
+            - PascalCase
+            - UPPER_CASE
+          leadingUnderscore: allow
+          trailingUnderscore: allow
+
+        - selector: typeLike
+          format:
+            - PascalCase
+
+      "@typescript-eslint/no-explicit-any":
+        - warn
+        - ignoreRestArgs: true
+
+      "@typescript-eslint/no-unsafe-member-access":
+        - warn
