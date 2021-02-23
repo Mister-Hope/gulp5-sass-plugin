@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions
+    url: https://github.com/mister-hope/gulp-sass/discussions/new
+    about: Please ask questions in Discussion.
+
+  - name: Issues about Dart sass
+    url: https://github.com/sass/sass/issues
+    about: Please ask questions about sass in it's own repo

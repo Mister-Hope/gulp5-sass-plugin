@@ -6,7 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -b tsconfig.project.json",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
     "lint": "prettier --check --write . && eslint . --ext .ts --fix",
+    "lint:check": "prettier --check . && eslint . --ext .ts",
     "test": "jest"
   },
   "repository": {
@@ -22,6 +24,11 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Mister-Hope/gulp-sass/issues"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@types/lodash": "^4.14.168",
@@ -48,6 +55,8 @@
     "@typescript-eslint/eslint-plugin": "4.15.1",
     "@typescript-eslint/parser": "4.15.1",
     "autoprefixer": "9.8.6",
+    "conventional-changelog-cli": "2.1.1",
+    "cz-conventional-changelog": "3.3.0",
     "del": "^6.0.0",
     "eslint": "7.20.0",
     "eslint-config-prettier": "8.0.0",

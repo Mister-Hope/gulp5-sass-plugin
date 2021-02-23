@@ -1,1 +1,8 @@
-tests/
+.github/
+coverage/
+dist/
+__tests__/
+
+.eslintrc.yml
+.prettierignore
+tsconfig.*
