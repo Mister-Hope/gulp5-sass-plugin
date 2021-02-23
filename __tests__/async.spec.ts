@@ -1,14 +1,14 @@
 import { basename, join } from "path";
-import { SassError, gulpSass } from "../src";
+import { SassError, sass } from "../src";
 import { createVinyl, normaliseEOL } from "./helpers";
 import Vinyl = require("vinyl");
 
 describe("gulp-sass -- async compile", () => {
   it("should pass file when it isNull()", (done) => {
-    const stream = gulpSass.async();
     const emptyFile = {
       isNull: (): boolean => true,
     };
+    const stream = sass();
 
     stream.on("data", (data: Vinyl.BufferFile) => {
       expect(data.isNull()).toEqual(true);
@@ -19,11 +19,11 @@ describe("gulp-sass -- async compile", () => {
   });
 
   it("should emit error when file isStream()", (done) => {
-    const stream = gulpSass.async();
     const streamFile = {
       isNull: (): boolean => false,
       isStream: (): boolean => true,
     };
+    const stream = sass();
 
     stream.on("error", (err) => {
       expect(err.message).toEqual("Streaming not supported");
@@ -35,7 +35,7 @@ describe("gulp-sass -- async compile", () => {
 
   it("should compile an empty sass file", (done) => {
     const sassFile = createVinyl("empty.scss");
-    const stream = gulpSass.async();
+    const stream = sass();
 
     stream.on("data", (cssFile: Vinyl.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -48,7 +48,7 @@ describe("gulp-sass -- async compile", () => {
 
   it("should compile a single sass file", (done) => {
     const sassFile = createVinyl("mixins.scss");
-    const stream = gulpSass.async();
+    const stream = sass();
 
     stream.on("data", (cssFile: Vinyl.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -60,9 +60,12 @@ describe("gulp-sass -- async compile", () => {
   });
 
   it("should compile multiple sass files", (done) => {
-    const files = [createVinyl("mixins.scss"), createVinyl("variables.scss")];
-    const stream = gulpSass.async();
-    let mustSee = files.length;
+    const sassFiles = [
+      createVinyl("mixins.scss"),
+      createVinyl("variables.scss"),
+    ];
+    const stream = sass();
+    let mustSee = sassFiles.length;
 
     stream.on("data", (cssFile: Vinyl.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -72,14 +75,12 @@ describe("gulp-sass -- async compile", () => {
       mustSee -= 1;
       if (mustSee <= 0) done();
     });
-    files.forEach((file) => {
-      stream.write(file);
-    });
+    sassFiles.forEach((file) => stream.write(file));
   });
 
   it("should compile files with partials in another folder", (done) => {
     const sassFile = createVinyl("inheritance.scss");
-    const stream = gulpSass.async();
+    const stream = sass();
 
     stream.on("data", (cssFile: Vinyl.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -94,16 +95,16 @@ describe("gulp-sass -- async compile", () => {
 
   it("should emit logError on sass error", (done) => {
     const errorFile = createVinyl("error.scss");
-    const stream = gulpSass.async();
+    const stream = sass();
 
-    stream.on("error", gulpSass.logError);
+    stream.on("error", sass.logError.bind(stream));
     stream.on("end", done);
     stream.write(errorFile);
   });
 
   it("should preserve the original sass error message", (done) => {
     const errorFile = createVinyl("error.scss");
-    const stream = gulpSass.async();
+    const stream = sass();
 
     stream.on("error", (err: SassError) => {
       // Error must include original error message
@@ -121,11 +122,10 @@ describe("gulp-sass -- async compile", () => {
 
   it("should compile a single sass file if the file name has been changed in the stream", (done) => {
     const sassFile = createVinyl("mixins.scss");
+    const stream = sass();
 
     // Transform file name
     sassFile.path = join(join(__dirname, "scss"), "mixin--changed.scss");
-
-    const stream = gulpSass.async();
 
     stream.on("data", (cssFile: Vinyl.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -139,7 +139,7 @@ describe("gulp-sass -- async compile", () => {
 
   it("should preserve changes made in-stream to a Sass file", (done) => {
     const sassFile = createVinyl("mixins.scss");
-    const stream = gulpSass.async();
+    const stream = sass();
 
     // Transform file name
     sassFile.contents = Buffer.from(
@@ -170,31 +170,26 @@ describe("gulp-sass -- async compile", () => {
       sources: ["scss/subdir/multilevelimport.scss"],
       sourcesContent: ["@import ../inheritance;"],
     });
-    const stream = gulpSass.async();
+    const stream = sass();
 
-    try {
-      stream.on("data", (cssFile: Vinyl.BufferFile) => {
-        // Expected sources are relative to file.base
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        expect(cssFile.sourceMap.sources).toEqual([
-          "includes/_cats.scss",
-          "includes/_dogs.sass",
-          "inheritance.scss",
-        ]);
+    stream.on("data", (cssFile: Vinyl.BufferFile) => {
+      // Expected sources are relative to file.base
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(cssFile.sourceMap.sources).toEqual([
+        "includes/_cats.scss",
+        "includes/_dogs.sass",
+        "inheritance.scss",
+      ]);
 
-        done();
-      });
-    } catch (err) {
-      console.error(err);
       done();
-    }
+    });
 
     stream.write(sassFile);
   });
 
   it("should compile a single indented sass file", (done) => {
     const sassFile = createVinyl("indent.sass");
-    const stream = gulpSass.async();
+    const stream = sass();
 
     stream.on("data", (cssFile: Vinyl.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -207,9 +202,9 @@ describe("gulp-sass -- async compile", () => {
   });
 
   it("should parse files in sass and scss", (done) => {
-    const files = [createVinyl("mixins.scss"), createVinyl("indent.sass")];
-    const stream = gulpSass.async();
-    let mustSee = files.length;
+    const sassFiles = [createVinyl("mixins.scss"), createVinyl("indent.sass")];
+    const stream = sass();
+    let mustSee = sassFiles.length;
 
     stream.on("data", (cssFile: Vinyl.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -220,8 +215,6 @@ describe("gulp-sass -- async compile", () => {
       if (mustSee <= 0) done();
     });
 
-    files.forEach((file) => {
-      stream.write(file);
-    });
+    sassFiles.forEach((file) => stream.write(file));
   });
 });

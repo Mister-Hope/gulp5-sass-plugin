@@ -1,16 +1,18 @@
 import { underline } from "chalk";
 import { basename, dirname, extname, join, relative } from "path";
 import { Options, SassException, render, renderSync, Result } from "sass";
-import { EventEmitter, Transform } from "stream";
+import { Transform } from "stream";
+import { RawSourceMap } from "source-map";
 import PluginError = require("plugin-error");
 import clonedeep = require("lodash/cloneDeep");
 import stripAnsi = require("strip-ansi");
 import applySourceMap = require("vinyl-sourcemaps-apply");
 import replaceExtension = require("replace-ext");
 import Vinyl = require("vinyl");
-import { RawSourceMap } from "source-map";
 
 const PLUGIN_NAME = "gulp-sass";
+
+export type SassOption = Omit<Options, "data" | "file">;
 
 export interface SassMap extends RawSourceMap {
   sourceRoot: string;
@@ -65,12 +67,17 @@ const handleFile = (
   return file;
 };
 
+export interface GulpSass {
+  (pluginOptions?: SassOption, sync?: boolean): Transform;
+  logError(error: SassError): void;
+}
+
 // Main Gulp Sass function
-export const gulpSass = (pluginOptions: Options = {}, sync = true): Transform =>
+export const sass: GulpSass = (pluginOptions = {}, sync) =>
   new Transform({
     objectMode: true,
     transform(file: Vinyl, _enc, callback): void {
-      const options = clonedeep(pluginOptions);
+      const options = clonedeep(pluginOptions) as Options;
 
       if (file.isNull()) return callback(null, file);
 
@@ -141,16 +148,26 @@ export const gulpSass = (pluginOptions: Options = {}, sync = true): Transform =>
     },
   });
 
-// Sync Sass render
-gulpSass.async = (options?: Options): Transform => gulpSass(options, false);
-
 // Log errors nicely
-gulpSass.logError = function logError(error: SassError): void {
+function logError(this: Transform, error: SassError): void {
   const message = new PluginError(
     "sass",
     error.messageFormatted || ""
   ).toString();
 
   process.stderr.write(`${message}\n`);
-  ((this as unknown) as EventEmitter).emit("end");
-};
+  this.emit("end");
+}
+
+sass.logError = logError;
+
+export interface GulpSassSync {
+  (pluginOptions?: SassOption): Transform;
+  logError(error: SassError): void;
+}
+
+// Sync Sass render
+export const sassSync: GulpSassSync = (pluginOptions?: SassOption) =>
+  sass(pluginOptions, true);
+
+sassSync.logError = logError;

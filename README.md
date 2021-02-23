@@ -22,24 +22,24 @@ Something like this will compile your Sass files:
 
 ```js
 const { dest, src, watch } = require("gulp");
-const { gulpSass } = require("@mr-hope/gulp-sass");
+const { sass } = require("@mr-hope/gulp-sass");
 
 const build = src("./styles/**/*.scss")
-  .pipe(gulpSass().on("error", sass.logError))
+  .pipe(sass().on("error", sass.logError))
   .pipe(dest("./css"));
 
 exports.build = build;
 exports.watch = watch("./styles/**/*.scss", build);
 ```
 
-You can also compile asynchronously, doing something like this:
+You can also compile synchronously, doing something like this:
 
 ```js
 const { dest, src, watch } = require("gulp");
-const { gulpSass } = require("@mr-hope/gulp-sass");
+const { sassSync } = require("@mr-hope/gulp-sass");
 
 const build = src("./styles/**/*.scss")
-  .pipe(gulpSass.async().on("error", sass.logError))
+  .pipe(sassSync().on("error", sassSync.logError))
   .pipe(dest("./css"));
 
 exports.build = build;
@@ -50,11 +50,11 @@ Note that **synchronous compilation is twice as fast as asynchronous compilation
 
 ```js
 const { dest, src, watch } = require("gulp");
-const { gulpSass } = require("@mr-hope/gulp-sass");
+const { sass } = require("@mr-hope/gulp-sass");
 const fiber = require("fibers");
 
 const build = src("./styles/**/*.scss")
-  .pipe(gulpSass.async({ fiber }).on("error", sass.logError))
+  .pipe(sass({ fiber }).on("error", sass.logError))
   .pipe(dest("./css"));
 
 exports.build = build;
@@ -69,17 +69,15 @@ For example:
 
 ```js
 exports.build = src("./styles/**/*.scss")
-  .pipe(gulpSass({ outputStyle: "compressed" }).on("error", sass.logError))
+  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
   .pipe(dest("./css"));
 ```
 
-Or this for asynchronous code:
+Or this for synchronous code:
 
 ```js
 exports.build = src("./styles/**/*.scss")
-  .pipe(
-    gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
-  )
+  .pipe(sassSync({ outputStyle: "compressed" }).on("error", sassSync.logError))
   .pipe(dest("./css"));
 ```
 
@@ -92,9 +90,7 @@ const sourcemaps = require("gulp-sourcemaps");
 
 exports.build = src("./styles/**/*.scss")
   .pipe(sourcemaps.init())
-  .pipe(
-    gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
-  )
+  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
   .pipe(sourcemaps.write())
   .pipe(dest("./css"));
 ```
@@ -106,9 +102,7 @@ const sourcemaps = require("gulp-sourcemaps");
 
 exports.build = src("./styles/**/*.scss")
   .pipe(sourcemaps.init())
-  .pipe(
-    gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
-  )
+  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
   .pipe(sourcemaps.write("./maps"))
   .pipe(dest("./css"));
 ```
