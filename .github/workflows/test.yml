@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: restore node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         id: node-modules-cache
         with:
           path: node_modules
@@ -25,7 +25,7 @@ jobs:
 
       - name: yarn-cache
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
