@@ -1,6 +1,6 @@
 # @mr-hope/gulp-sass
 
-Sass plugin for
+Sass plugin for gulp.
 
 ## Node Support
 
@@ -11,7 +11,7 @@ Only [Active LTS and Current releases][1] are supported.
 ## Install
 
 ```sh
-yarn install gulp-sass --save-dev
+yarn add -D @mr-hope/gulp-sass
 ```
 
 ## Basic Usage
@@ -19,37 +19,29 @@ yarn install gulp-sass --save-dev
 Something like this will compile your Sass files:
 
 ```js
-"use strict";
+const { dest, src, watch } = require("gulp");
+const { gulpSass } = require("@mr-hope/gulp-sass");
 
-var gulp = require("gulp");
-var sass = require("gulp-sass");
+const build = src("./styles/**/*.scss")
+    .pipe(gulpSass().on("error", sass.logError))
+    .pipe(dest("./css"))
 
-gulp.task("sass", () =>
-  gulp
-    .src("./sass/**/*.scss")
-    .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("./css"))
-);
-
-gulp.task("sass:watch", () => gulp.watch("./sass/**/*.scss", ["sass"]));
+exports.build = build;
+exports.watch = watch("./styles/**/*.scss", build);
 ```
 
-You can also compile synchronously, doing something like this:
+You can also compile asynchronously, doing something like this:
 
 ```js
-"use strict";
+const { dest, src, watch } = require("gulp");
+const { gulpSass } = require("@mr-hope/gulp-sass");
 
-var gulp = require("gulp");
-var sass = require("gulp-sass");
+const build = src("./styles/**/*.scss")
+    .pipe(gulpSass.async().on("error", sass.logError))
+    .pipe(dest("./css"))
 
-gulp.task("sass", () =>
-  gulp
-    .src("./sass/**/*.scss")
-    .pipe(sass.sync().on("error", sass.logError))
-    .pipe(gulp.dest("./css"))
-);
-
-gulp.task("sass:watch", () => gulp.watch("./sass/**/*.scss", ["sass"]));
+exports.build = build;
+exports.watch = watch("./styles/**/*.scss", build);
 ```
 
 Note that **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks. To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
@@ -57,62 +49,51 @@ Note that **synchronous compilation is twice as fast as asynchronous compilation
 ```js
 'use strict';
 
-var Fiber = require('fibers');
-var gulp = require('gulp');
-var sass = require('gulp-sass');
+const fiber = require('fibers');
+const { dest, src, watch } = require("gulp");
+const { gulpSass } = require("@mr-hope/gulp-sass");
 
-gulp.task('sass',  ()=>
-   gulp.src('./sass/**/*.scss')
-    .pipe(sass({fiber: Fiber}).on('error', sass.logError))
-    .pipe(gulp.dest('./css'));
-);
 
-gulp.task('sass:watch',  ()=>
-  gulp.watch('./sass/**/*.scss', ['sass']);
-);
+const build = src("./styles/**/*.scss")
+    .pipe(gulpSass({ fiber }).on("error", sass.logError))
+    .pipe(dest("./css"))
+
+exports.build = build;
+exports.watch = watch("./styles/**/*.scss", build);
 ```
 
 ## Options
 
-Pass in options just like you would for [Dart Sass][]; they will be passed along just as if you were using Node Sass. Except for the `data` option which is used by gulp-sass internally. Using the `file` option is also unsupported and results in undefined behaviour that may change without notice.
+Pass in options just like you would for [Dart Sass][]; they will be passed along just as if you were using `sass`. Except for the `data` option which is used by `@mr-hope/gulp-sass` internally. Using the `file` option is also unsupported and results in undefined behaviour that may change without notice.
 
 For example:
 
 ```js
-gulp.task("sass", () =>
-  gulp
-    .src("./sass/**/*.scss")
-    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(gulp.dest("./css"))
-);
+const build = src("./styles/**/*.scss")
+    .pipe(gulpSass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(dest("./css"))
 ```
 
-Or this for synchronous code:
+Or this for asynchronous code:
 
 ```js
-gulp.task("sass", () =>
-  gulp
-    .src("./sass/**/*.scss")
-    .pipe(sass.sync({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(gulp.dest("./css"))
-);
+const build = src("./styles/**/*.scss")
+    .pipe(gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(dest("./css"))
 ```
 
 ## Source Maps
 
-`gulp-sass` can be used in tandem with [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) to generate source maps for the Sass to CSS compilation. You will need to initialize [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) prior to running `gulp-sass` and write the source maps after.
+`@mr-hope/gulp-sass` can be used in tandem with [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) to generate source maps for the Sass to CSS compilation. You will need to initialize [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) prior to running `@mr-hope/gulp-sass` and write the source maps after.
 
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-gulp.task("sass", () =>
-  gulp
-    .src("./sass/**/*.scss")
+const build = src("./styles/**/*.scss")
     .pipe(sourcemaps.init())
-    .pipe(sass().on("error", sass.logError))
+    .pipe(gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest("./css"))
-);
+    .pipe(dest("./css"))
 ```
 
 By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) writes the source maps inline in the compiled CSS files. To write them to a separate file, specify a path relative to the `gulp.dest()` destination in the `sourcemaps.write()` function.
@@ -120,14 +101,13 @@ By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) write
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-gulp.task("sass", () =>
-  gulp
-    .src("./sass/**/*.scss")
+const sourcemaps = require("gulp-sourcemaps");
+
+const build = src("./styles/**/*.scss")
     .pipe(sourcemaps.init())
-    .pipe(sass().on("error", sass.logError))
-    .pipe(sourcemaps.write("./maps"))
-    .pipe(gulp.dest("./css"))
-);
+    .pipe(gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(sourcemaps.write('./maps'))
+    .pipe(dest("./css"))
 ```
 
 ## Issues
