@@ -8,12 +8,13 @@ import stripAnsi = require("strip-ansi");
 import applySourceMap = require("vinyl-sourcemaps-apply");
 import replaceExtension = require("replace-ext");
 import Vinyl = require("vinyl");
+import { RawSourceMap } from "source-map";
 
 const PLUGIN_NAME = "gulp-sass";
 
-export interface SassMap {
+export interface SassMap extends RawSourceMap {
+  sourceRoot: string;
   file: string;
-  sources: string[];
 }
 
 export interface SassError extends SassException {
@@ -46,10 +47,11 @@ const handleFile = (
     );
 
     // Remove 'stdin' from souces and replace with filenames!
-    sassMap.sources = sassMap.sources.filter((src) => src !== "stdin" && src);
+    sassMap.sources = sassMap.sources.filter((src) => src && src !== "stdin");
 
     // Replace the map file with the original file name (but new extension)
     sassMap.file = replaceExtension(sassFileSrc, ".css");
+
     // Apply the map
     applySourceMap(file, sassMap);
   }
@@ -136,8 +138,6 @@ export const gulpSass = (pluginOptions: Options = {}, sync = true): Transform =>
             return callback(null, handleFile(file, result));
           });
       }
-
-      callback(new PluginError(PLUGIN_NAME, "Unspported file type"));
     },
   });
 

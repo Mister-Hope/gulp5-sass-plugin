@@ -1,19 +1,16 @@
 import { join } from "path";
 import { statSync } from "fs";
 import { SassError, gulpSass } from "../src";
-import rimraf = require("rimraf");
 import gulp = require("gulp");
-// import autoprefixer = require("autoprefixer");
-// import postcss = require("gulp-postcss");
-// import sourcemaps = require("gulp-sourcemaps");
+import del = require("del");
+import autoprefixer = require("autoprefixer");
+import postcss = require("gulp-postcss");
 // import tap = require("gulp-tap");
-// import globule = require("globule");
+import sourcemaps = require("gulp-sourcemaps");
 import { createVinyl, normaliseEOL } from "./helpers";
 import File = require("vinyl");
 
-afterAll((done) => {
-  rimraf(join(__dirname, "results"), done);
-});
+afterAll(() => del(join(__dirname, "results")));
 
 describe("gulp-sass -- sync compile", () => {
   it("should pass file when it isNull()", (done) => {
@@ -115,137 +112,60 @@ describe("gulp-sass -- sync compile", () => {
     stream.write(errorFile);
   });
 
-  // it("should work with gulp-sourcemaps", (done) => {
-  //   const sassFile = createVinyl("inheritance.scss");
+  it("should work with gulp-sourcemaps", (done) => {
+    const sassFile = createVinyl("inheritance.scss");
 
-  //   // Expected sources are relative to file.base
-  //   const expectedSources = [
-  //     "inheritance.scss",
-  //     "includes/_cats.scss",
-  //     "includes/_dogs.sass",
-  //   ];
+    sassFile.sourceMap = JSON.stringify({
+      version: "3",
+      file: "scss/subdir/multilevelimport.scss",
+      names: [],
+      mappings: "",
+      sources: ["scss/subdir/multilevelimport.scss"],
+      sourcesContent: ["@import ../inheritance;"],
+    });
+    const stream = gulpSass();
 
-  //   sassFile.sourceMap =
-  //     "{" +
-  //     '"version": 3,' +
-  //     '"file": "scss/subdir/multilevelimport.scss",' +
-  //     '"names": [],' +
-  //     '"mappings": "",' +
-  //     '"sources": [ "scss/subdir/multilevelimport.scss" ],' +
-  //     '"sourcesContent": [ "@import ../inheritance;" ]' +
-  //     "}";
+    stream.on("data", (cssFile) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(cssFile.sourceMap.sources).toEqual([
+        "includes/_cats.scss",
+        "includes/_dogs.sass",
+        "inheritance.scss",
+      ]);
+      done();
+    });
+    stream.write(sassFile);
+  });
 
-  //   const stream = sass.sync();
-  //   stream.on("data", (cssFile) => {
-  //     expect(cssFile.sourceMap.sources).toEqual(expectedSources);
-  //     done();
-  //   });
-  //   stream.write(sassFile);
-  // });
+  it("should work with gulp-sourcemaps and a globbed source", (done) => {
+    gulp
+      .src(join(__dirname, "scss/globbed/**/*.scss"))
+      .pipe(sourcemaps.init())
+      .pipe(gulpSass())
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest(join(__dirname, "results")))
+      .on("end", done);
+  });
 
-  // it("should work with gulp-sourcemaps and autoprefixer", (done) => {
-  //   const expectedSourcesBefore = [
-  //     "inheritance.scss",
-  //     "includes/_cats.scss",
-  //     "includes/_dogs.sass",
-  //   ];
-
-  //   const expectedSourcesAfter = [
-  //     "includes/_cats.scss",
-  //     "includes/_dogs.sass",
-  //     "inheritance.scss",
-  //   ];
-
-  //   gulp
-  //     .src(join(__dirname, "scss", "inheritance.scss"))
-  //     .pipe(sourcemaps.init())
-  //     .pipe(sass.sync())
-  //     .pipe(
-  //       tap((file) => {
-  //         should.exist(file.sourceMap);
-  //         file.sourceMap.sources.should.eql(expectedSourcesBefore);
-  //       })
-  //     )
-  //     .pipe(postcss([autoprefixer()]))
-  //     .pipe(sourcemaps.write())
-  //     .pipe(gulp.dest(join(__dirname, "results")))
-  //     .pipe(
-  //       tap((file) => {
-  //         should.exist(file.sourceMap);
-  //         file.sourceMap.sources.should.eql(expectedSourcesAfter);
-  //       })
-  //     )
-  //     .on("end", done);
-  // });
-
-  // it("should work with gulp-sourcemaps and a globbed source", (done) => {
-  //   const globPath = join(__dirname, "scss", "globbed");
-  //   const files = globule.find(
-  //     join(__dirname, "scss", "globbed", "**", "*.scss")
-  //   );
-  //   const filesContent = {};
-
-  //   files.forEach((file) => {
-  //     const source = path.normalize(path.relative(globPath, file));
-  //     filesContent[source] = fs.readFileSync(file, "utf8");
-  //   });
-
-  //   gulp
-  //     .src(join(__dirname, "scss", "globbed", "**", "*.scss"))
-  //     .pipe(sourcemaps.init())
-  //     .pipe(sass.sync())
-  //     .pipe(
-  //       tap((file) => {
-  //         should.exist(file.sourceMap);
-  //         const actual = normaliseEOL(file.sourceMap.sourcesContent[0]);
-  //         const expected = normaliseEOL(
-  //           filesContent[path.normalize(file.sourceMap.sources[0])]
-  //         );
-  //         actual.should.eql(expected);
-  //       })
-  //     )
-  //     .on("end", done);
-  // });
-
-  // it("should work with gulp-sourcemaps and autoprefixer with different file.base", (done) => {
-  //   const expectedSourcesBefore = [
-  //     "scss/inheritance.scss",
-  //     "scss/includes/_cats.scss",
-  //     "scss/includes/_dogs.sass",
-  //   ];
-
-  //   const expectedSourcesAfter = [
-  //     "scss/includes/_cats.scss",
-  //     "scss/includes/_dogs.sass",
-  //     "scss/inheritance.scss",
-  //   ];
-
-  //   gulp
-  //     .src(join(__dirname, "scss", "inheritance.scss"), { base: "test" })
-  //     .pipe(sourcemaps.init())
-  //     .pipe(sass.sync())
-  //     .pipe(
-  //       tap((file) => {
-  //         expect(file.sourceMap.sources).toEqual(expectedSourcesBefore);
-  //       })
-  //     )
-  //     .pipe(postcss([autoprefixer()]))
-  //     .pipe(
-  //       tap((file) => {
-  //         expect(file.sourceMap.sources).toEqual(expectedSourcesAfter);
-  //       })
-  //     )
-  //     .on("end", done);
-  // });
+  it("should work with gulp-sourcemaps and autoprefixer", (done) => {
+    gulp
+      .src(join(__dirname, "scss/globbed/**/*.scss"))
+      .pipe(sourcemaps.init())
+      .pipe(gulpSass())
+      .pipe(postcss([autoprefixer()]))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest(join(__dirname, "results")))
+      .on("end", done);
+  });
 
   it("should work with empty files", (done) => {
     gulp
-      .src(join(__dirname, "scss", "empty.scss"))
+      .src(join(__dirname, "scss/empty.scss"))
       .pipe(gulpSass())
       .pipe(gulp.dest(join(__dirname, "results")))
 
       .on("end", () => {
-        const stat = statSync(join(__dirname, "results", "empty.css"));
+        const stat = statSync(join(__dirname, "results/empty.css"));
 
         expect(stat.size).toEqual(0);
         done();

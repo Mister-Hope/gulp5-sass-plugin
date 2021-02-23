@@ -20,6 +20,10 @@ exports[`gulp-sass -- sync compile should compile files with partials in another
   background: pink;
 }
 
+body {
+  text-align: center;
+}
+
 .error, .badError {
   border: #f00;
   background: #fdd;

@@ -41,6 +41,10 @@ exports[`gulp-sass -- async compile should compile files with partials in anothe
   background: pink;
 }
 
+body {
+  text-align: center;
+}
+
 .error, .badError {
   border: #f00;
   background: #fdd;

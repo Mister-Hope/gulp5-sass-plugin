@@ -159,31 +159,38 @@ describe("gulp-sass -- async compile", () => {
     stream.write(sassFile);
   });
 
-  // it("should work with gulp-sourcemaps", (done) => {
-  //   const sassFile = createVinyl("inheritance.scss");
+  it("should work with gulp-sourcemaps", (done) => {
+    const sassFile = createVinyl("inheritance.scss");
 
-  //   sassFile.sourceMap =
-  //     "{" +
-  //     '"version": 3,' +
-  //     '"file": "scss/subdir/multilevelimport.scss",' +
-  //     '"names": [],' +
-  //     '"mappings": "",' +
-  //     '"sources": [ "scss/subdir/multilevelimport.scss" ],' +
-  //     '"sourcesContent": [ "@import ../inheritance;" ]' +
-  //     "}";
-  //   const stream = sass();
+    sassFile.sourceMap = JSON.stringify({
+      version: "3",
+      file: "scss/subdir/multilevelimport.scss",
+      names: [],
+      mappings: "",
+      sources: ["scss/subdir/multilevelimport.scss"],
+      sourcesContent: ["@import ../inheritance;"],
+    });
+    const stream = gulpSass.async();
 
-  //   stream.on("data", (cssFile) => {
-  //     // Expected sources are relative to file.base
-  //     expect(cssFile.sourceMap.sources).toEqual([
-  //       "includes/_cats.scss",
-  //       "includes/_dogs.sass",
-  //       "inheritance.scss",
-  //     ]);
-  //     done();
-  //   });
-  //   stream.write(sassFile);
-  // });
+    try {
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        // Expected sources are relative to file.base
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        expect(cssFile.sourceMap.sources).toEqual([
+          "includes/_cats.scss",
+          "includes/_dogs.sass",
+          "inheritance.scss",
+        ]);
+
+        done();
+      });
+    } catch (err) {
+      console.error(err);
+      done();
+    }
+
+    stream.write(sassFile);
+  });
 
   it("should compile a single indented sass file", (done) => {
     const sassFile = createVinyl("indent.sass");
