@@ -47,14 +47,12 @@ exports.watch = watch("./styles/**/*.scss", build);
 Note that **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks. To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
 
 ```js
-"use strict";
-
-const fiber = require("fibers");
 const { dest, src, watch } = require("gulp");
 const { gulpSass } = require("@mr-hope/gulp-sass");
+const fiber = require("fibers");
 
 const build = src("./styles/**/*.scss")
-  .pipe(gulpSass({ fiber }).on("error", sass.logError))
+  .pipe(gulpSass.async({ fiber }).on("error", sass.logError))
   .pipe(dest("./css"));
 
 exports.build = build;
@@ -68,7 +66,7 @@ Pass in options just like you would for [Dart Sass][]; they will be passed along
 For example:
 
 ```js
-const build = src("./styles/**/*.scss")
+exports.build = src("./styles/**/*.scss")
   .pipe(gulpSass({ outputStyle: "compressed" }).on("error", sass.logError))
   .pipe(dest("./css"));
 ```
@@ -76,7 +74,7 @@ const build = src("./styles/**/*.scss")
 Or this for asynchronous code:
 
 ```js
-const build = src("./styles/**/*.scss")
+exports.build = src("./styles/**/*.scss")
   .pipe(
     gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
   )
@@ -90,7 +88,7 @@ const build = src("./styles/**/*.scss")
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-const build = src("./styles/**/*.scss")
+exports.build = src("./styles/**/*.scss")
   .pipe(sourcemaps.init())
   .pipe(
     gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
@@ -104,9 +102,7 @@ By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) write
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-const sourcemaps = require("gulp-sourcemaps");
-
-const build = src("./styles/**/*.scss")
+exports.build = src("./styles/**/*.scss")
   .pipe(sourcemaps.init())
   .pipe(
     gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
