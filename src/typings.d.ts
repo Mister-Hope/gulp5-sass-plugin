@@ -5,7 +5,14 @@ declare module "replace-ext" {
 }
 
 declare module "vinyl-sourcemaps-apply" {
-  function applySourceMap(chunk: any, map: any): void;
+  import Vinyl = require("vinyl");
+  function applySourceMap(
+    chunk: Vinyl.BufferFile,
+    map: {
+      file: string;
+      sources: string[];
+    }
+  ): void;
 
   export = applySourceMap;
 }

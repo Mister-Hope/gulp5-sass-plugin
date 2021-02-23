@@ -1,6 +1,6 @@
 import { join } from "path";
 import { statSync } from "fs";
-import sass = require("../src");
+import { SassError, gulpSass } from "../src";
 import rimraf = require("rimraf");
 import gulp = require("gulp");
 // import autoprefixer = require("autoprefixer");
@@ -9,6 +9,7 @@ import gulp = require("gulp");
 // import tap = require("gulp-tap");
 // import globule = require("globule");
 import { createVinyl, normaliseEOL } from "./helpers";
+import File = require("vinyl");
 
 afterAll((done) => {
   rimraf(join(__dirname, "results"), done);
@@ -16,24 +17,25 @@ afterAll((done) => {
 
 describe("gulp-sass -- sync compile", () => {
   it("should pass file when it isNull()", (done) => {
-    const stream = sass.sync();
+    const stream = gulpSass();
     const emptyFile = {
-      isNull: () => true,
+      isNull: (): boolean => true,
     };
 
-    stream.on("data", (data) => {
-      expect(data).toEqual(emptyFile);
+    stream.on("data", (data: File) => {
+      expect(data.isNull()).toEqual(true);
       done();
     });
     stream.write(emptyFile);
   });
 
   it("should emit error when file isStream()", (done) => {
-    const stream = sass.sync();
+    const stream = gulpSass();
     const streamFile = {
-      isNull: () => false,
-      isStream: () => true,
+      isNull: (): boolean => false,
+      isStream: (): boolean => true,
     };
+
     stream.on("error", (err) => {
       expect(err.message).toEqual("Streaming not supported");
       done();
@@ -43,8 +45,9 @@ describe("gulp-sass -- sync compile", () => {
 
   it("should compile a single sass file", (done) => {
     const sassFile = createVinyl("mixins.scss");
-    const stream = sass.sync();
-    stream.on("data", (cssFile) => {
+    const stream = gulpSass();
+
+    stream.on("data", (cssFile: File.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
       expect(typeof cssFile.path).toEqual("string");
       expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
@@ -55,10 +58,10 @@ describe("gulp-sass -- sync compile", () => {
 
   it("should compile multiple sass files", (done) => {
     const files = [createVinyl("mixins.scss"), createVinyl("variables.scss")];
-    const stream = sass.sync();
+    const stream = gulpSass();
     let mustSee = files.length;
 
-    stream.on("data", (cssFile) => {
+    stream.on("data", (cssFile: File.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
       expect(typeof cssFile.path).toEqual("string");
       expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
@@ -74,9 +77,9 @@ describe("gulp-sass -- sync compile", () => {
 
   it("should compile files with partials in another folder", (done) => {
     const sassFile = createVinyl("inheritance.scss");
-    const stream = sass.sync();
+    const stream = gulpSass();
 
-    stream.on("data", (cssFile) => {
+    stream.on("data", (cssFile: File.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
       expect(typeof cssFile.path).toEqual("string");
       expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
@@ -87,18 +90,18 @@ describe("gulp-sass -- sync compile", () => {
 
   it("should emit logError on sass error", (done) => {
     const errorFile = createVinyl("error.scss");
-    const stream = sass.sync();
+    const stream = gulpSass();
 
-    stream.on("error", sass.logError);
+    stream.on("error", gulpSass.logError);
     stream.on("end", done);
     stream.write(errorFile);
   });
 
   it("should preserve the original sass error message", (done) => {
     const errorFile = createVinyl("error.scss");
-    const stream = sass.sync();
+    const stream = gulpSass();
 
-    stream.on("error", (err: sass.SassError) => {
+    stream.on("error", (err: SassError) => {
       // Error must include original error message
       expect(err.messageOriginal).toContain('expected "{".');
       // Error must include relativePath property
@@ -238,11 +241,12 @@ describe("gulp-sass -- sync compile", () => {
   it("should work with empty files", (done) => {
     gulp
       .src(join(__dirname, "scss", "empty.scss"))
-      .pipe(sass.sync())
+      .pipe(gulpSass())
       .pipe(gulp.dest(join(__dirname, "results")))
 
       .on("end", () => {
         const stat = statSync(join(__dirname, "results", "empty.css"));
+
         expect(stat.size).toEqual(0);
         done();
       });

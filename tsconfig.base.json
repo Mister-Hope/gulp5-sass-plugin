@@ -32,11 +32,6 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "lib": ["ESNext"],
-    "locale": "zh-CN",
-
-    "outDir": "./dist",
-    "target": "ESNext",
-    "module": "CommonJS"
-  },
-  "include": ["src/**/*.ts"]
+    "locale": "zh-CN"
+  }
 }

@@ -4,7 +4,8 @@
   "description": "Gulp plugin for sass",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b tsconfig.project.json",
+    "lint": "prettier --check --write . && eslint . --ext .ts --fix",
     "test": "jest"
   },
   "repository": {

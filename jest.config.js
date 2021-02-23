@@ -9,7 +9,7 @@ module.exports = {
   moduleFileExtensions: ["js", "ts", "node"],
   globals: {
     "ts-jest": {
-      tsconfig: "<rootDir>/tsconfig.json",
+      tsconfig: "<rootDir>/tsconfig.project.json",
     },
   },
   testMatch: ["<rootDir>/__tests__/**/*.spec.ts"],
