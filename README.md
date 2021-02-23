@@ -23,8 +23,8 @@ const { dest, src, watch } = require("gulp");
 const { gulpSass } = require("@mr-hope/gulp-sass");
 
 const build = src("./styles/**/*.scss")
-    .pipe(gulpSass().on("error", sass.logError))
-    .pipe(dest("./css"))
+  .pipe(gulpSass().on("error", sass.logError))
+  .pipe(dest("./css"));
 
 exports.build = build;
 exports.watch = watch("./styles/**/*.scss", build);
@@ -37,8 +37,8 @@ const { dest, src, watch } = require("gulp");
 const { gulpSass } = require("@mr-hope/gulp-sass");
 
 const build = src("./styles/**/*.scss")
-    .pipe(gulpSass.async().on("error", sass.logError))
-    .pipe(dest("./css"))
+  .pipe(gulpSass.async().on("error", sass.logError))
+  .pipe(dest("./css"));
 
 exports.build = build;
 exports.watch = watch("./styles/**/*.scss", build);
@@ -47,16 +47,15 @@ exports.watch = watch("./styles/**/*.scss", build);
 Note that **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks. To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
 
 ```js
-'use strict';
+"use strict";
 
-const fiber = require('fibers');
+const fiber = require("fibers");
 const { dest, src, watch } = require("gulp");
 const { gulpSass } = require("@mr-hope/gulp-sass");
 
-
 const build = src("./styles/**/*.scss")
-    .pipe(gulpSass({ fiber }).on("error", sass.logError))
-    .pipe(dest("./css"))
+  .pipe(gulpSass({ fiber }).on("error", sass.logError))
+  .pipe(dest("./css"));
 
 exports.build = build;
 exports.watch = watch("./styles/**/*.scss", build);
@@ -70,16 +69,18 @@ For example:
 
 ```js
 const build = src("./styles/**/*.scss")
-    .pipe(gulpSass({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(dest("./css"))
+  .pipe(gulpSass({ outputStyle: "compressed" }).on("error", sass.logError))
+  .pipe(dest("./css"));
 ```
 
 Or this for asynchronous code:
 
 ```js
 const build = src("./styles/**/*.scss")
-    .pipe(gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(dest("./css"))
+  .pipe(
+    gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
+  )
+  .pipe(dest("./css"));
 ```
 
 ## Source Maps
@@ -90,10 +91,12 @@ const build = src("./styles/**/*.scss")
 const sourcemaps = require("gulp-sourcemaps");
 
 const build = src("./styles/**/*.scss")
-    .pipe(sourcemaps.init())
-    .pipe(gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(sourcemaps.write())
-    .pipe(dest("./css"))
+  .pipe(sourcemaps.init())
+  .pipe(
+    gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
+  )
+  .pipe(sourcemaps.write())
+  .pipe(dest("./css"));
 ```
 
 By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) writes the source maps inline in the compiled CSS files. To write them to a separate file, specify a path relative to the `gulp.dest()` destination in the `sourcemaps.write()` function.
@@ -104,10 +107,12 @@ const sourcemaps = require("gulp-sourcemaps");
 const sourcemaps = require("gulp-sourcemaps");
 
 const build = src("./styles/**/*.scss")
-    .pipe(sourcemaps.init())
-    .pipe(gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(sourcemaps.write('./maps'))
-    .pipe(dest("./css"))
+  .pipe(sourcemaps.init())
+  .pipe(
+    gulpSass.async({ outputStyle: "compressed" }).on("error", sass.logError)
+  )
+  .pipe(sourcemaps.write("./maps"))
+  .pipe(dest("./css"));
 ```
 
 ## Issues
