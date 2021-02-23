@@ -1,11 +1,11 @@
-name: Test and coverage
+name: Test
 
 on:
   - push
   - pull_request
 
 jobs:
-  test-theme:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
