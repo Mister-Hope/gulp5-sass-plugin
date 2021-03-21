@@ -79,7 +79,7 @@ exports.watch = watch("./styles/**/*.scss", build);
 
 ### Error logging
 
-Note that we provide a useful function called `logError` on these 2 tranform functions to let you print erros gracefully.
+Note that we provide a useful function called `logError` on these 2 tranform functions to let you print errors gracefully.
 
 See the demo above for usage.
 
