@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.168",
-    "@types/node": "^14.14.32",
+    "@types/node": "^14.14.36",
     "@types/sass": "^1.16.0",
     "chalk": "^4.1.0",
     "lodash": "^4.17.21",
