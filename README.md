@@ -8,7 +8,7 @@ Sass plugin for gulp.
 
 ## Compare
 
-We strongly recommand you to use this plugin instead of [gulp-sass][] or [gulp-dart-sass][].
+We strongly recommend you to use this plugin instead of [gulp-sass][] or [gulp-dart-sass][].
 
 <details>
 <summary><strong>Why</strong></summary>
