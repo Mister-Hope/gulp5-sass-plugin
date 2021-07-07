@@ -48,7 +48,7 @@
     "@types/gulp-postcss": "8.0.0",
     "@types/gulp-sourcemaps": "0.0.34",
     "@types/gulp-tap": "^1.0.0",
-    "@types/jest": "26.0.23",
+    "@types/jest": "26.0.24",
     "@types/rimraf": "3.0.0",
     "@types/vinyl": "2.0.4",
     "@typescript-eslint/eslint-plugin": "4.25.0",
