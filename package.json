@@ -53,7 +53,7 @@
     "@types/vinyl": "2.0.4",
     "@typescript-eslint/eslint-plugin": "4.25.0",
     "@typescript-eslint/parser": "4.25.0",
-    "autoprefixer": "10.2.6",
+    "autoprefixer": "10.3.2",
     "conventional-changelog-cli": "2.1.1",
     "cz-conventional-changelog": "3.3.0",
     "del": "6.0.0",
