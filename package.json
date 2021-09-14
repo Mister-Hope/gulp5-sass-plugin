@@ -51,7 +51,7 @@
     "@types/jest": "26.0.23",
     "@types/rimraf": "3.0.0",
     "@types/vinyl": "2.0.4",
-    "@typescript-eslint/eslint-plugin": "4.25.0",
+    "@typescript-eslint/eslint-plugin": "4.31.1",
     "@typescript-eslint/parser": "4.25.0",
     "autoprefixer": "10.2.6",
     "conventional-changelog-cli": "2.1.1",
