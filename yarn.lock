@@ -750,10 +750,10 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/globule@1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@types/globule/-/globule-1.1.3.tgz#07610e53848779830c2ad337c09f0b34af933f14"
-  integrity sha1-B2EOU4SHeYMMKtM3wJ8LNK+TPxQ=
+"@types/globule@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@types/globule/-/globule-1.1.4.tgz#8a592b56b8d3e1dfc0c17abf3309294c411da900"
+  integrity sha512-8zwhEB52SxKni27egVR2fA+DAdcd5x4mLPTC1z7bZq1L6eQHUBKVZTcqhr5BiJxbBEy7gaBmLQYOHzXkjCIdlQ==
   dependencies:
     "@types/glob" "*"
     "@types/minimatch" "*"
