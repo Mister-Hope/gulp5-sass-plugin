@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@types/globule": "1.1.3",
-    "@types/gulp": "4.0.8",
+    "@types/gulp": "4.0.9",
     "@types/gulp-postcss": "8.0.0",
     "@types/gulp-sourcemaps": "0.0.34",
     "@types/gulp-tap": "^1.0.0",
