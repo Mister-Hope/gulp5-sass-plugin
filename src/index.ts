@@ -135,7 +135,7 @@ export const sass: GulpSass = (pluginOptions = {}, sync) =>
           try {
             return callback(null, handleFile(file, renderSync(options)));
           } catch (error) {
-            return errorHandler(error);
+            return errorHandler(error as SassError);
           }
         // Async Sass render
         else
