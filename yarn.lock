@@ -730,10 +730,10 @@
     "@types/node" "*"
     "@types/vinyl" "*"
 
-"@types/gulp-tap@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@types/gulp-tap/-/gulp-tap-1.0.0.tgz#5efc325d53288848adc872c52796a079cae4fa20"
-  integrity sha512-pbLU7f8dwbj/fKI+EUXsqTl0ht7LSSxzwd61zzMnOIDhuGLV/h2qLIJ7fxqxlLzyjBBFTh24D55BRXBI5wnh1Q==
+"@types/gulp-tap@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/gulp-tap/-/gulp-tap-1.0.1.tgz#6bcf2beff616e2c8b8077d592baec9bb73b98d0a"
+  integrity sha512-TTxKFun5mAOeO1lvx4PWWXaNqNKyk5DxOMqSuRkDX3we0hnJhELLQuZxEAfdFmEFS5Ou1tPKx4KsVnrBMfrolQ==
   dependencies:
     "@types/node" "*"
     "@types/vinyl" "*"
