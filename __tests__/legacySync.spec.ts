@@ -1,6 +1,6 @@
 import { join } from "path";
 import { statSync } from "fs";
-import { SassError, sassSync } from "../src";
+import { LegacySassError, legacySync } from "../src";
 import gulp = require("gulp");
 import del = require("del");
 import autoprefixer = require("autoprefixer");
@@ -11,12 +11,12 @@ import File = require("vinyl");
 
 afterAll(() => del(join(__dirname, "results")));
 
-describe("gulp-sass -- sync compile", () => {
+describe("legacy sync render", () => {
   it("should pass file when it isNull()", (done) => {
     const emptyFile = {
       isNull: (): boolean => true,
     };
-    const stream = sassSync();
+    const stream = legacySync();
 
     stream.on("data", (data: File) => {
       expect(data.isNull()).toEqual(true);
@@ -26,7 +26,7 @@ describe("gulp-sass -- sync compile", () => {
   });
 
   it("should emit error when file isStream()", (done) => {
-    const stream = sassSync();
+    const stream = legacySync();
     const streamFile = {
       isNull: (): boolean => false,
       isStream: (): boolean => true,
@@ -41,7 +41,7 @@ describe("gulp-sass -- sync compile", () => {
 
   it("should compile a single sass file", (done) => {
     const sassFile = createVinyl("mixins.scss");
-    const stream = sassSync();
+    const stream = legacySync();
 
     stream.on("data", (cssFile: File.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -57,7 +57,7 @@ describe("gulp-sass -- sync compile", () => {
       createVinyl("mixins.scss"),
       createVinyl("variables.scss"),
     ];
-    const stream = sassSync();
+    const stream = legacySync();
     let mustSee = sassFiles.length;
 
     stream.on("data", (cssFile: File.BufferFile) => {
@@ -74,7 +74,7 @@ describe("gulp-sass -- sync compile", () => {
 
   it("should compile files with partials in another folder", (done) => {
     const sassFile = createVinyl("inheritance.scss");
-    const stream = sassSync();
+    const stream = legacySync();
 
     stream.on("data", (cssFile: File.BufferFile) => {
       expect(typeof cssFile.relative).toEqual("string");
@@ -87,18 +87,18 @@ describe("gulp-sass -- sync compile", () => {
 
   it("should emit logError on sass error", (done) => {
     const errorFile = createVinyl("error.scss");
-    const stream = sassSync();
+    const stream = legacySync();
 
-    stream.on("error", sassSync.logError.bind(stream));
+    stream.on("error", legacySync.logError.bind(stream));
     stream.on("end", done);
     stream.write(errorFile);
   });
 
   it("should preserve the original sass error message", (done) => {
     const errorFile = createVinyl("error.scss");
-    const stream = sassSync();
+    const stream = legacySync();
 
-    stream.on("error", (err: SassError) => {
+    stream.on("error", (err: LegacySassError) => {
       // Error must include original error message
       expect(err.messageOriginal).toContain('expected "{".');
       // Error must include relativePath property
@@ -123,7 +123,7 @@ describe("gulp-sass -- sync compile", () => {
       sources: ["scss/subdir/multilevelimport.scss"],
       sourcesContent: ["@import ../inheritance;"],
     });
-    const stream = sassSync();
+    const stream = legacySync();
 
     stream.on("data", (cssFile) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -141,7 +141,7 @@ describe("gulp-sass -- sync compile", () => {
     gulp
       .src(join(__dirname, "scss/globbed/**/*.scss"))
       .pipe(sourcemaps.init())
-      .pipe(sassSync())
+      .pipe(legacySync())
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(join(__dirname, "results")))
       .on("end", done);
@@ -151,7 +151,7 @@ describe("gulp-sass -- sync compile", () => {
     gulp
       .src(join(__dirname, "scss/globbed/**/*.scss"))
       .pipe(sourcemaps.init())
-      .pipe(sassSync())
+      .pipe(legacySync())
       .pipe(postcss([autoprefixer()]))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(join(__dirname, "results")))
@@ -161,7 +161,7 @@ describe("gulp-sass -- sync compile", () => {
   it("should work with empty files", (done) => {
     gulp
       .src(join(__dirname, "scss/empty.scss"))
-      .pipe(sassSync())
+      .pipe(legacySync())
       .pipe(gulp.dest(join(__dirname, "results")))
 
       .on("end", () => {

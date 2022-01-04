@@ -5,14 +5,10 @@ declare module "replace-ext" {
 }
 
 declare module "vinyl-sourcemaps-apply" {
+  import { RawSourceMap } from "source-map-js";
   import Vinyl = require("vinyl");
-  function applySourceMap(
-    chunk: Vinyl.BufferFile,
-    map: {
-      file: string;
-      sources: string[];
-    }
-  ): void;
+
+  function applySourceMap(chunk: Vinyl.BufferFile, map: RawSourceMap): void;
 
   export = applySourceMap;
 }
