@@ -12,7 +12,7 @@ Since sass introduce a new `compile` api in V1 (which use `Promise` instead of `
 
 **So V3 requireds a minimum sass version of `1.45.0`.**
 
-Due to `sync` is faster than `async`, users should use `sync` for the first choise, we marked `async` ones with `Async` prefix in V3.
+Due to `sync` is faster than `async`, users should use `sync` as the first choise, we marked `async` ones with `Async` prefix in V3.
 
 So we are providing:
 
