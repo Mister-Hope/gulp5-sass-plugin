@@ -118,6 +118,22 @@ describe("async compile", () => {
     stream.write(errorFile);
   });
 
+  it("should locate correct error file", (done) => {
+    const errorFile = createVinyl("error-location.scss");
+    const stream = sassAsync();
+
+    stream.on("error", (err: SassError) => {
+      // Error must include original error message
+      expect(err.messageOriginal).toContain('expected "{".');
+      // Error must include line and column error occurs on
+      expect(err.messageOriginal).toContain("error.scss 2:20  @use");
+      // Error must include relativePath property
+      expect(err.message).toContain(join("__tests__", "scss", "error.scss"));
+      done();
+    });
+    stream.write(errorFile);
+  });
+
   it("should compile a single sass file if the file name has been changed in the stream", (done) => {
     const sassFile = createVinyl("mixins.scss");
     const stream = sassAsync();
