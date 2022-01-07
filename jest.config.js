@@ -5,12 +5,12 @@ module.exports = {
   preset: "ts-jest",
   collectCoverage: true,
   collectCoverageFrom: ["**/*.ts", "!**/node_modules/**"],
-  testEnvironment: "node",
   moduleFileExtensions: ["js", "ts", "node"],
   globals: {
     "ts-jest": {
       tsconfig: "<rootDir>/tsconfig.project.json",
     },
   },
+  testEnvironment: "jest-environment-node-single-context",
   testMatch: ["<rootDir>/__tests__/**/*.spec.ts"],
 };

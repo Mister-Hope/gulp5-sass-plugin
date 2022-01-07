@@ -17,11 +17,6 @@ import replaceExtension = require("replace-ext");
 import Vinyl = require("vinyl");
 import { PLUGIN_NAME } from "./utils";
 
-export type LegacySassOptions = Omit<
-  LegacyStringOptions<"sync" | "async">,
-  "data" | "file"
->;
-
 export interface LegacySassMap extends RawSourceMap {
   sourceRoot: string;
   file: string;
@@ -42,6 +37,7 @@ const legacyHandleFile = (
   if (result.map) {
     // Transform map into JSON
     const sassMap = JSON.parse(result.map.toString()) as LegacySassMap;
+
     // Grab the stdout and transform it into stdin
     const sassMapFile = sassMap.file.replace(/^stdout$/, "stdin");
     // Grab the base file name that's being worked on
@@ -75,12 +71,15 @@ const legacyHandleFile = (
   return file;
 };
 
-export interface LegacyGulpSass {
-  (pluginOptions?: LegacySassOptions, sync?: boolean): Transform;
+interface PrivateGulpSass {
+  (
+    pluginOptions?: LegacySassOptions | LegacySassAsyncOptions,
+    sync?: boolean
+  ): Transform;
 }
 
 // Legacy Gulp Sass function
-const legacyMain: LegacyGulpSass = (pluginOptions = {}, sync) =>
+const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
   new Transform({
     objectMode: true,
     transform(file: Vinyl, _enc, callback): void {
@@ -172,6 +171,22 @@ function logError(this: Transform, error: LegacySassError): void {
   this.emit("end");
 }
 
+export type LegacySassOptions = Omit<
+  LegacyStringOptions<"sync">,
+  "data" | "file"
+>;
+
+export interface LegacyGulpSass {
+  (pluginOptions?: LegacySassOptions): Transform;
+  logError(error: LegacySassError): void;
+}
+
+// Sync Sass render
+export const legacy: LegacyGulpSass = (pluginOptions?: LegacySassOptions) =>
+  legacyMain(pluginOptions, true);
+
+legacy.logError = logError;
+
 export type LegacySassAsyncOptions = Omit<
   LegacyStringOptions<"async">,
   "data" | "file"
@@ -188,20 +203,3 @@ export const legacyAsync: LegacyGulpSassAsync = (
 ) => legacyMain(pluginOptions, false);
 
 legacyAsync.logError = logError;
-
-export type LegacySassSyncOptions = Omit<
-  LegacyStringOptions<"sync">,
-  "data" | "file"
->;
-
-export interface LegacyGulpSassSync {
-  (pluginOptions?: LegacySassSyncOptions): Transform;
-  logError(error: LegacySassError): void;
-}
-
-// Sync Sass render
-export const legacySync: LegacyGulpSassSync = (
-  pluginOptions?: LegacySassSyncOptions
-) => legacyMain(pluginOptions, true);
-
-legacySync.logError = logError;

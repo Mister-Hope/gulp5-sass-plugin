@@ -1,11 +1,20 @@
-export { legacyAsync, legacySync } from "./legacy";
+export { sass, sassAsync } from "./compile";
 
 export type {
-  LegacySassOptions,
+  GulpSassAsync,
+  GulpSass,
+  SassAsyncOptions,
+  SassOptions,
+  SassError,
+} from "./compile";
+
+export { legacy, legacyAsync } from "./legacy";
+
+export type {
   LegacySassAsyncOptions,
-  LegacySassSyncOptions,
+  LegacySassOptions,
   LegacyGulpSassAsync,
-  LegacyGulpSassSync,
+  LegacyGulpSass,
   LegacySassError,
   LegacySassMap,
 } from "./legacy";
