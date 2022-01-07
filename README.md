@@ -14,12 +14,12 @@ Since sass introduce a new `compile` api in V1 (which use `Promise` instead of `
 
 Due to `sync` is faster than `async`, users should use `sync` for the first choise, we marked `async` ones with `Async` prefix in V3.
 
-So:
+So we are providing:
 
-- The old `sass` and `sassSync` are renamed to `legacyAsync` and `legacy`.
-- The new compile apis are called `sass` and `sassAsync`
-- We also export `LegacySassOptions` and `LegacySassAsyncOptions` for old apis, together with `SassAsyncOptions` and `SassOptions` for new apis.
-- `sass`, `sassAsync`, `legacy`, `legacyAsync` 's type is exported as `GulpSass`, `GulpSassAsync`, `LegacyGulpSass`, `LegacyGulpSassAsync`.
+- The legacy apis `legacy` and `legacyAsync` (used to be `sassSync` and `sass` ).
+- New compile api `sass` and `sassAsync`
+- Option types `LegacySassOptions` and `LegacySassAsyncOptions` for old apis, together with `SassAsyncOptions` and `SassOptions` for new apis.
+- Function types `GulpSass`, `GulpSassAsync`, `LegacyGulpSass`, `LegacyGulpSassAsync` for `sass`, `sassAsync`, `legacy`, `legacyAsync`
 
 ## Compare
 
