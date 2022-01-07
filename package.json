@@ -64,7 +64,7 @@
     "gulp-postcss": "9.0.1",
     "gulp-sourcemaps": "3.0.0",
     "gulp-tap": "2.0.0",
-    "jest": "27.4.5",
+    "jest": "27.4.7",
     "jest-environment-node-single-context": "27.2.0",
     "postcss": "8.4.5",
     "prettier": "2.5.1",
