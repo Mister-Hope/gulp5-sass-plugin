@@ -6,6 +6,21 @@
 
 Sass plugin for gulp.
 
+## Migrating to V3
+
+Since sass introduce a new `compile` api in V1 (which use `Promise` instead of `callback` when async), we are upgrading to V3 to use this new API.
+
+**So V3 requireds a minimum sass version of `1.45.0`.**
+
+Due to `sync` is faster than `async`, users should use `sync` for the first choise, we marked `async` ones with `Async` prefix in V3.
+
+So:
+
+- The old `sass` and `sassSync` are renamed to `legacyAsync` and `legacy`.
+- The new compile apis are called `sass` and `sassAsync`
+- We also export `LegacySassOptions` and `LegacySassAsyncOptions` for old apis, together with `SassAsyncOptions` and `SassOptions` for new apis.
+- `sass`, `sassAsync`, `legacy`, `legacyAsync` 's type is exported as `GulpSass`, `GulpSassAsync`, `LegacyGulpSass`, `LegacyGulpSassAsync`.
+
 ## Compare
 
 We strongly recommend you to use this plugin instead of [gulp-sass][] or [gulp-dart-sass][].
@@ -30,6 +45,7 @@ Also, node-sass will take a long time to built during installation.
 
 It's a totally rewrite version in typescript. It has:
 
+- Uses new `compile` api
 - Option interface, and will provide autocomplete and validate (with IDE support like VSCode)
 - Code quality test and 100% test coverage
 
@@ -49,7 +65,7 @@ npm i -D @mr-hope/gulp-sass
 
 ## Basic Usage
 
-You should use `sass` to asynchronously tranform your sass code in to css:
+You should use `sass` to synchronously tranform your sass code in to css:
 
 ```js
 const { dest, src, watch } = require("gulp");
@@ -63,14 +79,14 @@ exports.build = build;
 exports.watch = watch("./styles/**/*.scss", build);
 ```
 
-You can also compile synchronously:
+You can also compile asynchronously:
 
 ```js
 const { dest, src, watch } = require("gulp");
-const { sassSync } = require("@mr-hope/gulp-sass");
+const { sassAsync } = require("@mr-hope/gulp-sass");
 
 const build = src("./styles/**/*.scss")
-  .pipe(sassSync().on("error", sassSync.logError))
+  .pipe(sassAsync().on("error", sassAsync.logError))
   .pipe(dest("./css"));
 
 exports.build = build;
@@ -105,9 +121,7 @@ exports.watch = watch("./styles/**/*.scss", build);
 
 ## Options
 
-You should pass in options just like you would for [Dart Sass][]. They will be passed along just as if you were using `sass`. We also export a `SassOption` interface in declaration files.
-
-`SassOption` is just like `Options` in `sass` except for the `data` and `file` options which are used by `@mr-hope/gulp-sass` internally.
+You should pass in options just like you would for [Dart Sass][] `compileString` api. They will be passed along just as if you were using `sass`. We also export `SassOption` and `SassAsyncOption` interface in declaration files.
 
 For example:
 
@@ -117,11 +131,13 @@ exports.build = src("./styles/**/*.scss")
   .pipe(dest("./css"));
 ```
 
-Or this for synchronous code:
+Or this for asynchronous code:
 
 ```js
 exports.build = src("./styles/**/*.scss")
-  .pipe(sassSync({ outputStyle: "compressed" }).on("error", sassSync.logError))
+  .pipe(
+    sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
+  )
   .pipe(dest("./css"));
 ```
 
@@ -156,6 +172,114 @@ exports.build = src("./styles/**/*.scss")
 Only [Active LTS and Current releases][1] are supported.
 
 [1]: https://github.com/nodejs/Release#release-schedule
+
+## Legacy APIS
+
+### Usage
+
+You should use `legacy` to synchronously tranform your sass code in to css:
+
+```js
+const { dest, src, watch } = require("gulp");
+const { legacy } = require("@mr-hope/gulp-sass");
+
+const build = src("./styles/**/*.scss")
+  .pipe(legacy().on("error", legacy.logError))
+  .pipe(dest("./css"));
+
+exports.build = build;
+exports.watch = watch("./styles/**/*.scss", build);
+```
+
+You can also compile asynchronously:
+
+```js
+const { dest, src, watch } = require("gulp");
+const { legacyAsync } = require("@mr-hope/gulp-sass");
+
+const build = src("./styles/**/*.scss")
+  .pipe(legacyAsync().on("error", legacyAsync.logError))
+  .pipe(dest("./css"));
+
+exports.build = build;
+exports.watch = watch("./styles/**/*.scss", build);
+```
+
+### Error logging
+
+Note that we provide a useful function called `logError` on these 2 tranform functions to let you print errors gracefully.
+
+See the demo above for usage.
+
+<details>
+<summary><strong>Performance</strong></summary>
+
+Note that **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks. To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
+
+```js
+const { dest, src, watch } = require("gulp");
+const { legacyAsync } = require("@mr-hope/gulp-sass");
+const fiber = require("fibers");
+
+const build = src("./styles/**/*.scss")
+  .pipe(legacyAsync({ fiber }).on("error", legacyAsync.logError))
+  .pipe(dest("./css"));
+
+exports.build = build;
+exports.watch = watch("./styles/**/*.scss", build);
+```
+
+</details>
+
+### Options
+
+You should pass in options just like you would for [Dart Sass][]. They will be passed along just as if you were using `sass`. We also export `LegacySassOption` and `LegacySassAsyncOption` interface in declaration files.
+
+`LegacySassOption` and `LegacySassAsyncOption` is just like `LegacyOptions<'sync'>` and `LegacyOptions<'async'>` in `sass` except for the `data` and `file` options which are used by `@mr-hope/gulp-sass` internally.
+
+For example:
+
+```js
+exports.build = src("./styles/**/*.scss")
+  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+  .pipe(dest("./css"));
+```
+
+Or this for asynchronous code:
+
+```js
+exports.build = src("./styles/**/*.scss")
+  .pipe(
+    sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
+  )
+  .pipe(dest("./css"));
+```
+
+### Source Maps
+
+`@mr-hope/gulp-sass` can be used in tandem with [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) to generate source maps for the Sass to CSS compilation. You will need to initialize [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) prior to running `@mr-hope/gulp-sass` and write the source maps after.
+
+```js
+const sourcemaps = require("gulp-sourcemaps");
+
+exports.build = src("./styles/**/*.scss")
+  .pipe(sourcemaps.init())
+  .pipe(legacy({ outputStyle: "compressed" }).on("error", legacy.logError))
+  .pipe(sourcemaps.write())
+  .pipe(dest("./css"));
+```
+
+By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) writes the source maps inline in the compiled CSS files. To write them to a separate file, specify a path relative to the `gulp.dest()` destination in the `sourcemaps.write()` function.
+
+```js
+const sourcemaps = require("gulp-sourcemaps");
+
+exports.build = src("./styles/**/*.scss")
+  .pipe(sourcemaps.init())
+  .pipe(legacy({ outputStyle: "compressed" }).on("error", legacy.logError))
+  .pipe(sourcemaps.write("./maps"))
+  .pipe(dest("./css"));
+```
 
 ## Issues
 
