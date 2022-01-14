@@ -37,7 +37,7 @@
     "lodash": "^4.17.21",
     "plugin-error": "^1.0.1",
     "replace-ext": "^2.0.0",
-    "sass": ">= 1.45.0",
+    "sass": ">= 1.48.0",
     "strip-ansi": "^6.0.0",
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
