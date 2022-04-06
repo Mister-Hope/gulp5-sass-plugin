@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: restore node_modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: node-modules-cache
         with:
           path: node_modules
@@ -25,7 +25,7 @@ jobs:
 
       - name: yarn-cache
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -48,4 +48,4 @@ jobs:
         run: yarn run test
 
       - name: Upload coverage
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
