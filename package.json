@@ -31,7 +31,7 @@
     }
   },
   "dependencies": {
-    "@types/lodash": "^4.14.181",
+    "@types/lodash": "^4.14.182",
     "@types/node": "*",
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
