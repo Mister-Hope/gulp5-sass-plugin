@@ -1,4 +1,3 @@
-import { underline } from "chalk";
 import { basename, dirname, extname, relative } from "path";
 import { fileURLToPath } from "url";
 import {
@@ -9,13 +8,15 @@ import {
   compileString,
 } from "sass";
 import { Transform } from "stream";
+import { PLUGIN_NAME } from "./utils";
+
+import chalk = require("chalk");
 import PluginError = require("plugin-error");
 import clonedeep = require("lodash/cloneDeep");
 import stripAnsi = require("strip-ansi");
 import applySourceMap = require("vinyl-sourcemaps-apply");
 import replaceExtension = require("replace-ext");
 import Vinyl = require("vinyl");
-import { PLUGIN_NAME } from "./utils";
 
 export interface SassError extends Exception {
   messageFormatted?: string;
@@ -107,9 +108,10 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
             : file.path;
 
           const relativePath = relative(process.cwd(), filePath);
-          const message = [underline(relativePath), error.sassMessage].join(
-            "\n"
-          );
+          const message = [
+            chalk.underline(relativePath),
+            error.sassMessage,
+          ].join("\n");
 
           error.messageFormatted = message;
           error.messageOriginal = error.message;

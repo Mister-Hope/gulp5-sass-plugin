@@ -1,3 +1,7 @@
 coverage/
+
 dist/
-__tests__/scss/error.scss
+
+__tests__/__fixtures__/scss/error.scss
+
+pnpm-lock.yaml

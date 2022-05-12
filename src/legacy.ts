@@ -1,4 +1,3 @@
-import { underline } from "chalk";
 import { basename, dirname, extname, join, relative } from "path";
 import {
   LegacyException,
@@ -8,14 +7,16 @@ import {
   renderSync,
 } from "sass";
 import { Transform } from "stream";
-import { RawSourceMap } from "source-map";
+import { PLUGIN_NAME } from "./utils";
+import type { RawSourceMap } from "source-map-js";
+
+import chalk = require("chalk");
 import PluginError = require("plugin-error");
 import clonedeep = require("lodash/cloneDeep");
 import stripAnsi = require("strip-ansi");
 import applySourceMap = require("vinyl-sourcemaps-apply");
 import replaceExtension = require("replace-ext");
 import Vinyl = require("vinyl");
-import { PLUGIN_NAME } from "./utils";
 
 export interface LegacySassMap extends RawSourceMap {
   sourceRoot: string;
@@ -128,7 +129,9 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
           const filePath =
             (error.file === "stdin" ? file.path : error.file) || file.path;
           const relativePath = relative(process.cwd(), filePath);
-          const message = [underline(relativePath), error.formatted].join("\n");
+          const message = [chalk.underline(relativePath), error.formatted].join(
+            "\n"
+          );
 
           error.messageFormatted = message;
           error.messageOriginal = error.message;
