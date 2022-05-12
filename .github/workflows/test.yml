@@ -11,41 +11,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: restore node_modules
-        uses: actions/cache@v3
-        id: node-modules-cache
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
         with:
-          path: node_modules
-          key: ${{ runner.os }}-lerna-${{ hashFiles('yarn.lock') }}
+          version: 7
+          run_install: true
 
-      - name: Get yarn cache directory path
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: yarn-cache
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v3
-        id: yarn-cache
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install Deps
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+          node-version: 16
+          cache: pnpm
 
       - name: Build project
-        run: yarn run build
+        run: pnpm build
 
       - name: Linter test
         run: |
-          yarn run lint:check
+          pnpm lint:check
 
       - name: Unit test
-        run: yarn run test
+        run: pnpm test
 
       - name: Upload coverage
         uses: codecov/codecov-action@v3

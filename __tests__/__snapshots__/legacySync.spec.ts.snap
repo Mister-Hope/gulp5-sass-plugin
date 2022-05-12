@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`legacy sync render should compile a single sass file 1`] = `
+exports[`legacy sync render > should compile a single sass file 1`] = `
 "#data {
   float: left;
   margin-left: 10px;
@@ -15,7 +15,7 @@ exports[`legacy sync render should compile a single sass file 1`] = `
 }"
 `;
 
-exports[`legacy sync render should compile files with partials in another folder 1`] = `
+exports[`legacy sync render > should compile files with partials in another folder 1`] = `
 "body {
   background: pink;
 }
@@ -39,7 +39,7 @@ body {
 }"
 `;
 
-exports[`legacy sync render should compile multiple sass files 1`] = `
+exports[`legacy sync render > should compile multiple sass files 1`] = `
 "#data {
   float: left;
   margin-left: 10px;
@@ -54,7 +54,7 @@ exports[`legacy sync render should compile multiple sass files 1`] = `
 }"
 `;
 
-exports[`legacy sync render should compile multiple sass files 2`] = `
+exports[`legacy sync render > should compile multiple sass files 2`] = `
 ".content-navigation {
   border-color: #3bbfce;
   color: #2ca2af;

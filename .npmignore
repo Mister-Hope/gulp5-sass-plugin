@@ -5,5 +5,4 @@ __tests__/
 
 .eslintrc.yml
 .prettierignore
-jest.config.js
 tsconfig.*

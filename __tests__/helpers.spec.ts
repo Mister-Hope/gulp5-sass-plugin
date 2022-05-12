@@ -1,4 +1,5 @@
-import { normaliseEOL } from "./helpers";
+import { describe, expect, it } from "vitest";
+import { normaliseEOL } from "./__fixtures__";
 
 describe("test helpers", () => {
   it("should normalise EOL", () => {

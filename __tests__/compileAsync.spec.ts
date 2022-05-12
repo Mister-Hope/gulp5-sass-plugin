@@ -1,234 +1,258 @@
 import { basename, join } from "path";
+import { describe, expect, it } from "vitest";
 import { SassError, sassAsync } from "../src";
-import { createVinyl, normaliseEOL } from "./helpers";
+import { createVinyl, normaliseEOL } from "./__fixtures__";
+
 import Vinyl = require("vinyl");
 
 describe("async compile", () => {
-  it("should pass file when it isNull()", (done) => {
-    const emptyFile = {
-      isNull: (): boolean => true,
-    };
-    const stream = sassAsync();
+  it("should pass file when it isNull()", () =>
+    new Promise((resolve) => {
+      const emptyFile = {
+        isNull: (): boolean => true,
+      };
 
-    stream.on("data", (data: Vinyl.BufferFile) => {
-      expect(data.isNull()).toEqual(true);
-      done();
-    });
+      const stream = sassAsync();
 
-    stream.write(emptyFile);
-  });
+      stream.on("data", (data: Vinyl.BufferFile) => {
+        expect(data.isNull()).toEqual(true);
+        resolve();
+      });
 
-  it("should emit error when file isStream()", (done) => {
-    const streamFile = {
-      isNull: (): boolean => false,
-      isStream: (): boolean => true,
-    };
-    const stream = sassAsync();
+      stream.write(emptyFile);
+    }));
 
-    stream.on("error", (err) => {
-      expect(err.message).toEqual("Streaming not supported");
-      done();
-    });
+  it("should emit error when file isStream()", () =>
+    new Promise((resolve) => {
+      const streamFile = {
+        isNull: (): boolean => false,
+        isStream: (): boolean => true,
+      };
+      const stream = sassAsync();
 
-    stream.write(streamFile);
-  });
+      stream.on("error", (err) => {
+        expect(err.message).toEqual("Streaming not supported");
+        resolve();
+      });
 
-  it("should compile an empty sass file", (done) => {
-    const sassFile = createVinyl("empty.scss");
-    const stream = sassAsync();
+      stream.write(streamFile);
+    }));
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(basename(cssFile.path)).toEqual("empty.css");
-      expect(normaliseEOL(cssFile.contents)).toEqual("");
-      done();
-    });
-    stream.write(sassFile);
-  });
+  it("should compile an empty sass file", () =>
+    new Promise((resolve) => {
+      const sassFile = createVinyl("empty.scss");
+      const stream = sassAsync();
 
-  it("should compile a single sass file", (done) => {
-    const sassFile = createVinyl("mixins.scss");
-    const stream = sassAsync();
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(basename(cssFile.path)).toEqual("empty.css");
+        expect(normaliseEOL(cssFile.contents)).toEqual("");
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(typeof cssFile.path).toEqual("string");
-      expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
-      done();
-    });
-    stream.write(sassFile);
-  });
+  it("should compile a single sass file", () =>
+    new Promise((resolve) => {
+      const sassFile = createVinyl("mixins.scss");
+      const stream = sassAsync();
 
-  it("should compile multiple sass files", (done) => {
-    const sassFiles = [
-      createVinyl("mixins.scss"),
-      createVinyl("variables.scss"),
-    ];
-    const stream = sassAsync();
-    let mustSee = sassFiles.length;
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
+        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(typeof cssFile.path).toEqual("string");
+  it("should compile multiple sass files", () =>
+    new Promise((resolve) => {
+      const sassFiles = [
+        createVinyl("mixins.scss"),
+        createVinyl("variables.scss"),
+      ];
+      const stream = sassAsync();
+      let mustSee = sassFiles.length;
 
-      expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
-      mustSee -= 1;
-      if (mustSee <= 0) done();
-    });
-    sassFiles.forEach((file) => stream.write(file));
-  });
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
 
-  it("should compile files with partials in another folder", (done) => {
-    const sassFile = createVinyl("inheritance.scss");
-    const stream = sassAsync();
+        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        mustSee -= 1;
+        if (mustSee <= 0) resolve();
+      });
+      sassFiles.forEach((file) => stream.write(file));
+    }));
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(typeof cssFile.path).toEqual("string");
+  it("should compile files with partials in another folder", () =>
+    new Promise((resolve) => {
+      const sassFile = createVinyl("inheritance.scss");
+      const stream = sassAsync();
 
-      expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
-      done();
-    });
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
 
-    stream.write(sassFile);
-  });
+        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        resolve();
+      });
 
-  it("should emit logError on sass error", (done) => {
-    const errorFile = createVinyl("error.scss");
-    const stream = sassAsync();
+      stream.write(sassFile);
+    }));
 
-    stream.on("error", sassAsync.logError.bind(stream));
-    stream.on("end", done);
-    stream.write(errorFile);
-  });
+  it("should emit logError on sass error", () =>
+    new Promise((resolve) => {
+      const errorFile = createVinyl("error.scss");
+      const stream = sassAsync();
 
-  it("should preserve the original sass error message", (done) => {
-    const errorFile = createVinyl("error.scss");
-    const stream = sassAsync();
+      stream.on("error", sassAsync.logError.bind(stream));
+      stream.on("end", resolve);
+      stream.write(errorFile);
+    }));
 
-    stream.on("error", (err: SassError) => {
-      // Error must include original error message
-      expect(err.messageOriginal).toContain('expected "{".');
-      // Error must include line and column error occurs on
-      expect(err.messageOriginal).toContain("2:20  root stylesheet");
-      // Error must include relativePath property
-      expect(err.message).toContain(join("__tests__", "scss", "error.scss"));
-      done();
-    });
-    stream.write(errorFile);
-  });
+  it("should preserve the original sass error message", () =>
+    new Promise((resolve) => {
+      const errorFile = createVinyl("error.scss");
+      const stream = sassAsync();
 
-  it("should locate correct error file", (done) => {
-    const errorFile = createVinyl("error-location.scss");
-    const stream = sassAsync();
+      stream.on("error", (err: SassError) => {
+        // Error must include original error message
+        expect(err.messageOriginal).toContain('expected "{".');
+        // Error must include line and column error occurs on
+        expect(err.messageOriginal).toContain("2:20  root stylesheet");
+        // Error must include relativePath property
+        expect(err.message).toContain(
+          join("__tests__", "__fixtures__", "scss", "error.scss")
+        );
+        resolve();
+      });
+      stream.write(errorFile);
+    }));
 
-    stream.on("error", (err: SassError) => {
-      // Error must include original error message
-      expect(err.messageOriginal).toContain('expected "{".');
-      // Error must include line and column error occurs on
-      expect(err.messageOriginal).toContain("error.scss 2:20  @use");
-      // Error must include relativePath property
-      expect(err.message).toContain(join("__tests__", "scss", "error.scss"));
-      done();
-    });
-    stream.write(errorFile);
-  });
+  it("should locate correct error file", () =>
+    new Promise((resolve) => {
+      const errorFile = createVinyl("error-location.scss");
+      const stream = sassAsync();
 
-  it("should compile a single sass file if the file name has been changed in the stream", (done) => {
-    const sassFile = createVinyl("mixins.scss");
-    const stream = sassAsync();
+      stream.on("error", (err: SassError) => {
+        // Error must include original error message
+        expect(err.messageOriginal).toContain('expected "{".');
+        // Error must include line and column error occurs on
+        expect(err.messageOriginal).toContain("error.scss 2:20  @use");
+        // Error must include relativePath property
+        expect(err.message).toContain(
+          join("__tests__", "__fixtures__", "scss", "error.scss")
+        );
+        resolve();
+      });
+      stream.write(errorFile);
+    }));
 
-    // Transform file name
-    sassFile.path = join(join(__dirname, "scss"), "mixin--changed.scss");
+  it("should compile a single sass file if the file name has been changed in the stream", () =>
+    new Promise((resolve) => {
+      const sassFile = createVinyl("mixins.scss");
+      const stream = sassAsync();
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(cssFile.path).toContain("mixin--changed.css");
+      // Transform file name
+      sassFile.path = join(__dirname, "__fixtures__/scss/mixin--changed.scss");
 
-      expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
-      done();
-    });
-    stream.write(sassFile);
-  });
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(cssFile.path).toContain("mixin--changed.css");
 
-  it("should preserve changes made in-stream to a Sass file", (done) => {
-    const sassFile = createVinyl("mixins.scss");
-    const stream = sassAsync();
+        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
 
-    // Transform file name
-    sassFile.contents = Buffer.from(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      `/* Added Dynamically */${sassFile.contents!.toString()}`
-    );
+  it("should preserve changes made in-stream to a Sass file", () =>
+    new Promise((resolve) => {
+      const sassFile = createVinyl("mixins.scss");
+      const stream = sassAsync();
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(typeof cssFile.path).toEqual("string");
-
-      expect(normaliseEOL(cssFile.contents)).toContain(
-        "/* Added Dynamically */"
+      // Transform file name
+      sassFile.contents = Buffer.from(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        `/* Added Dynamically */${sassFile.contents!.toString()}`
       );
-      done();
-    });
-    stream.write(sassFile);
-  });
 
-  it("should work with gulp-sourcemaps", (done) => {
-    const sassFile = createVinyl("inheritance.scss");
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
 
-    sassFile.sourceMap = JSON.stringify({
-      version: "3",
-      file: "scss/subdir/multilevelimport.scss",
-      names: [],
-      mappings: "",
-      sources: ["scss/subdir/multilevelimport.scss"],
-      sourcesContent: ["@import ../inheritance;"],
-    });
-    const stream = sassAsync();
+        expect(normaliseEOL(cssFile.contents)).toContain(
+          "/* Added Dynamically */"
+        );
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      // Expected sources are relative to file.base
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      expect(cssFile.sourceMap.sources).toEqual([
-        "includes/_cats.scss",
-        "includes/_dogs.sass",
-        "inheritance.scss",
-      ]);
+  it("should work with gulp-sourcemaps", () =>
+    new Promise((resolve) => {
+      const sassFile = createVinyl("inheritance.scss");
 
-      done();
-    });
+      sassFile.sourceMap = JSON.stringify({
+        version: "3",
+        file: "__fixtures__/scss/subdir/multilevelimport.scss",
+        names: [],
+        mappings: "",
+        sources: ["__fixtures__/scss/subdir/multilevelimport.scss"],
+        sourcesContent: ["@import ../inheritance;"],
+      });
+      const stream = sassAsync();
 
-    stream.write(sassFile);
-  });
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        // Expected sources are relative to file.base
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        expect(cssFile.sourceMap.sources).toEqual([
+          "includes/_cats.scss",
+          "includes/_dogs.sass",
+          "inheritance.scss",
+        ]);
 
-  it("should compile a single indented sass file", (done) => {
-    const sassFile = createVinyl("indent.sass");
-    const stream = sassAsync();
+        resolve();
+      });
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(typeof cssFile.path).toEqual("string");
+      stream.write(sassFile);
+    }));
 
-      expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
-      done();
-    });
-    stream.write(sassFile);
-  });
+  it("should compile a single indented sass file", () =>
+    new Promise((resolve) => {
+      const sassFile = createVinyl("indent.sass");
+      const stream = sassAsync();
 
-  it("should parse files in sass and scss", (done) => {
-    const sassFiles = [createVinyl("mixins.scss"), createVinyl("indent.sass")];
-    const stream = sassAsync();
-    let mustSee = sassFiles.length;
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
 
-    stream.on("data", (cssFile: Vinyl.BufferFile) => {
-      expect(typeof cssFile.relative).toEqual("string");
-      expect(typeof cssFile.path).toEqual("string");
-      expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
 
-      mustSee -= 1;
-      if (mustSee <= 0) done();
-    });
+  it("should parse files in sass and scss", () =>
+    new Promise((resolve) => {
+      const sassFiles = [
+        createVinyl("mixins.scss"),
+        createVinyl("indent.sass"),
+      ];
+      const stream = sassAsync();
+      let mustSee = sassFiles.length;
 
-    sassFiles.forEach((file) => stream.write(file));
-  });
+      stream.on("data", (cssFile: Vinyl.BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
+        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+
+        mustSee -= 1;
+        if (mustSee <= 0) resolve();
+      });
+
+      sassFiles.forEach((file) => stream.write(file));
+    }));
 });
