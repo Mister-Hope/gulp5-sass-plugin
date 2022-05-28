@@ -54,6 +54,12 @@ It's a totally rewrite version in typescript. It has:
 ## Install
 
 ```sh
+pnpm add -D @mr-hope/gulp-sass
+```
+
+or
+
+```sh
 yarn add -D @mr-hope/gulp-sass
 ```
 
