@@ -38,7 +38,7 @@ specifiers:
   typescript: 4.7.2
   vinyl: ^2.2.1
   vinyl-sourcemaps-apply: ^0.2.1
-  vite: 2.9.9
+  vite: 2.9.12
   vitest: 0.16.0
 
 dependencies:
@@ -81,7 +81,7 @@ devDependencies:
   prettier: 2.6.2
   rimraf: 3.0.2
   typescript: 4.7.2
-  vite: 2.9.9_sass@1.52.1
+  vite: 2.9.12_sass@1.52.1
   vitest: 0.16.0_c8@7.11.3+sass@1.52.1
 
 packages:
@@ -5223,31 +5223,6 @@ packages:
 
   /vite/2.9.12_sass@1.52.1:
     resolution: {integrity: sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==}
-    engines: {node: '>=12.2.0'}
-    hasBin: true
-    peerDependencies:
-      less: '*'
-      sass: '*'
-      stylus: '*'
-    peerDependenciesMeta:
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-    dependencies:
-      esbuild: 0.14.41
-      postcss: 8.4.14
-      resolve: 1.22.0
-      rollup: 2.75.1
-      sass: 1.52.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
-  /vite/2.9.9_sass@1.52.1:
-    resolution: {integrity: sha512-ffaam+NgHfbEmfw/Vuh6BHKKlI/XIAhxE5QSS7gFLIngxg171mg1P3a4LSRME0z2ZU1ScxoKzphkipcYwSD5Ew==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
