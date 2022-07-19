@@ -57,7 +57,7 @@
     "c8": "7.11.3",
     "conventional-changelog-cli": "2.2.2",
     "cz-conventional-changelog": "3.3.0",
-    "del": "6.1.1",
+    "del": "7.0.0",
     "eslint": "8.18.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.0.0",
