@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0](https://github.com/Mister-Hope/gulp-sass/compare/v3.0.2...v3.1.0) (2022-10-07)
+
+### Features
+
+- improve logError ([efa2790](https://github.com/Mister-Hope/gulp-sass/commit/efa27908694df0f416845d4ab342a91a2417f33b))
+
 ## [3.0.2](https://github.com/Mister-Hope/gulp-sass/compare/v2.0.0...v3.0.2) (2022-01-07)
 
 ### Features
