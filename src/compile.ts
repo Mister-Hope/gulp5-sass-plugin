@@ -12,7 +12,6 @@ import { PLUGIN_NAME } from "./utils";
 
 import chalk = require("chalk");
 import PluginError = require("plugin-error");
-import clonedeep = require("lodash/cloneDeep");
 import stripAnsi = require("strip-ansi");
 import applySourceMap = require("vinyl-sourcemaps-apply");
 import replaceExtension = require("replace-ext");
@@ -68,7 +67,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
   new Transform({
     objectMode: true,
     transform(file: Vinyl, _enc, callback): void {
-      const options = clonedeep(pluginOptions);
+      const options = { ...pluginOptions };
 
       if (file.isNull()) return callback(null, file);
 

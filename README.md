@@ -8,7 +8,7 @@ Sass plugin for gulp.
 
 ## Migrating to V3
 
-Since sass introduce a new `compile` api in V1 (which use `Promise` instead of `callback` when async), we are upgrading to V3 to use this new API.
+Since sass introduce a new `compile` api in v1.45.0 (which use `Promise` instead of `callback` when async), we are upgrading to V3 to use this new API.
 
 **So V3 requireds a minimum sass version of `1.45.0`.**
 

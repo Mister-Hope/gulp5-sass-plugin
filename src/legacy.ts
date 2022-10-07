@@ -12,7 +12,6 @@ import type { RawSourceMap } from "source-map-js";
 
 import chalk = require("chalk");
 import PluginError = require("plugin-error");
-import clonedeep = require("lodash/cloneDeep");
 import stripAnsi = require("strip-ansi");
 import applySourceMap = require("vinyl-sourcemaps-apply");
 import replaceExtension = require("replace-ext");
@@ -84,9 +83,9 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
   new Transform({
     objectMode: true,
     transform(file: Vinyl, _enc, callback): void {
-      const options = clonedeep(pluginOptions) as LegacyStringOptions<
-        "sync" | "async"
-      >;
+      const options = <LegacyStringOptions<"sync" | "async">>{
+        ...pluginOptions,
+      };
 
       if (file.isNull()) return callback(null, file);
 
