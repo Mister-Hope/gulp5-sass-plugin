@@ -145,7 +145,10 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
 // Log errors nicely
 function logError(this: Transform, error: SassError): void {
-  const message = new PluginError("sass", error.message).toString();
+  const message = new PluginError(
+    "sass",
+    error.messageFormatted || error.message
+  ).toString();
 
   process.stderr.write(`${message}\n`);
   this.emit("end");
