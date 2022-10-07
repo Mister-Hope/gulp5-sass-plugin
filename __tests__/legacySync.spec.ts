@@ -5,18 +5,20 @@ import { afterAll, describe, expect, it } from "vitest";
 import { LegacySassError, legacy } from "../src";
 import { createVinyl, normaliseEOL } from "./__fixtures__";
 
-import autoprefixer = require("autoprefixer");
-import del = require("del");
-import gulp = require("gulp");
-import postcss = require("gulp-postcss");
-import sourcemaps = require("gulp-sourcemaps");
-import File = require("vinyl");
+import autoprefixer from "autoprefixer";
+import del from "del";
+import gulp from "gulp";
+import postcss from "gulp-postcss";
+import sourcemaps from "gulp-sourcemaps";
+import File from "vinyl";
 
-afterAll(() => del(join(__dirname, "results")));
+afterAll(async () => {
+  await del(join(__dirname, "results"));
+});
 
 describe("legacy sync render", () => {
   it("should pass file when it isNull()", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const emptyFile = {
         isNull: (): boolean => true,
       };
@@ -30,7 +32,7 @@ describe("legacy sync render", () => {
     }));
 
   it("should emit error when file isStream()", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const stream = legacy();
       const streamFile = {
         isNull: (): boolean => false,
@@ -45,7 +47,7 @@ describe("legacy sync render", () => {
     }));
 
   it("should compile a single sass file", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("mixins.scss");
       const stream = legacy();
 
@@ -59,7 +61,7 @@ describe("legacy sync render", () => {
     }));
 
   it("should compile multiple sass files", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFiles = [
         createVinyl("mixins.scss"),
         createVinyl("variables.scss"),
@@ -80,7 +82,7 @@ describe("legacy sync render", () => {
     }));
 
   it("should compile files with partials in another folder", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("inheritance.scss");
       const stream = legacy();
 
@@ -104,7 +106,7 @@ describe("legacy sync render", () => {
     }));
 
   it("should preserve the original sass error message", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const errorFile = createVinyl("error.scss");
       const stream = legacy();
 
@@ -123,7 +125,7 @@ describe("legacy sync render", () => {
     }));
 
   it("should work with gulp-sourcemaps", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("inheritance.scss");
 
       sassFile.sourceMap = JSON.stringify({
@@ -172,7 +174,7 @@ describe("legacy sync render", () => {
     }));
 
   it("should work with empty files", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       gulp
         .src(join(__dirname, "__fixtures__/scss/empty.scss"))
         .pipe(legacy())

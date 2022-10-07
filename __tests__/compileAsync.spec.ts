@@ -1,13 +1,13 @@
+import Vinyl from "vinyl";
 import { basename, join } from "path";
 import { describe, expect, it } from "vitest";
+
 import { SassError, sassAsync } from "../src";
 import { createVinyl, normaliseEOL } from "./__fixtures__";
 
-import Vinyl = require("vinyl");
-
 describe("async compile", () => {
   it("should pass file when it isNull()", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const emptyFile = {
         isNull: (): boolean => true,
       };
@@ -23,7 +23,7 @@ describe("async compile", () => {
     }));
 
   it("should emit error when file isStream()", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const streamFile = {
         isNull: (): boolean => false,
         isStream: (): boolean => true,
@@ -39,7 +39,7 @@ describe("async compile", () => {
     }));
 
   it("should compile an empty sass file", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("empty.scss");
       const stream = sassAsync();
 
@@ -53,7 +53,7 @@ describe("async compile", () => {
     }));
 
   it("should compile a single sass file", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("mixins.scss");
       const stream = sassAsync();
 
@@ -67,7 +67,7 @@ describe("async compile", () => {
     }));
 
   it("should compile multiple sass files", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFiles = [
         createVinyl("mixins.scss"),
         createVinyl("variables.scss"),
@@ -87,7 +87,7 @@ describe("async compile", () => {
     }));
 
   it("should compile files with partials in another folder", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("inheritance.scss");
       const stream = sassAsync();
 
@@ -113,7 +113,7 @@ describe("async compile", () => {
     }));
 
   it("should preserve the original sass error message", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const errorFile = createVinyl("error.scss");
       const stream = sassAsync();
 
@@ -132,7 +132,7 @@ describe("async compile", () => {
     }));
 
   it("should locate correct error file", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const errorFile = createVinyl("error-location.scss");
       const stream = sassAsync();
 
@@ -151,7 +151,7 @@ describe("async compile", () => {
     }));
 
   it("should compile a single sass file if the file name has been changed in the stream", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("mixins.scss");
       const stream = sassAsync();
 
@@ -169,7 +169,7 @@ describe("async compile", () => {
     }));
 
   it("should preserve changes made in-stream to a Sass file", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("mixins.scss");
       const stream = sassAsync();
 
@@ -192,7 +192,7 @@ describe("async compile", () => {
     }));
 
   it("should work with gulp-sourcemaps", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("inheritance.scss");
 
       sassFile.sourceMap = JSON.stringify({
@@ -221,7 +221,7 @@ describe("async compile", () => {
     }));
 
   it("should compile a single indented sass file", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFile = createVinyl("indent.sass");
       const stream = sassAsync();
 
@@ -236,7 +236,7 @@ describe("async compile", () => {
     }));
 
   it("should parse files in sass and scss", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const sassFiles = [
         createVinyl("mixins.scss"),
         createVinyl("indent.sass"),

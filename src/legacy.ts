@@ -10,12 +10,12 @@ import { Transform } from "stream";
 import { PLUGIN_NAME } from "./utils";
 import type { RawSourceMap } from "source-map-js";
 
-import chalk = require("chalk");
-import PluginError = require("plugin-error");
-import stripAnsi = require("strip-ansi");
-import applySourceMap = require("vinyl-sourcemaps-apply");
-import replaceExtension = require("replace-ext");
-import Vinyl = require("vinyl");
+import chalk from "chalk";
+import PluginError from "plugin-error";
+import replaceExtension from "replace-ext";
+import stripAnsi from "strip-ansi";
+import Vinyl from "vinyl";
+import applySourceMap from "vinyl-sourcemaps-apply";
 
 export interface LegacySassMap extends RawSourceMap {
   sourceRoot: string;
