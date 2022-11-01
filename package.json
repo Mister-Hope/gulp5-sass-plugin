@@ -56,7 +56,7 @@
     "@types/vinyl": "2.0.6",
     "@typescript-eslint/eslint-plugin": "5.42.0",
     "@typescript-eslint/parser": "5.42.0",
-    "@vitest/coverage-c8": "0.24.4",
+    "@vitest/coverage-c8": "0.24.5",
     "autoprefixer": "10.4.13",
     "c8": "7.12.0",
     "conventional-changelog-cli": "2.2.2",
@@ -78,7 +78,7 @@
     "rollup-plugin-terser": "7.0.2",
     "typescript": "4.8.4",
     "vite": "3.2.2",
-    "vitest": "0.24.4"
+    "vitest": "0.24.5"
   },
   "packageManager": "pnpm@7.14.1",
   "publishConfig": {
