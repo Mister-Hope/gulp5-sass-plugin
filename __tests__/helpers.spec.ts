@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { normaliseEOL } from "./__fixtures__";
+import { normalizeEOL } from "./__fixtures__";
 
 describe("test helpers", () => {
   it("should normalise EOL", () => {
-    expect(normaliseEOL("foo\r\nbar")).toEqual("foo\nbar");
-    expect(normaliseEOL("foo\nbar")).toEqual("foo\nbar");
+    expect(normalizeEOL("foo\r\nbar")).toEqual("foo\nbar");
+    expect(normalizeEOL("foo\nbar")).toEqual("foo\nbar");
   });
 });

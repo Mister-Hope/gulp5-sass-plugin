@@ -10,9 +10,9 @@ Sass plugin for gulp.
 
 Since sass introduce a new `compile` api in v1.45.0 (which use `Promise` instead of `callback` when async), we are upgrading to V3 to use this new API.
 
-**So V3 requireds a minimum sass version of `1.45.0`.**
+**So V3 requires a minimum sass version of `1.45.0`.**
 
-Due to `sync` is faster than `async`, users should use `sync` as the first choise, we marked `async` ones with `Async` prefix in V3.
+Due to `sync` is faster than `async`, users should use `sync` as the first choice, we marked `async` ones with `Async` prefix in V3.
 
 So we are providing:
 
@@ -71,7 +71,7 @@ npm i -D @mr-hope/gulp-sass
 
 ## Basic Usage
 
-You should use `sass` to synchronously tranform your sass code in to css:
+You should use `sass` to synchronously transform your sass code in to css:
 
 ```js
 const { dest, src, watch } = require("gulp");
@@ -101,7 +101,7 @@ exports.watch = watch("./styles/**/*.scss", build);
 
 ### Error logging
 
-Note that we provide a useful function called `logError` on these 2 tranform functions to let you print errors gracefully.
+Note that we provide a useful function called `logError` on these 2 transform functions to let you print errors gracefully.
 
 See the demo above for usage.
 
@@ -183,7 +183,7 @@ Only [Active LTS and Current releases][1] are supported.
 
 ### Usage
 
-You should use `legacy` to synchronously tranform your sass code in to css:
+You should use `legacy` to synchronously transform your sass code in to css:
 
 ```js
 const { dest, src, watch } = require("gulp");
@@ -213,7 +213,7 @@ exports.watch = watch("./styles/**/*.scss", build);
 
 ### Error logging
 
-Note that we provide a useful function called `logError` on these 2 tranform functions to let you print errors gracefully.
+Note that we provide a useful function called `logError` on these 2 transform functions to let you print errors gracefully.
 
 See the demo above for usage.
 

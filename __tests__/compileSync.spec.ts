@@ -3,7 +3,7 @@ import { join } from "path";
 import { afterAll, describe, expect, it } from "vitest";
 
 import { SassError, sass } from "../src";
-import { createVinyl, normaliseEOL } from "./__fixtures__";
+import { createVinyl, normalizeEOL } from "./__fixtures__";
 
 import gulp from "gulp";
 import del from "del";
@@ -54,7 +54,7 @@ describe("legacy sync render", () => {
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
       stream.write(sassFile);
@@ -72,7 +72,7 @@ describe("legacy sync render", () => {
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
         if (mustSee <= 0) resolve();
@@ -89,7 +89,7 @@ describe("legacy sync render", () => {
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
       stream.write(sassFile);

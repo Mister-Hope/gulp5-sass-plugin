@@ -1,8 +1,0 @@
-.github/
-coverage/
-src/
-__tests__/
-
-.eslintrc.yml
-.prettierignore
-tsconfig.*

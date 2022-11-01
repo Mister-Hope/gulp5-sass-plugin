@@ -3,7 +3,7 @@ import Vinyl from "vinyl";
 import { describe, expect, it } from "vitest";
 
 import { LegacySassError, legacyAsync } from "../src";
-import { createVinyl, normaliseEOL } from "./__fixtures__";
+import { createVinyl, normalizeEOL } from "./__fixtures__";
 
 describe("legacy async render", () => {
   it("should pass file when it isNull()", () =>
@@ -45,7 +45,7 @@ describe("legacy async render", () => {
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(basename(cssFile.path)).toEqual("empty.css");
-        expect(normaliseEOL(cssFile.contents)).toEqual("");
+        expect(normalizeEOL(cssFile.contents)).toEqual("");
         resolve();
       });
       stream.write(sassFile);
@@ -59,7 +59,7 @@ describe("legacy async render", () => {
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
       stream.write(sassFile);
@@ -78,7 +78,7 @@ describe("legacy async render", () => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
 
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         mustSee -= 1;
         if (mustSee <= 0) resolve();
       });
@@ -94,7 +94,7 @@ describe("legacy async render", () => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
 
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
 
@@ -142,7 +142,7 @@ describe("legacy async render", () => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(cssFile.path).toContain("mixin--changed.css");
 
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
       stream.write(sassFile);
@@ -163,7 +163,7 @@ describe("legacy async render", () => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
 
-        expect(normaliseEOL(cssFile.contents)).toContain(
+        expect(normalizeEOL(cssFile.contents)).toContain(
           "/* Added Dynamically */"
         );
         resolve();
@@ -209,7 +209,7 @@ describe("legacy async render", () => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
 
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
       stream.write(sassFile);
@@ -227,7 +227,7 @@ describe("legacy async render", () => {
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
-        expect(normaliseEOL(cssFile.contents)).toMatchSnapshot();
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
         if (mustSee <= 0) resolve();

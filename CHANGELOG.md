@@ -11,7 +11,7 @@
 ### Features
 
 - add compile string api ([84a7378](https://github.com/Mister-Hope/gulp-sass/commit/84a7378632edd680837d0bc04fcadb5b127a7bdd))
-- compatable with sass@v1.45 ([a00a32f](https://github.com/Mister-Hope/gulp-sass/commit/a00a32fb7a7f2c7941b7b5051b452e7ebb5c07bd))
+- compatible with sass@v1.45 ([a00a32f](https://github.com/Mister-Hope/gulp-sass/commit/a00a32fb7a7f2c7941b7b5051b452e7ebb5c07bd))
 
 ### BREAKING CHANGES
 

@@ -15,6 +15,6 @@ A clear and concise description of what the bug is.
 If applicable, add screenshots to help explain your problem.
 
 **Additional context**
-Add any other context about the problem here. Especially the issue occurs in certain OS, browser or configuation.
+Add any other context about the problem here. Especially the issue occurs in certain OS, browser or configuration.
 
 <!-- Please be aware that the plugin ONLY support LTS version of Node and force you to use sass. -->

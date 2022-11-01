@@ -52,7 +52,7 @@ const legacyHandleFile = (
       index === sourceFileIndex ? source : join(sassFileSrcPath, source)
     );
 
-    // Remove 'stdin' from souces and replace with filenames!
+    // Remove 'stdin' from sources and replace with filenames!
     sassMap.sources = sassMap.sources.filter((src) => src && src !== "stdin");
 
     // Replace the map file with the original file name (but new extension)
@@ -105,7 +105,7 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
         options.data = file.contents.toString();
 
-        // we set the file path here so that libsass can correctly resolve import paths
+        // we set the file path here so that sass can correctly resolve import paths
         options.file = file.path;
 
         // Ensure `indentedSyntax` is true if a `.sass` file

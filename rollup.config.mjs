@@ -21,7 +21,7 @@ export default [
       "chalk",
       "plugin-error",
       "replace-ext",
-      "stripe-ansi",
+      "strip-ansi",
       "source-map-js",
       "vinyl",
       "vinyl-sourcemaps-apply",

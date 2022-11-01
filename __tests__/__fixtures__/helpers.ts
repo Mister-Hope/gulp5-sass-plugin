@@ -14,5 +14,5 @@ export const createVinyl = (filename: string, contents?: Buffer): Vinyl => {
   });
 };
 
-export const normaliseEOL = (str: Buffer | string): string =>
+export const normalizeEOL = (str: Buffer | string): string =>
   str.toString("utf8").replace(/\r\n/g, "\n");
