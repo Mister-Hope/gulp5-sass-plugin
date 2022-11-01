@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.1](https://github.com/Mister-Hope/gulp-sass/compare/v3.1.0...v3.1.1) (2022-11-01)
+
+### Features
+
+- stop bundling source files
+
 ## [3.1.0](https://github.com/Mister-Hope/gulp-sass/compare/v3.0.2...v3.1.0) (2022-10-07)
 
 ### Features
