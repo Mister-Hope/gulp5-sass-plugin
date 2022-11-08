@@ -9,7 +9,7 @@ specifiers:
   '@types/gulp-tap': 1.0.1
   '@types/node': '*'
   '@types/rimraf': 3.0.2
-  '@types/vinyl': 2.0.6
+  '@types/vinyl': 2.0.7
   '@typescript-eslint/eslint-plugin': 5.42.1
   '@typescript-eslint/parser': 5.42.1
   '@vitest/coverage-c8': 0.25.0
@@ -63,7 +63,7 @@ devDependencies:
   '@types/gulp-sourcemaps': 0.0.35
   '@types/gulp-tap': 1.0.1
   '@types/rimraf': 3.0.2
-  '@types/vinyl': 2.0.6
+  '@types/vinyl': 2.0.7
   '@typescript-eslint/eslint-plugin': 5.42.1_2udltptbznfmezdozpdoa2aemq
   '@typescript-eslint/parser': 5.42.1_rmayb2veg2btbq6mbmnyivgasy
   '@vitest/coverage-c8': 0.25.0_sass@1.55.0
@@ -431,21 +431,21 @@ packages:
     resolution: {integrity: sha512-E9oU9e2wg6CJ1OxnSpfF/hWWMZyaAG+900xzfJzFqsrbSyFemeSMSeaxZJY1iLwHn7iagewy9/UKJAQh273N2Q==}
     dependencies:
       '@types/node': 18.11.8
-      '@types/vinyl': 2.0.6
+      '@types/vinyl': 2.0.7
     dev: true
 
   /@types/gulp-sourcemaps/0.0.35:
     resolution: {integrity: sha512-vUBuizwA4CAV3Mke0DJYHQxyN4YOB1aAql284qAO7Et7fe0hmnPi/R9Fhu2UhxMuSxAwFktsJUOQk5dJHOU1eA==}
     dependencies:
       '@types/node': 18.11.8
-      '@types/vinyl': 2.0.6
+      '@types/vinyl': 2.0.7
     dev: true
 
   /@types/gulp-tap/1.0.1:
     resolution: {integrity: sha512-TTxKFun5mAOeO1lvx4PWWXaNqNKyk5DxOMqSuRkDX3we0hnJhELLQuZxEAfdFmEFS5Ou1tPKx4KsVnrBMfrolQ==}
     dependencies:
       '@types/node': 18.11.8
-      '@types/vinyl': 2.0.6
+      '@types/vinyl': 2.0.7
     dev: true
 
   /@types/gulp/4.0.9:
@@ -517,11 +517,11 @@ packages:
     dependencies:
       '@types/glob-stream': 6.1.1
       '@types/node': 18.11.8
-      '@types/vinyl': 2.0.6
+      '@types/vinyl': 2.0.7
     dev: true
 
-  /@types/vinyl/2.0.6:
-    resolution: {integrity: sha512-ayJ0iOCDNHnKpKTgBG6Q6JOnHTj9zFta+3j2b8Ejza0e4cvRyMn0ZoLEmbPrTHe5YYRlDYPvPWVdV4cTaRyH7g==}
+  /@types/vinyl/2.0.7:
+    resolution: {integrity: sha512-4UqPv+2567NhMQuMLdKAyK4yzrfCqwaTt6bLhHEs8PFcxbHILsrxaY63n4wgE/BRLDWDQeI+WcTmkXKExh9hQg==}
     dependencies:
       '@types/expect': 1.20.4
       '@types/node': 18.11.8
