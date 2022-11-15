@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@rollup/plugin-typescript': 9.0.2
   '@types/globule': 1.1.4
-  '@types/gulp': 4.0.9
+  '@types/gulp': 4.0.10
   '@types/gulp-postcss': 8.0.2
   '@types/gulp-sourcemaps': 0.0.35
   '@types/gulp-tap': 1.0.1
@@ -58,7 +58,7 @@ dependencies:
 devDependencies:
   '@rollup/plugin-typescript': 9.0.2_aoc4guvlpr5bfeyf2nus4ubkpu
   '@types/globule': 1.1.4
-  '@types/gulp': 4.0.9
+  '@types/gulp': 4.0.10
   '@types/gulp-postcss': 8.0.2
   '@types/gulp-sourcemaps': 0.0.35
   '@types/gulp-tap': 1.0.1
@@ -448,8 +448,8 @@ packages:
       '@types/vinyl': 2.0.7
     dev: true
 
-  /@types/gulp/4.0.9:
-    resolution: {integrity: sha512-zzT+wfQ8uwoXjDhRK9Zkmmk09/fbLLmN/yDHFizJiEKIve85qutOnXcP/TM2sKPBTU+Jc16vfPbOMkORMUBN7Q==}
+  /@types/gulp/4.0.10:
+    resolution: {integrity: sha512-spgZHJFqiEJGwqGlf7T/k4nkBpBcLgP7T0EfN6G2vvnhUfvd4uO1h8RwpXOE8x/54DVYUs1XCAtBHkX/R3axAQ==}
     dependencies:
       '@types/undertaker': 1.2.8
       '@types/vinyl-fs': 2.4.12
