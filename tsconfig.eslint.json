@@ -4,5 +4,5 @@
     "target": "ESNext",
     "module": "CommonJS"
   },
-  "include": ["__tests__/**/*.ts", "src/**/*.ts"]
+  "include": ["__tests__/**/*.ts", "src/**/*.ts", "rollup.config.ts"]
 }
