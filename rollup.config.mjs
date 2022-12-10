@@ -1,6 +1,5 @@
-import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-import { terser } from "rollup-plugin-terser";
+import esbuild from "rollup-plugin-esbuild";
 
 export default [
   {
@@ -12,7 +11,13 @@ export default [
         sourcemap: true,
       },
     ],
-    plugins: [typescript(), terser()],
+    plugins: [
+      esbuild({
+        charset: "utf8",
+        minify: true,
+        target: "node14",
+      }),
+    ],
     external: [
       "path",
       "url",
