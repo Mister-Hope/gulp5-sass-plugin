@@ -32,7 +32,7 @@ specifiers:
   prettier: 2.8.1
   replace-ext: ^2.0.0
   rimraf: 3.0.2
-  rollup: 3.7.2
+  rollup: 3.7.3
   rollup-plugin-dts: 5.0.0
   rollup-plugin-esbuild: 5.0.0
   sass: '>= 1.45.0'
@@ -83,9 +83,9 @@ devDependencies:
   postcss: 8.4.19
   prettier: 2.8.1
   rimraf: 3.0.2
-  rollup: 3.7.2
-  rollup-plugin-dts: 5.0.0_rhcy7w73syvkxwkjav7taplolm
-  rollup-plugin-esbuild: 5.0.0_uyd7v7jndykc7aad2otypgy7bi
+  rollup: 3.7.3
+  rollup-plugin-dts: 5.0.0_6hu75beimlyhzhs4jaytlzqtvy
+  rollup-plugin-esbuild: 5.0.0_ediepaqm3dh3x43zpyym4letwe
   typescript: 4.9.4
   vite: 4.0.0_fdj2axhwykthmxlren36icxkni
   vitest: 0.25.7_sass@1.55.0
@@ -493,7 +493,7 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@rollup/pluginutils/5.0.2_rollup@3.7.2:
+  /@rollup/pluginutils/5.0.2_rollup@3.7.3:
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -505,7 +505,7 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 3.7.2
+      rollup: 3.7.3
     dev: true
 
   /@tsconfig/node10/1.0.9:
@@ -4613,7 +4613,7 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup-plugin-dts/5.0.0_rhcy7w73syvkxwkjav7taplolm:
+  /rollup-plugin-dts/5.0.0_6hu75beimlyhzhs4jaytlzqtvy:
     resolution: {integrity: sha512-OO8ayCvuJCKaQSShyVTARxGurVVk4ulzbuvz+0zFd1f93vlnWFU5pBMT7HFeS6uj7MvvZLx4kUAarGATSU1+Ng==}
     engines: {node: '>=v14'}
     peerDependencies:
@@ -4621,32 +4621,32 @@ packages:
       typescript: ^4.1
     dependencies:
       magic-string: 0.26.7
-      rollup: 3.7.2
+      rollup: 3.7.3
       typescript: 4.9.4
     optionalDependencies:
       '@babel/code-frame': 7.18.6
     dev: true
 
-  /rollup-plugin-esbuild/5.0.0_uyd7v7jndykc7aad2otypgy7bi:
+  /rollup-plugin-esbuild/5.0.0_ediepaqm3dh3x43zpyym4letwe:
     resolution: {integrity: sha512-1cRIOHAPh8WQgdQQyyvFdeOdxuiyk+zB5zJ5+YOwrZP4cJ0MT3Fs48pQxrZeyZHcn+klFherytILVfE4aYrneg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     peerDependencies:
       esbuild: '>=0.10.1'
       rollup: ^1.20.0 || ^2.0.0 || ^3.0.0
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.7.2
+      '@rollup/pluginutils': 5.0.2_rollup@3.7.3
       debug: 4.3.4
       es-module-lexer: 1.1.0
       esbuild: 0.16.4
       joycon: 3.1.1
       jsonc-parser: 3.2.0
-      rollup: 3.7.2
+      rollup: 3.7.3
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /rollup/3.7.2:
-    resolution: {integrity: sha512-orqIX5zkHyHKVsIBl8J5a2tnVikOAMte0DgOLViyW6McYuj45FG+cQPrXILhaifBSmy0D0hKbHg2RbgzFJcwTg==}
+  /rollup/3.7.3:
+    resolution: {integrity: sha512-7e68MQbAWCX6mI4/0lG1WHd+NdNAlVamg0Zkd+8LZ/oXojligdGnCNyHlzXqXCZObyjs5FRc3AH0b17iJESGIQ==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -5472,7 +5472,7 @@ packages:
       esbuild: 0.16.4
       postcss: 8.4.19
       resolve: 1.22.1
-      rollup: 3.7.2
+      rollup: 3.7.3
       sass: 1.55.0
     optionalDependencies:
       fsevents: 2.3.2
