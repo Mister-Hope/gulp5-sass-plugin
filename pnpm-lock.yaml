@@ -41,7 +41,7 @@ specifiers:
   typescript: 4.9.4
   vinyl: ^2.2.1
   vinyl-sourcemaps-apply: ^0.2.1
-  vite: 4.0.0
+  vite: 4.0.1
   vitest: 0.25.7
 
 dependencies:
@@ -87,7 +87,7 @@ devDependencies:
   rollup-plugin-dts: 5.0.0_6hu75beimlyhzhs4jaytlzqtvy
   rollup-plugin-esbuild: 5.0.0_ediepaqm3dh3x43zpyym4letwe
   typescript: 4.9.4
-  vite: 4.0.0_fdj2axhwykthmxlren36icxkni
+  vite: 4.0.1_fdj2axhwykthmxlren36icxkni
   vitest: 0.25.7_sass@1.55.0
 
 packages:
@@ -4299,6 +4299,15 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /postcss/8.4.20:
+    resolution: {integrity: sha512-6Q04AXR1212bXr5fh03u8aAwbLxAQNGQ/Q1LNa0VfOI06ZAlhPHtQvE4OIdpj4kLThXilalPnmDSOD65DcHt+g==}
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: 3.3.4
+      picocolors: 1.0.0
+      source-map-js: 1.0.2
+    dev: true
+
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -5443,8 +5452,8 @@ packages:
       remove-trailing-separator: 1.1.0
       replace-ext: 1.0.1
 
-  /vite/4.0.0_fdj2axhwykthmxlren36icxkni:
-    resolution: {integrity: sha512-ynad+4kYs8Jcnn8J7SacS9vAbk7eMy0xWg6E7bAhS1s79TK+D7tVFGXVZ55S7RNLRROU1rxoKlvZ/qjaB41DGA==}
+  /vite/4.0.1_fdj2axhwykthmxlren36icxkni:
+    resolution: {integrity: sha512-kZQPzbDau35iWOhy3CpkrRC7It+HIHtulAzBhMqzGHKRf/4+vmh8rPDDdv98SWQrFWo6//3ozwsRmwQIPZsK9g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -5513,7 +5522,7 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.0
       tinyspy: 1.0.2
-      vite: 4.0.0_fdj2axhwykthmxlren36icxkni
+      vite: 4.0.1_fdj2axhwykthmxlren36icxkni
     transitivePeerDependencies:
       - less
       - sass
