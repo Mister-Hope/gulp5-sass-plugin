@@ -50,7 +50,7 @@
     "replace-ext": "^2.0.0",
     "sass": ">= 1.45.0",
     "source-map-js": "^1.0.2",
-    "strip-ansi": "^6.0.1",
+    "strip-ansi": "^7.0.0",
     "vinyl": "^2.2.1",
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
