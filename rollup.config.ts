@@ -1,6 +1,20 @@
 import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
 
+const external = [
+  "node:path",
+  "node:stream",
+  "node:url",
+  "picocolors",
+  "plugin-error",
+  "replace-ext",
+  "sass",
+  "source-map-js",
+  "strip-ansi",
+  "vinyl",
+  "vinyl-sourcemaps-apply",
+];
+
 export default [
   {
     input: "./src/index.ts",
@@ -18,19 +32,7 @@ export default [
         target: "node14",
       }),
     ],
-    external: [
-      "path",
-      "url",
-      "sass",
-      "stream",
-      "chalk",
-      "plugin-error",
-      "replace-ext",
-      "strip-ansi",
-      "source-map-js",
-      "vinyl",
-      "vinyl-sourcemaps-apply",
-    ],
+    external,
   },
   {
     input: "./src/index.ts",
@@ -38,22 +40,9 @@ export default [
       {
         file: "./dist/index.d.ts",
         format: "esm",
-        sourcemap: true,
       },
     ],
     plugins: [dts()],
-    external: [
-      "path",
-      "url",
-      "sass",
-      "stream",
-      "chalk",
-      "plugin-error",
-      "replace-ext",
-      "stripe-ansi",
-      "source-map-js",
-      "vinyl",
-      "vinyl-sourcemaps-apply",
-    ],
+    external,
   },
 ];

@@ -1,9 +1,9 @@
+import { basename, join } from "node:path";
 import Vinyl from "vinyl";
-import { basename, join } from "path";
 import { describe, expect, it } from "vitest";
 
-import { SassError, sassAsync } from "../src";
-import { createVinyl, normalizeEOL } from "./__fixtures__";
+import { SassError, sassAsync } from "../src/index.js";
+import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 
 describe("async compile", () => {
   it("should pass file when it isNull()", () =>

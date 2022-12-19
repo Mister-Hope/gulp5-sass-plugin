@@ -1,6 +1,6 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-import Vinyl = require("vinyl");
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import Vinyl from "vinyl";
 
 export const createVinyl = (filename: string, contents?: Buffer): Vinyl => {
   const base = join(__dirname, "scss");

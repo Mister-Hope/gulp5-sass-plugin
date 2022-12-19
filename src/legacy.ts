@@ -1,21 +1,18 @@
-import { basename, dirname, extname, join, relative } from "path";
-import {
-  LegacyException,
-  LegacyStringOptions,
-  LegacyResult,
-  render,
-  renderSync,
-} from "sass";
-import { Transform } from "stream";
-import { PLUGIN_NAME } from "./utils";
-import type { RawSourceMap } from "source-map-js";
+import { basename, dirname, extname, join, relative } from "node:path";
+import { Transform } from "node:stream";
 
-import chalk from "chalk";
+import picocolors from "picocolors";
 import PluginError from "plugin-error";
 import replaceExtension from "replace-ext";
+import dartSass from "sass";
 import stripAnsi from "strip-ansi";
 import Vinyl from "vinyl";
 import applySourceMap from "vinyl-sourcemaps-apply";
+
+import { PLUGIN_NAME } from "./utils.js";
+
+import type { LegacyException, LegacyStringOptions, LegacyResult } from "sass";
+import type { RawSourceMap } from "source-map-js";
 
 export interface LegacySassMap extends RawSourceMap {
   sourceRoot: string;
@@ -128,9 +125,10 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
           const filePath =
             (error.file === "stdin" ? file.path : error.file) || file.path;
           const relativePath = relative(process.cwd(), filePath);
-          const message = [chalk.underline(relativePath), error.formatted].join(
-            "\n"
-          );
+          const message = [
+            picocolors.underline(relativePath),
+            error.formatted,
+          ].join("\n");
 
           error.messageFormatted = message;
           error.messageOriginal = error.message;
@@ -143,13 +141,16 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
         // Sync Sass render
         if (sync)
           try {
-            return callback(null, legacyHandleFile(file, renderSync(options)));
+            return callback(
+              null,
+              legacyHandleFile(file, dartSass.renderSync(options))
+            );
           } catch (error) {
             return errorHandler(error as LegacySassError);
           }
 
         // Async Sass render
-        return render(
+        return dartSass.render(
           options,
           (error?: LegacySassError, result?: LegacyResult) => {
             if (error) return errorHandler(error);

@@ -1,23 +1,20 @@
-import { basename, dirname, extname, relative } from "path";
-import { fileURLToPath } from "url";
-import {
-  CompileResult,
-  Exception,
-  StringOptions,
-  compileStringAsync,
-  compileString,
-} from "sass";
-import { Transform } from "stream";
-import { PLUGIN_NAME } from "./utils";
+import { basename, dirname, extname, relative } from "node:path";
+import { Transform } from "node:stream";
+import { fileURLToPath } from "node:url";
+import dartSass from "sass";
 
-import chalk from "chalk";
+import picocolors from "picocolors";
 import PluginError from "plugin-error";
 import replaceExtension from "replace-ext";
 import stripAnsi from "strip-ansi";
 import Vinyl from "vinyl";
 import applySourceMap from "vinyl-sourcemaps-apply";
 
-export interface SassError extends Exception {
+import { PLUGIN_NAME } from "./utils.js";
+
+import type { CompileResult, StringOptions } from "sass";
+
+export interface SassError extends dartSass.Exception {
   messageFormatted?: string;
   messageOriginal?: string;
   relativePath?: string;
@@ -108,7 +105,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
           const relativePath = relative(process.cwd(), filePath);
           const message = [
-            chalk.underline(relativePath),
+            picocolors.underline(relativePath),
             error.sassMessage,
           ].join("\n");
 
@@ -125,14 +122,15 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
           try {
             return callback(
               null,
-              handleFile(file, compileString(content, options))
+              handleFile(file, dartSass.compileString(content, options))
             );
           } catch (error) {
             return errorHandler(error as SassError);
           }
 
         // Async Sass render
-        void compileStringAsync(content, options)
+        void dartSass
+          .compileStringAsync(content, options)
           .then((result) => {
             return callback(null, handleFile(file, result));
           })

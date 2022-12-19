@@ -7,7 +7,8 @@
   "scripts": {
     "build": "rollup -c rollup.config.ts --configPlugin esbuild",
     "clean": "rimraf dist",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
+    "commit": "pnpm git-cz",
+    "changelog": "standard-version --skip.bump --skip.commit --skip.tag",
     "lint": "prettier --check --write . && eslint . --ext .ts --fix",
     "lint:check": "prettier --check . && eslint . --ext .ts",
     "test": "vitest run --coverage"
@@ -29,15 +30,23 @@
   "bugs": {
     "url": "https://github.com/Mister-Hope/gulp-sass/issues"
   },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --fix",
+    "*.{js,ts,json,yaml,yml,md}": "prettier --write",
+    "*.wxss": "stylelint --fix",
+    "*.wxml": "prettier --parser html --write",
+    "*.wxs": "prettier --parser babel-flow --write",
+    "package.json": "sort-package-json"
+  },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/cz-git"
     }
   },
   "dependencies": {
     "@types/node": "*",
-    "chalk": "^4.1.2",
     "plugin-error": "^2.0.1",
+    "picocolors": "^1.0.0",
     "replace-ext": "^2.0.0",
     "sass": ">= 1.45.0",
     "source-map-js": "^1.0.2",
@@ -46,6 +55,8 @@
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "17.3.0",
+    "@commitlint/config-conventional": "17.3.0",
     "@types/globule": "1.1.4",
     "@types/gulp": "4.0.10",
     "@types/gulp-postcss": "8.0.2",
@@ -55,14 +66,14 @@
     "@types/vinyl": "2.0.7",
     "@typescript-eslint/eslint-plugin": "5.46.1",
     "@typescript-eslint/parser": "5.46.1",
-    "@vitest/coverage-c8": "0.25.8",
+    "@vitest/coverage-c8": "0.26.0",
     "autoprefixer": "10.4.13",
+    "commitizen": "4.2.6",
+    "cz-git": "1.4.1",
     "c8": "7.12.0",
-    "conventional-changelog-cli": "2.2.2",
-    "cz-conventional-changelog": "3.3.0",
     "del": "6.1.1",
-    "esbuild": "0.16.4",
-    "eslint": "8.29.0",
+    "esbuild": "0.16.9",
+    "eslint": "8.30.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.2.1",
     "globule": "1.3.4",
@@ -70,18 +81,32 @@
     "gulp-postcss": "9.0.1",
     "gulp-sourcemaps": "3.0.0",
     "gulp-tap": "2.0.0",
+    "husky": "8.0.2",
+    "lint-staged": "13.1.0",
     "postcss": "8.4.20",
     "prettier": "2.8.1",
     "rimraf": "3.0.2",
-    "rollup": "3.7.3",
+    "rollup": "3.7.5",
     "rollup-plugin-dts": "5.0.0",
     "rollup-plugin-esbuild": "5.0.0",
+    "standard-version": "9.5.0",
     "typescript": "4.9.4",
-    "vite": "4.0.1",
-    "vitest": "0.25.8"
+    "vite": "4.0.2",
+    "vitest": "0.26.0"
   },
   "packageManager": "pnpm@7.18.2",
   "publishConfig": {
     "access": "public"
+  },
+  "pnpm": {
+    "overrides": {
+      "cacache": "^17.0.4",
+      "chokidar": "3.5.1",
+      "css": "npm:@adobe/css-tools@4.0.1",
+      "glob-stream": "^7.0.0",
+      "glob-parent": "^6.0.2",
+      "micromatch": "^4.0.5",
+      "yargs-parser": "^21.1.1"
+    }
   }
 }

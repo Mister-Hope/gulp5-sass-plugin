@@ -17,7 +17,6 @@ ignorePatterns:
 rules:
   eqeqeq: error
   line-comment-position: error
-  no-duplicate-imports: error
   object-shorthand: error
   padding-line-between-statements:
     - error

@@ -1,9 +1,9 @@
-import { statSync } from "fs";
-import { join } from "path";
+import { statSync } from "node:fs";
+import { join } from "node:path";
 import { afterAll, describe, expect, it } from "vitest";
 
-import { LegacySassError, legacy } from "../src";
-import { createVinyl, normalizeEOL } from "./__fixtures__";
+import { LegacySassError, legacy } from "../src/index.js";
+import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 
 import autoprefixer from "autoprefixer";
 import del from "del";

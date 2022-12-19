@@ -1,4 +1,4 @@
-export { sass, sassAsync } from "./compile";
+export { sass, sassAsync } from "./compile.js";
 
 export type {
   GulpSassAsync,
@@ -6,9 +6,9 @@ export type {
   SassAsyncOptions,
   SassOptions,
   SassError,
-} from "./compile";
+} from "./compile.js";
 
-export { legacy, legacyAsync } from "./legacy";
+export { legacy, legacyAsync } from "./legacy.js";
 
 export type {
   LegacySassAsyncOptions,
@@ -17,4 +17,4 @@ export type {
   LegacyGulpSass,
   LegacySassError,
   LegacySassMap,
-} from "./legacy";
+} from "./legacy.js";

@@ -1,9 +1,9 @@
-import { basename, join } from "path";
+import { basename, join } from "node:path";
 import Vinyl from "vinyl";
 import { describe, expect, it } from "vitest";
 
-import { LegacySassError, legacyAsync } from "../src";
-import { createVinyl, normalizeEOL } from "./__fixtures__";
+import { LegacySassError, legacyAsync } from "../src/index.js";
+import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 
 describe("legacy async render", () => {
   it("should pass file when it isNull()", () =>
