@@ -22,7 +22,7 @@ specifiers:
   '@types/vinyl': 2.0.7
   '@typescript-eslint/eslint-plugin': 5.46.1
   '@typescript-eslint/parser': 5.46.1
-  '@vitest/coverage-c8': 0.26.0
+  '@vitest/coverage-c8': 0.26.2
   autoprefixer: 10.4.13
   c8: 7.12.0
   commitizen: 4.2.6
@@ -56,7 +56,7 @@ specifiers:
   vinyl: ^2.2.1
   vinyl-sourcemaps-apply: ^0.2.1
   vite: 4.0.2
-  vitest: 0.26.0
+  vitest: 0.26.2
 
 dependencies:
   '@types/node': 18.11.16
@@ -81,7 +81,7 @@ devDependencies:
   '@types/vinyl': 2.0.7
   '@typescript-eslint/eslint-plugin': 5.46.1_knuev5ex3hryrh46aivii4rsoq
   '@typescript-eslint/parser': 5.46.1_iukboom6ndih5an6iafl45j2fe
-  '@vitest/coverage-c8': 0.26.0_sass@1.57.0
+  '@vitest/coverage-c8': 0.26.2_sass@1.57.0
   autoprefixer: 10.4.13_postcss@8.4.20
   c8: 7.12.0
   commitizen: 4.2.6
@@ -107,7 +107,7 @@ devDependencies:
   standard-version: 9.5.0
   typescript: 4.9.4
   vite: 4.0.2_k6oqnztktp4dgazaq76kukrvtq
-  vitest: 0.26.0_sass@1.57.0
+  vitest: 0.26.2_sass@1.57.0
 
 packages:
 
@@ -920,11 +920,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.26.0_sass@1.57.0:
-    resolution: {integrity: sha512-1LSMHvX1Winy1dIV1XqQanIskYBvd3+TlQtxO6BeyFa57Lah2uNBm3gh5iDB+ZWCySN5o6bl7qOJdaZjEQZZeg==}
+  /@vitest/coverage-c8/0.26.2_sass@1.57.0:
+    resolution: {integrity: sha512-h7RZ7trUUsq+yixiXhBaGboap7pjee+x59HE9rsz/JbY/evJhgk+biLY5lOgjpyUonPN0Ymz3mxlrXW9Da54SQ==}
     dependencies:
       c8: 7.12.0
-      vitest: 0.26.0_sass@1.57.0
+      vitest: 0.26.2_sass@1.57.0
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -5358,8 +5358,8 @@ packages:
       remove-trailing-separator: 1.1.0
       replace-ext: 1.0.1
 
-  /vite-node/0.26.0_k6oqnztktp4dgazaq76kukrvtq:
-    resolution: {integrity: sha512-nLtHWCv6reONl1oFsKhQ/LT7n3UNLpvVARAJlmGrQV6qSElht/9AdN41Pa+WSkw2Winh682UzM0Yw0GNlfqejw==}
+  /vite-node/0.26.2_k6oqnztktp4dgazaq76kukrvtq:
+    resolution: {integrity: sha512-4M/zlatItZAyvrQG+82zQBhgDjRZRhVJYFW4T9wcAKh7eMmSiPOVSeI5zsV9UzHXgCcIDKX0o0r3s4OxExTHqg==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     dependencies:
@@ -5414,8 +5414,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.26.0_sass@1.57.0:
-    resolution: {integrity: sha512-5kUnms5WOa0qrDCJePEPB13v9mhr+ZT1Qy0qNg0eVj1X7/Fx4GY4L1e5s3OH+BQ/J7M5WtaKsUGv9l1pbC7v2Q==}
+  /vitest/0.26.2_sass@1.57.0:
+    resolution: {integrity: sha512-Jvqxh6SDy9SsuslkDjts0iDewDIdq4rveEt69YgDuAb1tVDGV0lDepVaeAFraoySWqneJmOt4TngFFNhlw7GfA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
@@ -5450,7 +5450,7 @@ packages:
       tinypool: 0.3.0
       tinyspy: 1.0.2
       vite: 4.0.2_k6oqnztktp4dgazaq76kukrvtq
-      vite-node: 0.26.0_k6oqnztktp4dgazaq76kukrvtq
+      vite-node: 0.26.2_k6oqnztktp4dgazaq76kukrvtq
     transitivePeerDependencies:
       - less
       - sass
