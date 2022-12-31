@@ -73,7 +73,7 @@
     "c8": "7.12.0",
     "del": "6.1.1",
     "esbuild": "0.16.9",
-    "eslint": "8.30.0",
+    "eslint": "8.31.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.2.1",
     "globule": "1.3.4",
@@ -87,14 +87,14 @@
     "prettier": "2.8.1",
     "rimraf": "3.0.2",
     "rollup": "3.7.5",
-    "rollup-plugin-dts": "5.0.0",
+    "rollup-plugin-dts": "5.1.0",
     "rollup-plugin-esbuild": "5.0.0",
     "standard-version": "9.5.0",
     "typescript": "4.9.4",
     "vite": "4.0.3",
     "vitest": "0.26.0"
   },
-  "packageManager": "pnpm@7.18.2",
+  "packageManager": "pnpm@7.21.0",
   "publishConfig": {
     "access": "public"
   },
