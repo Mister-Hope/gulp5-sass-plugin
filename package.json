@@ -94,7 +94,7 @@
     "vite": "4.0.2",
     "vitest": "0.26.0"
   },
-  "packageManager": "pnpm@7.18.2",
+  "packageManager": "pnpm@7.21.0",
   "publishConfig": {
     "access": "public"
   },
