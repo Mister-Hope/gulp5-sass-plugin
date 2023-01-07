@@ -55,7 +55,7 @@ specifiers:
   typescript: 4.9.4
   vinyl: ^2.2.1
   vinyl-sourcemaps-apply: ^0.2.1
-  vite: 4.0.3
+  vite: 4.0.4
   vitest: 0.26.2
 
 dependencies:
@@ -106,7 +106,7 @@ devDependencies:
   rollup-plugin-esbuild: 5.0.0_y373bxzhxrh563zoydfean2qqi
   standard-version: 9.5.0
   typescript: 4.9.4
-  vite: 4.0.3_ovmyjmuuyckt3r3gpaexj2onji
+  vite: 4.0.4_ovmyjmuuyckt3r3gpaexj2onji
   vitest: 0.26.2_sass@1.57.1
 
 packages:
@@ -5156,7 +5156,7 @@ packages:
       pathe: 0.2.0
       source-map: 0.6.1
       source-map-support: 0.5.21
-      vite: 4.0.3_ovmyjmuuyckt3r3gpaexj2onji
+      vite: 4.0.4_ovmyjmuuyckt3r3gpaexj2onji
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -5167,8 +5167,8 @@ packages:
       - terser
     dev: true
 
-  /vite/4.0.3_ovmyjmuuyckt3r3gpaexj2onji:
-    resolution: {integrity: sha512-HvuNv1RdE7deIfQb8mPk51UKjqptO/4RXZ5yXSAvurd5xOckwS/gg8h9Tky3uSbnjYTgUm0hVCet1cyhKd73ZA==}
+  /vite/4.0.4_ovmyjmuuyckt3r3gpaexj2onji:
+    resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -5237,7 +5237,7 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.0
       tinyspy: 1.0.2
-      vite: 4.0.3_ovmyjmuuyckt3r3gpaexj2onji
+      vite: 4.0.4_ovmyjmuuyckt3r3gpaexj2onji
       vite-node: 0.26.2_ovmyjmuuyckt3r3gpaexj2onji
     transitivePeerDependencies:
       - less
