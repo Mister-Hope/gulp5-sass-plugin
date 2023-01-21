@@ -46,8 +46,8 @@ devDependencies:
     specifier: 17.4.2
     version: 17.4.2
   '@types/globule':
-    specifier: 1.1.4
-    version: 1.1.4
+    specifier: 1.1.5
+    version: 1.1.5
   '@types/gulp':
     specifier: 4.0.10
     version: 4.0.10
@@ -929,8 +929,8 @@ packages:
       '@types/node': 18.11.18
     dev: true
 
-  /@types/globule@1.1.4:
-    resolution: {integrity: sha512-8zwhEB52SxKni27egVR2fA+DAdcd5x4mLPTC1z7bZq1L6eQHUBKVZTcqhr5BiJxbBEy7gaBmLQYOHzXkjCIdlQ==}
+  /@types/globule@1.1.5:
+    resolution: {integrity: sha512-NsjQJ0U6GZt9T2bwBN+6TXrWLdpAB0f+SGphkexapHh2HnEZTI9BuxBG1utBRsDC8/byy+ZxwzCGrsk1FXaLOQ==}
     dependencies:
       '@types/glob': 8.0.0
       '@types/minimatch': 5.1.2

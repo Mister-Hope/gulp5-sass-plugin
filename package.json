@@ -59,7 +59,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.4.2",
     "@commitlint/config-conventional": "17.4.2",
-    "@types/globule": "1.1.4",
+    "@types/globule": "1.1.5",
     "@types/gulp": "4.0.10",
     "@types/gulp-postcss": "8.0.2",
     "@types/gulp-sourcemaps": "0.0.35",
