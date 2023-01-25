@@ -6,14 +6,14 @@ import { LegacySassError, legacy } from "../src/index.js";
 import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 
 import autoprefixer from "autoprefixer";
-import del from "del";
+import { deleteAsync } from "del";
 import gulp from "gulp";
 import postcss from "gulp-postcss";
 import sourcemaps from "gulp-sourcemaps";
 import File from "vinyl";
 
 afterAll(async () => {
-  await del(join(__dirname, "results"));
+  await deleteAsync(join(__dirname, "results"));
 });
 
 describe("legacy sync render", () => {
