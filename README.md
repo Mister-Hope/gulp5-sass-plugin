@@ -77,12 +77,13 @@ You should use `sass` to synchronously transform your sass code in to css:
 const { dest, src, watch } = require("gulp");
 const { sass } = require("@mr-hope/gulp-sass");
 
-const build = src("./styles/**/*.scss")
-  .pipe(sass().on("error", sass.logError))
-  .pipe(dest("./css"));
+const build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(dest("./css"));
 
 exports.build = build;
-exports.watch = watch("./styles/**/*.scss", build);
+exports.watch = () => watch("./styles/**/*.scss", build);
 ```
 
 You can also compile asynchronously:
@@ -91,12 +92,13 @@ You can also compile asynchronously:
 const { dest, src, watch } = require("gulp");
 const { sassAsync } = require("@mr-hope/gulp-sass");
 
-const build = src("./styles/**/*.scss")
-  .pipe(sassAsync().on("error", sassAsync.logError))
-  .pipe(dest("./css"));
+const build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sassAsync().on("error", sassAsync.logError))
+    .pipe(dest("./css"));
 
 exports.build = build;
-exports.watch = watch("./styles/**/*.scss", build);
+exports.watch = () => watch("./styles/**/*.scss", build);
 ```
 
 ### Error logging
@@ -115,12 +117,13 @@ const { dest, src, watch } = require("gulp");
 const { sass } = require("@mr-hope/gulp-sass");
 const fiber = require("fibers");
 
-const build = src("./styles/**/*.scss")
-  .pipe(sass({ fiber }).on("error", sass.logError))
-  .pipe(dest("./css"));
+const build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sass({ fiber }).on("error", sass.logError))
+    .pipe(dest("./css"));
 
 exports.build = build;
-exports.watch = watch("./styles/**/*.scss", build);
+exports.watch = () => watch("./styles/**/*.scss", build);
 ```
 
 </details>
@@ -132,19 +135,21 @@ You should pass in options just like you would for [Dart Sass][] `compileString`
 For example:
 
 ```js
-exports.build = src("./styles/**/*.scss")
-  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(dest("./css"));
 ```
 
 Or this for asynchronous code:
 
 ```js
-exports.build = src("./styles/**/*.scss")
-  .pipe(
-    sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
-  )
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(
+      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
+    )
+    .pipe(dest("./css"));
 ```
 
 ## Source Maps
@@ -154,11 +159,12 @@ exports.build = src("./styles/**/*.scss")
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-exports.build = src("./styles/**/*.scss")
-  .pipe(sourcemaps.init())
-  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-  .pipe(sourcemaps.write())
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sourcemaps.init())
+    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(sourcemaps.write())
+    .pipe(dest("./css"));
 ```
 
 By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) writes the source maps inline in the compiled CSS files. To write them to a separate file, specify a path relative to the `gulp.dest()` destination in the `sourcemaps.write()` function.
@@ -166,11 +172,12 @@ By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) write
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-exports.build = src("./styles/**/*.scss")
-  .pipe(sourcemaps.init())
-  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-  .pipe(sourcemaps.write("./maps"))
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sourcemaps.init())
+    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(sourcemaps.write("./maps"))
+    .pipe(dest("./css"));
 ```
 
 ## Node Support
@@ -189,12 +196,13 @@ You should use `legacy` to synchronously transform your sass code in to css:
 const { dest, src, watch } = require("gulp");
 const { legacy } = require("@mr-hope/gulp-sass");
 
-const build = src("./styles/**/*.scss")
-  .pipe(legacy().on("error", legacy.logError))
-  .pipe(dest("./css"));
+const build = () =>
+  src("./styles/**/*.scss")
+    .pipe(legacy().on("error", legacy.logError))
+    .pipe(dest("./css"));
 
 exports.build = build;
-exports.watch = watch("./styles/**/*.scss", build);
+exports.watch = () => watch("./styles/**/*.scss", build);
 ```
 
 You can also compile asynchronously:
@@ -203,12 +211,13 @@ You can also compile asynchronously:
 const { dest, src, watch } = require("gulp");
 const { legacyAsync } = require("@mr-hope/gulp-sass");
 
-const build = src("./styles/**/*.scss")
-  .pipe(legacyAsync().on("error", legacyAsync.logError))
-  .pipe(dest("./css"));
+const build = () =>
+  src("./styles/**/*.scss")
+    .pipe(legacyAsync().on("error", legacyAsync.logError))
+    .pipe(dest("./css"));
 
 exports.build = build;
-exports.watch = watch("./styles/**/*.scss", build);
+exports.watch = () => watch("./styles/**/*.scss", build);
 ```
 
 ### Error logging
@@ -227,12 +236,13 @@ const { dest, src, watch } = require("gulp");
 const { legacyAsync } = require("@mr-hope/gulp-sass");
 const fiber = require("fibers");
 
-const build = src("./styles/**/*.scss")
-  .pipe(legacyAsync({ fiber }).on("error", legacyAsync.logError))
-  .pipe(dest("./css"));
+const build = () =>
+  src("./styles/**/*.scss")
+    .pipe(legacyAsync({ fiber }).on("error", legacyAsync.logError))
+    .pipe(dest("./css"));
 
 exports.build = build;
-exports.watch = watch("./styles/**/*.scss", build);
+exports.watch = () => watch("./styles/**/*.scss", build);
 ```
 
 </details>
@@ -246,19 +256,21 @@ You should pass in options just like you would for [Dart Sass][]. They will be p
 For example:
 
 ```js
-exports.build = src("./styles/**/*.scss")
-  .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(dest("./css"));
 ```
 
 Or this for asynchronous code:
 
 ```js
-exports.build = src("./styles/**/*.scss")
-  .pipe(
-    sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
-  )
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(
+      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
+    )
+    .pipe(dest("./css"));
 ```
 
 ### Source Maps
@@ -268,11 +280,12 @@ exports.build = src("./styles/**/*.scss")
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-exports.build = src("./styles/**/*.scss")
-  .pipe(sourcemaps.init())
-  .pipe(legacy({ outputStyle: "compressed" }).on("error", legacy.logError))
-  .pipe(sourcemaps.write())
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sourcemaps.init())
+    .pipe(legacy({ outputStyle: "compressed" }).on("error", legacy.logError))
+    .pipe(sourcemaps.write())
+    .pipe(dest("./css"));
 ```
 
 By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) writes the source maps inline in the compiled CSS files. To write them to a separate file, specify a path relative to the `gulp.dest()` destination in the `sourcemaps.write()` function.
@@ -280,11 +293,12 @@ By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) write
 ```js
 const sourcemaps = require("gulp-sourcemaps");
 
-exports.build = src("./styles/**/*.scss")
-  .pipe(sourcemaps.init())
-  .pipe(legacy({ outputStyle: "compressed" }).on("error", legacy.logError))
-  .pipe(sourcemaps.write("./maps"))
-  .pipe(dest("./css"));
+exports.build = () =>
+  src("./styles/**/*.scss")
+    .pipe(sourcemaps.init())
+    .pipe(legacy({ outputStyle: "compressed" }).on("error", legacy.logError))
+    .pipe(sourcemaps.write("./maps"))
+    .pipe(dest("./css"));
 ```
 
 ## Issues
