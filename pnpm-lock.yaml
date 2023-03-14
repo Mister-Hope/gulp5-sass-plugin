@@ -82,8 +82,8 @@ devDependencies:
     specifier: 4.3.0
     version: 4.3.0
   cz-git:
-    specifier: 1.5.0
-    version: 1.5.0
+    specifier: 1.6.0
+    version: 1.6.0
   del:
     specifier: 7.0.0
     version: 7.0.0
@@ -2130,8 +2130,8 @@ packages:
       - '@swc/wasm'
     dev: true
 
-  /cz-git@1.5.0:
-    resolution: {integrity: sha512-USHPVnv6baK3RutSfBZmR8a9pP9w5gbQUytq7mKgpq+nudhY2kbpu6fYy+acmBfXGhZmFlc6orTfVcij1ERkgw==}
+  /cz-git@1.6.0:
+    resolution: {integrity: sha512-eOGpDlYtY9qcJ+PC9Rg+Dk0aDrk6azkOOU5z52MJzKm11mtIMQIzqCtvsM7fHYschiQ0NCcrg5pNr9JaxtVA1A==}
     dev: true
 
   /d@1.0.1:
