@@ -69,7 +69,7 @@
     "@typescript-eslint/eslint-plugin": "5.55.0",
     "@typescript-eslint/parser": "5.55.0",
     "@vitest/coverage-c8": "0.28.5",
-    "autoprefixer": "10.4.13",
+    "autoprefixer": "10.4.14",
     "commitizen": "4.3.0",
     "cz-git": "1.6.0",
     "del": "7.0.0",
