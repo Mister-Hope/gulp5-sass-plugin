@@ -48,8 +48,8 @@ devDependencies:
     specifier: 1.1.6
     version: 1.1.6
   '@types/gulp':
-    specifier: 4.0.10
-    version: 4.0.10
+    specifier: 4.0.11
+    version: 4.0.11
   '@types/gulp-postcss':
     specifier: 8.0.3
     version: 8.0.3
@@ -833,8 +833,8 @@ packages:
       '@types/vinyl': 2.0.7
     dev: true
 
-  /@types/gulp@4.0.10:
-    resolution: {integrity: sha512-spgZHJFqiEJGwqGlf7T/k4nkBpBcLgP7T0EfN6G2vvnhUfvd4uO1h8RwpXOE8x/54DVYUs1XCAtBHkX/R3axAQ==}
+  /@types/gulp@4.0.11:
+    resolution: {integrity: sha512-jy0nfcsjiGqO1prNsYMK/bHkTblIBgG04sL2nxPpnP9MyNicHp1SUblomjOla6JoW1qkR67HjFHqIibpPoShNQ==}
     dependencies:
       '@types/undertaker': 1.2.8
       '@types/vinyl-fs': 3.0.2
