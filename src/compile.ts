@@ -1,18 +1,17 @@
 import { basename, dirname, extname, relative } from "node:path";
 import { Transform } from "node:stream";
 import { fileURLToPath } from "node:url";
-import dartSass from "sass";
 
 import picocolors from "picocolors";
 import PluginError from "plugin-error";
 import replaceExtension from "replace-ext";
+import type { CompileResult, StringOptions } from "sass";
+import dartSass from "sass";
 import stripAnsi from "strip-ansi";
 import Vinyl from "vinyl";
 import applySourceMap from "vinyl-sourcemaps-apply";
 
 import { PLUGIN_NAME } from "./utils.js";
-
-import type { CompileResult, StringOptions } from "sass";
 
 export interface SassError extends dartSass.Exception {
   messageFormatted?: string;
@@ -93,9 +92,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
         options.loadPaths.unshift(dirname(file.path));
 
         // Generate Source Maps if plugin source-map present
-        if (file.sourceMap) {
-          options.sourceMap = true;
-        }
+        if (file.sourceMap) options.sourceMap = true;
 
         // Handles error message
         const errorHandler = (error: SassError): void => {

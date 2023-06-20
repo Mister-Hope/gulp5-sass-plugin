@@ -4,15 +4,14 @@ import { Transform } from "node:stream";
 import picocolors from "picocolors";
 import PluginError from "plugin-error";
 import replaceExtension from "replace-ext";
+import type { LegacyException, LegacyResult, LegacyStringOptions } from "sass";
 import dartSass from "sass";
+import type { RawSourceMap } from "source-map-js";
 import stripAnsi from "strip-ansi";
 import Vinyl from "vinyl";
 import applySourceMap from "vinyl-sourcemaps-apply";
 
 import { PLUGIN_NAME } from "./utils.js";
-
-import type { LegacyException, LegacyStringOptions, LegacyResult } from "sass";
-import type { RawSourceMap } from "source-map-js";
 
 export interface LegacySassMap extends RawSourceMap {
   sourceRoot: string;

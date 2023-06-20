@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+
 import Vinyl from "vinyl";
 
 export const createVinyl = (filename: string, contents?: Buffer): Vinyl => {

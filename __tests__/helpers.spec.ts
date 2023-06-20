@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { normalizeEOL } from "./__fixtures__/index.js";
 
 describe("test helpers", () => {

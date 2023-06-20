@@ -1,16 +1,16 @@
 import { statSync } from "node:fs";
 import { join } from "node:path";
-import { afterAll, describe, expect, it } from "vitest";
 
-import { SassError, sass } from "../src/index.js";
-import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
-
-import gulp from "gulp";
-import { deleteAsync } from "del";
 import autoprefixer from "autoprefixer";
+import { deleteAsync } from "del";
+import gulp from "gulp";
 import postcss from "gulp-postcss";
 import sourcemaps from "gulp-sourcemaps";
 import Vinyl from "vinyl";
+import { afterAll, describe, expect, it } from "vitest";
+
+import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
+import { SassError, sass } from "../src/index.js";
 
 afterAll(async () => {
   await deleteAsync(join(__dirname, "results"));
