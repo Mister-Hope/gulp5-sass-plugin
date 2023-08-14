@@ -73,7 +73,7 @@
     "commitizen": "4.3.0",
     "cz-git": "1.6.1",
     "del": "7.0.0",
-    "esbuild": "0.18.5",
+    "esbuild": "0.19.2",
     "eslint": "8.43.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
