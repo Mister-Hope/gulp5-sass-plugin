@@ -115,7 +115,7 @@ describe("legacy sync render", () => {
         expect(err.messageOriginal).toContain('expected "{".');
         // Error must include relativePath property
         expect(err.messageOriginal).toContain(
-          join("__tests__", "__fixtures__", "scss", "error.scss")
+          join("__tests__", "__fixtures__", "scss", "error.scss"),
         );
         // Error must include line and column error occurs on
         expect(err.messageOriginal).toContain("2:20  root stylesheet");

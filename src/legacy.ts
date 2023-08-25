@@ -27,7 +27,7 @@ export interface LegacySassError extends LegacyException {
 // Handles returning the file to the stream
 const legacyHandleFile = (
   file: Vinyl.BufferFile,
-  result: LegacyResult
+  result: LegacyResult,
 ): Vinyl.BufferFile => {
   // Build Source Maps
   if (result.map) {
@@ -45,7 +45,7 @@ const legacyHandleFile = (
     // Prepend the path to all files in the sources array except the file that's being worked on
     if (sassFileSrcPath) sourceFileIndex = sassMap.sources.indexOf(sassMapFile);
     sassMap.sources = sassMap.sources.map((source, index) =>
-      index === sourceFileIndex ? source : join(sassFileSrcPath, source)
+      index === sourceFileIndex ? source : join(sassFileSrcPath, source),
     );
 
     // Remove 'stdin' from sources and replace with filenames!
@@ -70,7 +70,7 @@ const legacyHandleFile = (
 interface PrivateGulpSass {
   (
     pluginOptions?: LegacySassOptions | LegacySassAsyncOptions,
-    sync?: boolean
+    sync?: boolean,
   ): Transform;
 }
 
@@ -87,7 +87,7 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
       if (file.isStream())
         return callback(
-          new PluginError(PLUGIN_NAME, "Streaming not supported")
+          new PluginError(PLUGIN_NAME, "Streaming not supported"),
         );
 
       if (file.isBuffer()) {
@@ -142,7 +142,7 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
           try {
             return callback(
               null,
-              legacyHandleFile(file, dartSass.renderSync(options))
+              legacyHandleFile(file, dartSass.renderSync(options)),
             );
           } catch (error) {
             return errorHandler(error as LegacySassError);
@@ -156,7 +156,7 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             return callback(null, legacyHandleFile(file, result!));
-          }
+          },
         );
       }
     },
@@ -166,7 +166,7 @@ const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
 function logError(this: Transform, error: LegacySassError): void {
   const message = new PluginError(
     "sass",
-    error.messageFormatted || ""
+    error.messageFormatted || "",
   ).toString();
 
   process.stderr.write(`${message}\n`);
@@ -201,7 +201,7 @@ export interface LegacyGulpSassAsync {
 
 // Main Gulp Sass function
 export const legacyAsync: LegacyGulpSassAsync = (
-  pluginOptions?: LegacySassAsyncOptions
+  pluginOptions?: LegacySassAsyncOptions,
 ) => legacyMain(pluginOptions, false);
 
 legacyAsync.logError = logError;

@@ -122,7 +122,7 @@ describe("legacy async render", () => {
         expect(err.messageOriginal).toContain('expected "{".');
         // Error must include relativePath property
         expect(err.messageOriginal).toContain(
-          join("__tests__", "__fixtures__", "scss", "error.scss")
+          join("__tests__", "__fixtures__", "scss", "error.scss"),
         );
         // Error must include line and column error occurs on
         expect(err.messageOriginal).toContain("2:20  root stylesheet");
@@ -157,7 +157,7 @@ describe("legacy async render", () => {
       // Transform file name
       sassFile.contents = Buffer.from(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        `/* Added Dynamically */${sassFile.contents!.toString()}`
+        `/* Added Dynamically */${(<Buffer>sassFile.contents!).toString()}`,
       );
 
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
@@ -165,7 +165,7 @@ describe("legacy async render", () => {
         expect(typeof cssFile.path).toEqual("string");
 
         expect(normalizeEOL(cssFile.contents)).toContain(
-          "/* Added Dynamically */"
+          "/* Added Dynamically */",
         );
         resolve();
       });

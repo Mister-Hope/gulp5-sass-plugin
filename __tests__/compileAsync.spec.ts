@@ -125,7 +125,7 @@ describe("async compile", () => {
         expect(err.messageOriginal).toContain("2:20  root stylesheet");
         // Error must include relativePath property
         expect(err.message).toContain(
-          join("__tests__", "__fixtures__", "scss", "error.scss")
+          join("__tests__", "__fixtures__", "scss", "error.scss"),
         );
         resolve();
       });
@@ -144,7 +144,7 @@ describe("async compile", () => {
         expect(err.messageOriginal).toContain("error.scss 2:20  @use");
         // Error must include relativePath property
         expect(err.message).toContain(
-          join("__tests__", "__fixtures__", "scss", "error.scss")
+          join("__tests__", "__fixtures__", "scss", "error.scss"),
         );
         resolve();
       });
@@ -177,7 +177,7 @@ describe("async compile", () => {
       // Transform file name
       sassFile.contents = Buffer.from(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        `/* Added Dynamically */${sassFile.contents!.toString()}`
+        `/* Added Dynamically */${(<Buffer>sassFile.contents!).toString()}`,
       );
 
       stream.on("data", (cssFile: Vinyl.BufferFile) => {
@@ -185,7 +185,7 @@ describe("async compile", () => {
         expect(typeof cssFile.path).toEqual("string");
 
         expect(normalizeEOL(cssFile.contents)).toContain(
-          "/* Added Dynamically */"
+          "/* Added Dynamically */",
         );
         resolve();
       });

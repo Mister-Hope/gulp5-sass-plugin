@@ -147,7 +147,7 @@ Or this for asynchronous code:
 exports.build = () =>
   src("./styles/**/*.scss")
     .pipe(
-      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
+      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError),
     )
     .pipe(dest("./css"));
 ```
@@ -268,7 +268,7 @@ Or this for asynchronous code:
 exports.build = () =>
   src("./styles/**/*.scss")
     .pipe(
-      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
+      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError),
     )
     .pipe(dest("./css"));
 ```

@@ -22,7 +22,7 @@ export interface SassError extends dartSass.Exception {
 // Handles returning the file to the stream
 const handleFile = (
   file: Vinyl.BufferFile,
-  result: CompileResult
+  result: CompileResult,
 ): Vinyl.BufferFile => {
   // Build Source Maps
   if (result.sourceMap) {
@@ -35,7 +35,7 @@ const handleFile = (
     sassMap.sources = sassMap.sources.map((source) =>
       source.startsWith("data:")
         ? file.relative
-        : relative(dirname(file.path), fileURLToPath(source))
+        : relative(dirname(file.path), fileURLToPath(source)),
     );
 
     // Replace the map file with the original file name (but new extension)
@@ -69,7 +69,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
       if (file.isStream())
         return callback(
-          new PluginError(PLUGIN_NAME, "Streaming not supported")
+          new PluginError(PLUGIN_NAME, "Streaming not supported"),
         );
 
       if (file.isBuffer()) {
@@ -119,7 +119,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
           try {
             return callback(
               null,
-              handleFile(file, dartSass.compileString(content, options))
+              handleFile(file, dartSass.compileString(content, options)),
             );
           } catch (error) {
             return errorHandler(error as SassError);
@@ -142,7 +142,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 function logError(this: Transform, error: SassError): void {
   const message = new PluginError(
     "sass",
-    error.messageFormatted || error.message
+    error.messageFormatted || error.message,
   ).toString();
 
   process.stderr.write(`${message}\n`);
@@ -171,7 +171,7 @@ export interface GulpSassAsync {
 
 // Main Gulp Sass function
 export const sassAsync: GulpSassAsync = (
-  pluginOptions?: StringOptions<"async">
+  pluginOptions?: StringOptions<"async">,
 ) => main(pluginOptions, false);
 
 sassAsync.logError = logError;
