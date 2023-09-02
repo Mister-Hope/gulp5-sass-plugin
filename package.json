@@ -72,7 +72,7 @@
     "autoprefixer": "10.4.15",
     "commitizen": "4.3.0",
     "cz-git": "1.7.1",
-    "del": "7.0.0",
+    "del": "7.1.0",
     "esbuild": "0.19.2",
     "eslint": "8.47.0",
     "eslint-config-prettier": "9.0.0",

@@ -88,8 +88,8 @@ devDependencies:
     specifier: 1.7.1
     version: 1.7.1
   del:
-    specifier: 7.0.0
-    version: 7.0.0
+    specifier: 7.1.0
+    version: 7.1.0
   esbuild:
     specifier: 0.19.2
     version: 0.19.2
@@ -2443,8 +2443,8 @@ packages:
       object-keys: 1.1.1
     dev: true
 
-  /del@7.0.0:
-    resolution: {integrity: sha512-tQbV/4u5WVB8HMJr08pgw0b6nG4RGt/tj+7Numvq+zqcvUFeMaIWWOUFltiU+6go8BSO2/ogsB4EasDaj0y68Q==}
+  /del@7.1.0:
+    resolution: {integrity: sha512-v2KyNk7efxhlyHpjEvfyxaAihKKK0nWCuf6ZtqZcFFpQRG0bJ12Qsr0RpvsICMjAAZ8DOVCxrlqpxISlMHC4Kg==}
     engines: {node: '>=14.16'}
     dependencies:
       globby: 13.2.2
