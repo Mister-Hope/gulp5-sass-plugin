@@ -68,7 +68,7 @@
     "@types/vinyl": "2.0.7",
     "@typescript-eslint/eslint-plugin": "6.7.0",
     "@typescript-eslint/parser": "6.7.0",
-    "@vitest/coverage-v8": "0.34.2",
+    "@vitest/coverage-v8": "0.34.4",
     "autoprefixer": "10.4.15",
     "commitizen": "4.3.0",
     "cz-git": "1.7.1",
@@ -94,7 +94,7 @@
     "standard-version": "9.5.0",
     "typescript": "5.2.2",
     "vite": "4.4.9",
-    "vitest": "0.34.2"
+    "vitest": "0.34.4"
   },
   "packageManager": "pnpm@8.7.5",
   "publishConfig": {
