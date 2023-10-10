@@ -52,8 +52,8 @@ devDependencies:
     specifier: 1.1.6
     version: 1.1.6
   '@types/gulp':
-    specifier: 4.0.13
-    version: 4.0.13
+    specifier: 4.0.14
+    version: 4.0.14
   '@types/gulp-postcss':
     specifier: 8.0.3
     version: 8.0.3
@@ -1081,8 +1081,8 @@ packages:
       '@types/vinyl': 2.0.7
     dev: true
 
-  /@types/gulp@4.0.13:
-    resolution: {integrity: sha512-Ms20Q2tZ3MpThZGn4Ag6e7ifz/oQJFxsuiopqz5oHmhE6q2ohnELgafi5K/pKX/4ntlpidS61v/TXAguYsVcaA==}
+  /@types/gulp@4.0.14:
+    resolution: {integrity: sha512-zjhBRyGTIPnJ/gByJpjtFyRPKej7zkNFct+QgDhAwpOEoJ2MQjajhU69vrcHIffKcnt3Dik2JHzgMj0C1q9WOg==}
     dependencies:
       '@types/undertaker': 1.2.8
       '@types/vinyl-fs': 3.0.2
