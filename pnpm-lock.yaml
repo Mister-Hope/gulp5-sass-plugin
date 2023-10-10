@@ -55,8 +55,8 @@ devDependencies:
     specifier: 4.0.13
     version: 4.0.13
   '@types/gulp-postcss':
-    specifier: 8.0.3
-    version: 8.0.3
+    specifier: 8.0.4
+    version: 8.0.4
   '@types/gulp-sourcemaps':
     specifier: 0.0.36
     version: 0.0.36
@@ -1060,8 +1060,8 @@ packages:
       '@types/minimatch': 5.1.2
     dev: true
 
-  /@types/gulp-postcss@8.0.3:
-    resolution: {integrity: sha512-q2GfSYrXA+YEP2fuH+LNr/c9HnPuqMf4qOWlSXgwckBBeT2mX3vsjuPFkm6H03ahTuc2qRrkSFKMz5i0NYSEng==}
+  /@types/gulp-postcss@8.0.4:
+    resolution: {integrity: sha512-wW0jmJvWkwpX5HpmbcAobsMDCsAvzE4z9ycl4SLtOAaqdKf4cPRov77fwLI1B19+xhsIJU8SlNBq+/jVXtju5A==}
     dependencies:
       '@types/node': 20.5.6
       '@types/vinyl': 2.0.7
