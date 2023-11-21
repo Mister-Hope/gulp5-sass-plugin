@@ -61,8 +61,8 @@ devDependencies:
     specifier: 0.0.36
     version: 0.0.36
   '@types/gulp-tap':
-    specifier: 1.0.3
-    version: 1.0.3
+    specifier: 1.0.5
+    version: 1.0.5
   '@types/rimraf':
     specifier: 3.0.2
     version: 3.0.2
@@ -1150,8 +1150,8 @@ packages:
       '@types/vinyl': 2.0.10
     dev: true
 
-  /@types/gulp-tap@1.0.3:
-    resolution: {integrity: sha512-TQV0qhPC58XuW54VI03o8knBcULx/ADYnndzPupLkjLP4uTTNVqVf5QmOD7FD1548tFppdFedvWg+gYusGNoSQ==}
+  /@types/gulp-tap@1.0.5:
+    resolution: {integrity: sha512-EWcrizhaFbzbgsMU1ISIB8rJgY36359kCz+jC80gI0QGRsWTxXz7yDmRXgrkmgFEu/2RC29T5feUp+I4lwEmIg==}
     dependencies:
       '@types/node': 20.8.4
       '@types/vinyl': 2.0.10
