@@ -58,8 +58,8 @@ devDependencies:
     specifier: 8.0.4
     version: 8.0.4
   '@types/gulp-sourcemaps':
-    specifier: 0.0.36
-    version: 0.0.36
+    specifier: 0.0.38
+    version: 0.0.38
   '@types/gulp-tap':
     specifier: 1.0.5
     version: 1.0.5
@@ -1143,8 +1143,8 @@ packages:
       '@types/vinyl': 2.0.10
     dev: true
 
-  /@types/gulp-sourcemaps@0.0.36:
-    resolution: {integrity: sha512-AGANydDaQtGDiB8bD5NAiyN9byg2bLN9Rqlm8iv8qty6VWyGbBk6mXrsX8QJkvgikT+NbG4LRJqcKYxs96a6dQ==}
+  /@types/gulp-sourcemaps@0.0.38:
+    resolution: {integrity: sha512-9wm+P44eM/VKZSYwGDwalOH6rnvNckwfPgz0gEUlTzjKH1OsSbexdvE8aKBt+8syEkq827Fu+4gV17/EyUtH9w==}
     dependencies:
       '@types/node': 20.8.4
       '@types/vinyl': 2.0.10

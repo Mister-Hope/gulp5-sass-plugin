@@ -62,7 +62,7 @@
     "@types/globule": "1.1.7",
     "@types/gulp": "4.0.14",
     "@types/gulp-postcss": "8.0.4",
-    "@types/gulp-sourcemaps": "0.0.36",
+    "@types/gulp-sourcemaps": "0.0.38",
     "@types/gulp-tap": "1.0.5",
     "@types/rimraf": "3.0.2",
     "@types/vinyl": "2.0.10",
