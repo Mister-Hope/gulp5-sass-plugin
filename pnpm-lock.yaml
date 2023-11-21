@@ -52,8 +52,8 @@ devDependencies:
     specifier: 1.1.7
     version: 1.1.7
   '@types/gulp':
-    specifier: 4.0.14
-    version: 4.0.14
+    specifier: 4.0.17
+    version: 4.0.17
   '@types/gulp-postcss':
     specifier: 8.0.4
     version: 8.0.4
@@ -1157,9 +1157,10 @@ packages:
       '@types/vinyl': 2.0.10
     dev: true
 
-  /@types/gulp@4.0.14:
-    resolution: {integrity: sha512-zjhBRyGTIPnJ/gByJpjtFyRPKej7zkNFct+QgDhAwpOEoJ2MQjajhU69vrcHIffKcnt3Dik2JHzgMj0C1q9WOg==}
+  /@types/gulp@4.0.17:
+    resolution: {integrity: sha512-+pKQynu2C/HS16kgmDlAicjtFYP8kaa86eE9P0Ae7GB5W29we/E2TIdbOWtEZD5XkpY+jr8fyqfwO6SWZecLpQ==}
     dependencies:
+      '@types/node': 20.8.4
       '@types/undertaker': 1.2.9
       '@types/vinyl-fs': 3.0.3
       chokidar: 3.5.3
