@@ -63,12 +63,12 @@
     "@types/gulp-postcss": "8.0.6",
     "@types/gulp-sourcemaps": "0.0.38",
     "@types/gulp-tap": "1.0.5",
-    "@types/node": "^20.10.3",
+    "@types/node": "^20.10.5",
     "@types/rimraf": "3.0.2",
     "@types/vinyl": "2.0.11",
-    "@typescript-eslint/eslint-plugin": "6.13.2",
-    "@typescript-eslint/parser": "6.13.2",
-    "@vitest/coverage-v8": "1.0.1",
+    "@typescript-eslint/eslint-plugin": "6.15.0",
+    "@typescript-eslint/parser": "6.15.0",
+    "@vitest/coverage-v8": "1.0.4",
     "autoprefixer": "10.4.16",
     "commitizen": "4.3.0",
     "cz-git": "1.8.0",
@@ -94,7 +94,7 @@
     "standard-version": "9.5.0",
     "typescript": "5.3.3",
     "vite": "5.0.10",
-    "vitest": "1.0.1"
+    "vitest": "1.0.4"
   },
   "packageManager": "pnpm@8.12.1",
   "publishConfig": {
