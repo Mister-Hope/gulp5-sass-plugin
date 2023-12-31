@@ -1,4 +1,10 @@
 {
   "extends": ["config:base"],
-  "schedule": ["every weekend"]
+  "schedule": ["every weekend"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "commitMessageAction": "update lockfile",
+    "platformAutomerge": true,
+    "extends": ["group:allNonMajor", "schedule:weekly"]
+  }
 }

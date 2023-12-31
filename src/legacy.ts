@@ -78,7 +78,7 @@ interface PrivateGulpSass {
 const legacyMain: PrivateGulpSass = (pluginOptions = {}, sync) =>
   new Transform({
     objectMode: true,
-    transform(file: Vinyl, _enc, callback): void {
+    transform(file: Vinyl, _encoding, callback): void {
       const options = <LegacyStringOptions<"sync" | "async">>{
         ...pluginOptions,
       };

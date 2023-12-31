@@ -11,7 +11,6 @@ extends:
 
 plugins:
   - import
-  - prettier
 
 parserOptions:
   parser: "@typescript-eslint/parser"
@@ -34,8 +33,6 @@ rules:
     - selector: default
       format:
         - camelCase
-      leadingUnderscore: allowSingleOrDouble
-      trailingUnderscore: allow
 
     - selector:
         - variable
@@ -43,36 +40,18 @@ rules:
         - camelCase
         - PascalCase
         - UPPER_CASE
-      leadingUnderscore: allowSingleOrDouble
-      trailingUnderscore: allowSingleOrDouble
 
-    - selector:
-        - parameter
+    - selector: parameter
       format:
         - camelCase
         - PascalCase
       leadingUnderscore: allow
-      trailingUnderscore: allow
 
-    - selector:
-        - property
-      format: null
-      custom:
-        regex: (^/.*/$|^@|^[a-z]+(?:-[a-z]+)*?$)
-        match: true
-      # allow locales path like `/zh/`, alias starting with `@` and css property like `line-width`
-      filter: (^/.*/$|^@|^[a-z]+(?:-[a-z]+)*?$)
-      leadingUnderscore: allow
-      trailingUnderscore: allow
-
-    - selector:
-        - property
+    - selector: property
       format:
         - camelCase
         - PascalCase
         - UPPER_CASE
-      leadingUnderscore: allow
-      trailingUnderscore: allow
 
     - selector: import
       format:
@@ -185,11 +164,6 @@ rules:
     - object: true
 
   prefer-template: error
-
-  sort-imports:
-    - error
-    - allowSeparatedGroups: false
-      ignoreDeclarationSort: true
 
 overrides:
   - files:
