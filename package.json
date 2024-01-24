@@ -103,7 +103,7 @@
   "pnpm": {
     "overrides": {
       "chokidar": "^3.5.3",
-      "css": "npm:@adobe/css-tools@^4.3.1",
+      "css": "npm:@adobe/css-tools@^4.3.2",
       "glob-stream": "^7.0.0",
       "glob-parent": "^6.0.2",
       "micromatch": "^4.0.5",
