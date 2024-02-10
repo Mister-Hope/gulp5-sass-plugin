@@ -112,8 +112,8 @@ devDependencies:
     specifier: 4.0.2
     version: 4.0.2
   gulp-postcss:
-    specifier: 9.1.0
-    version: 9.1.0(postcss@8.4.35)
+    specifier: 10.0.0
+    version: 10.0.0(postcss@8.4.35)
   gulp-sourcemaps:
     specifier: 3.0.0
     version: 3.0.0
@@ -3647,8 +3647,8 @@ packages:
       yargs: 7.1.2
     dev: true
 
-  /gulp-postcss@9.1.0(postcss@8.4.35):
-    resolution: {integrity: sha512-a843mcKPApfeI987uqQbc8l50xXeWIXBsiVvYxtCI5XtVAMzTi/HnU2qzQpGwkB/PAOfsLV8OsqDv2iJZ9qvdw==}
+  /gulp-postcss@10.0.0(postcss@8.4.35):
+    resolution: {integrity: sha512-z1RF2RJEX/BvFsKN11PXai8lRmihZTiHnlJf7Zu8uHaA/Q7Om4IeN8z1NtMAW5OiLwUY02H0DIFl9tHl0CNSgA==}
     engines: {node: '>=18'}
     peerDependencies:
       postcss: ^8.0.0
