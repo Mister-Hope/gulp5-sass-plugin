@@ -56,8 +56,8 @@
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.0.3",
-    "@commitlint/config-conventional": "19.0.3",
+    "@commitlint/cli": "19.2.0",
+    "@commitlint/config-conventional": "19.1.0",
     "@types/globule": "1.1.9",
     "@types/gulp": "4.0.17",
     "@types/gulp-postcss": "8.0.6",
