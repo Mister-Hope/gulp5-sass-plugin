@@ -88,7 +88,7 @@
     "postcss": "8.4.35",
     "prettier": "3.2.5",
     "rimraf": "5.0.5",
-    "rollup": "4.12.1",
+    "rollup": "4.13.0",
     "rollup-plugin-dts": "6.1.0",
     "rollup-plugin-esbuild": "6.1.1",
     "standard-version": "9.5.0",
