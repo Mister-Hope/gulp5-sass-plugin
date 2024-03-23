@@ -93,7 +93,7 @@
     "rollup-plugin-esbuild": "6.1.1",
     "standard-version": "9.5.0",
     "typescript": "5.4.3",
-    "vite": "5.1.6",
+    "vite": "5.2.4",
     "vitest": "1.4.0"
   },
   "packageManager": "pnpm@8.15.5",
