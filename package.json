@@ -1,5 +1,5 @@
 {
-  "name": "gulp5-sass",
+  "name": "gulp5-sass-plugin",
   "version": "1.0.0",
   "description": "Gulp plugin for sass",
   "type": "module",
@@ -9,11 +9,11 @@
     "gulp"
   ],
   "bugs": {
-    "url": "https://github.com/Mister-Hope/gulp-sass/issues"
+    "url": "https://github.com/Mister-Hope/gulp5-sass-plugin/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Mister-Hope/gulp-sass"
+    "url": "git://github.com/Mister-Hope/gulp5-sass-plugin"
   },
   "license": "MIT",
   "author": "Mr.Hope",

@@ -1,4 +1,4 @@
-# gulp5-sass
+# gulp5-sass-plugin
 
 <!-- markdownlint-disable no-inline-html -->
 
@@ -26,7 +26,7 @@ Also, node-sass will take a long time to built during installation.
 - just remove sourcemap and pipe tests
 - still remain the old deps
 
-### gulp5-sass
+### gulp5-sass-plugin
 
 It's a totally rewrite version in typescript. It has:
 
@@ -39,11 +39,11 @@ It's a totally rewrite version in typescript. It has:
 ## Install
 
 ```sh
-pnpm add -D gulp5-sass
+pnpm add -D gulp5-sass-plugin
 # or
-yarn add -D gulp5-sass
+yarn add -D gulp5-sass-plugin
 # or
-npm i -D gulp5-sass
+npm i -D gulp5-sass-plugin
 ```
 
 ## Basic Usage
@@ -52,7 +52,7 @@ You should use `sass` to synchronously transform your sass code in to css:
 
 ```js
 import { dest, src, watch } from "gulp";
-import { sass } from "gulp5-sass";
+import { sass } from "gulp5-sass-plugin";
 
 export const build = () =>
   src("./styles/**/*.scss")
@@ -66,7 +66,7 @@ You can also compile asynchronously:
 
 ```js
 import { dest, src, watch } from "gulp";
-import { sassAsync } from "gulp5-sass";
+import { sassAsync } from "gulp5-sass-plugin";
 
 export const build = () =>
   src("./styles/**/*.scss")
@@ -89,7 +89,7 @@ Note that **synchronous compilation is twice as fast as asynchronous compilation
 
 ```js
 const { dest, src, watch } = require("gulp");
-const { sass } = require("gulp5-sass");
+const { sass } = require("gulp5-sass-plugin");
 const fiber = require("fibers");
 
 const build = () =>
@@ -122,18 +122,18 @@ Or this for asynchronous code:
 export const build = () =>
   src("./styles/**/*.scss")
     .pipe(
-      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError),
+      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
     )
     .pipe(dest("./css"));
 ```
 
 ## Source Maps
 
-`gulp5-sass` can be used together with [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) to generate source maps for the Sass to CSS compilation. You will need to initialize [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) prior to running `gulp5-sass` and write the source maps after.
+`gulp5-sass-plugin` can be used together with [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) to generate source maps for the Sass to CSS compilation. You will need to initialize [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) prior to running `gulp5-sass-plugin` and write the source maps after.
 
 ```js
 const { dest, src, watch } = require("gulp");
-const { sassAsync } = require("gulp5-sass");
+const { sassAsync } = require("gulp5-sass-plugin");
 const sourcemaps = require("gulp-sourcemaps");
 
 exports.build = () =>
@@ -148,7 +148,7 @@ By default, [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps) write
 
 ```js
 const { dest, src, watch } = require("gulp");
-const { sassAsync } = require("gulp5-sass");
+const { sassAsync } = require("gulp5-sass-plugin");
 const sourcemaps = require("gulp-sourcemaps");
 
 exports.build = () =>
@@ -168,7 +168,7 @@ Since sass only supports Node.js 14 and above, we also only support Node.js 14 a
 
 ## Issues
 
-`gulp5-sass` is a very light-weight wrapper around [Dart Sass][]. Because of this, the issue you're having likely isn't a `gulp5-sass` issue, but an issue with one those projects or with [Sass][] as a whole.
+`gulp5-sass-plugin` is a very light-weight wrapper around [Dart Sass][]. Because of this, the issue you're having likely isn't a `gulp5-sass-plugin` issue, but an issue with one those projects or with [Sass][] as a whole.
 
 If you have a feature request/question how Sass works/concerns on how your Sass gets compiled/errors in your compiling, it's likely a Dart Sass issue and you should file your issue with one of those projects.
 
