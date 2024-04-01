@@ -1,0 +1,17 @@
+@import "includes/cats";
+@import "includes/dogs";
+
+.error {
+  border: #f00;
+  background: #fdd;
+}
+
+.error.intrusion {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.badError {
+  @extend .error;
+  border-width: 3px;
+}
