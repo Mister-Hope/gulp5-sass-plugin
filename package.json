@@ -102,7 +102,7 @@
     "rollup-plugin-dts": "6.1.0",
     "rollup-plugin-esbuild": "6.1.1",
     "standard-version": "9.5.0",
-    "typescript": "5.4.3",
+    "typescript": "5.4.5",
     "vite": "5.2.7",
     "vitest": "1.4.0"
   },
