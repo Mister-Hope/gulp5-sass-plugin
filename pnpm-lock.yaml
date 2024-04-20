@@ -59,8 +59,8 @@ devDependencies:
     specifier: ^20.12.1
     version: 20.12.1
   '@types/vinyl':
-    specifier: 2.0.11
-    version: 2.0.11
+    specifier: 2.0.12
+    version: 2.0.12
   '@typescript-eslint/eslint-plugin':
     specifier: 7.4.0
     version: 7.4.0(@typescript-eslint/parser@7.4.0)(eslint@8.57.0)(typescript@5.4.3)
@@ -971,21 +971,21 @@ packages:
     resolution: {integrity: sha512-mjGEmTvurqRHFeJQnrgtMC9GtKNkI2+56n92zIzff5UFr2jUfilw1elKRxS7bK0FYRvuEcnMX9JH0AUpCxBrpg==}
     dependencies:
       '@types/node': 20.12.1
-      '@types/vinyl': 2.0.11
+      '@types/vinyl': 2.0.12
     dev: true
 
   /@types/gulp-sourcemaps@0.0.38:
     resolution: {integrity: sha512-9wm+P44eM/VKZSYwGDwalOH6rnvNckwfPgz0gEUlTzjKH1OsSbexdvE8aKBt+8syEkq827Fu+4gV17/EyUtH9w==}
     dependencies:
       '@types/node': 20.12.1
-      '@types/vinyl': 2.0.11
+      '@types/vinyl': 2.0.12
     dev: true
 
   /@types/gulp-tap@1.0.5:
     resolution: {integrity: sha512-EWcrizhaFbzbgsMU1ISIB8rJgY36359kCz+jC80gI0QGRsWTxXz7yDmRXgrkmgFEu/2RC29T5feUp+I4lwEmIg==}
     dependencies:
       '@types/node': 20.12.1
-      '@types/vinyl': 2.0.11
+      '@types/vinyl': 2.0.12
     dev: true
 
   /@types/gulp@4.0.17:
@@ -1062,11 +1062,11 @@ packages:
     dependencies:
       '@types/glob-stream': 8.0.2
       '@types/node': 20.12.1
-      '@types/vinyl': 2.0.11
+      '@types/vinyl': 2.0.12
     dev: true
 
-  /@types/vinyl@2.0.11:
-    resolution: {integrity: sha512-vPXzCLmRp74e9LsP8oltnWKTH+jBwt86WgRUb4Pc9Lf3pkMVGyvIo2gm9bODeGfCay2DBB/hAWDuvf07JcK4rw==}
+  /@types/vinyl@2.0.12:
+    resolution: {integrity: sha512-Sr2fYMBUVGYq8kj3UthXFAu5UN6ZW+rYr4NACjZQJvHvj+c8lYv0CahmZ2P/r7iUkN44gGUBwqxZkrKXYPb7cw==}
     dependencies:
       '@types/expect': 1.20.4
       '@types/node': 20.12.1
