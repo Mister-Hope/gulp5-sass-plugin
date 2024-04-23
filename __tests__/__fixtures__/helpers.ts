@@ -11,7 +11,7 @@ export const createVinyl = (filename: string, contents?: Buffer): Vinyl => {
     cwd: __dirname,
     base,
     path: filePath,
-    contents: contents || readFileSync(filePath),
+    contents: contents ?? readFileSync(filePath),
   });
 };
 

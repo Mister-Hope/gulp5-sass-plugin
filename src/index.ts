@@ -8,7 +8,7 @@ import replaceExtension from "replace-ext";
 import type { CompileResult, Exception, StringOptions } from "sass";
 import { compileString, compileStringAsync } from "sass";
 import stripAnsi from "strip-ansi";
-import Vinyl from "vinyl";
+import type Vinyl from "vinyl";
 import applySourceMap from "vinyl-sourcemaps-apply";
 
 const PLUGIN_NAME = "gulp5-sass-plugin";
@@ -22,7 +22,7 @@ export interface SassError extends Exception {
 // Handles returning the file to the stream
 const handleFile = (
   file: Vinyl.BufferFile,
-  result: CompileResult
+  result: CompileResult,
 ): Vinyl.BufferFile => {
   // Build Source Maps
   if (result.sourceMap) {
@@ -35,7 +35,7 @@ const handleFile = (
     sassMap.sources = sassMap.sources.map((source) =>
       source.startsWith("data:")
         ? file.relative
-        : relative(dirname(file.path), fileURLToPath(source))
+        : relative(dirname(file.path), fileURLToPath(source)),
     );
 
     // Replace the map file with the original file name (but new extension)
@@ -54,9 +54,10 @@ const handleFile = (
   return file;
 };
 
-interface PrivateGulpSass {
-  (pluginOptions?: StringOptions<"sync" | "async">, sync?: boolean): Transform;
-}
+type PrivateGulpSass = (
+  pluginOptions?: StringOptions<"sync" | "async">,
+  sync?: boolean,
+) => Transform;
 
 // Main Gulp Sass function
 const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
@@ -69,11 +70,11 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
       if (file.isStream())
         return callback(
-          new PluginError(PLUGIN_NAME, "Streaming not supported")
+          new PluginError(PLUGIN_NAME, "Streaming not supported"),
         );
 
       if (file.isBuffer()) {
-        if (basename(file.path).indexOf("_") === 0) return callback();
+        if (basename(file.path).startsWith("_")) return callback();
 
         if (!file.contents.length) {
           file.path = replaceExtension(file.path, ".css");
@@ -102,7 +103,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
           const relativePath = relative(process.cwd(), filePath);
           const message = [underline(relativePath), error.sassMessage].join(
-            "\n"
+            "\n",
           );
 
           error.messageFormatted = message;
@@ -118,7 +119,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
           try {
             return callback(
               null,
-              handleFile(file, compileString(content, options))
+              handleFile(file, compileString(content, options)),
             );
           } catch (error) {
             return errorHandler(error as SassError);
@@ -136,7 +137,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 function logError(this: Transform, error: SassError): void {
   const message = new PluginError(
     "sass",
-    error.messageFormatted || error.message
+    error.messageFormatted ?? error.message,
   ).toString();
 
   process.stderr.write(`${message}\n`);
@@ -165,7 +166,7 @@ export interface GulpSassAsync {
 
 // Main Gulp Sass function
 export const sassAsync: GulpSassAsync = (
-  pluginOptions?: StringOptions<"async">
+  pluginOptions?: StringOptions<"async">,
 ) => main(pluginOptions, false);
 
 sassAsync.logError = logError;

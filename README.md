@@ -122,7 +122,7 @@ Or this for asynchronous code:
 export const build = () =>
   src("./styles/**/*.scss")
     .pipe(
-      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError)
+      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError),
     )
     .pipe(dest("./css"));
 ```

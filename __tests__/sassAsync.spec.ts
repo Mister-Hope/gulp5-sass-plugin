@@ -1,10 +1,11 @@
 import { basename, join } from "node:path";
 
 import type { BufferFile } from "vinyl";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
-import { SassError, sassAsync } from "../src/index.js";
+import type { SassError } from "../src/index.js";
+import { sassAsync } from "../src/index.js";
 
 describe("async compile", () => {
   it("should pass file when it isNull()", () =>
@@ -104,12 +105,17 @@ describe("async compile", () => {
     }));
 
   it("should emit logError on sass error", () =>
-    new Promise((resolve) => {
+    new Promise<void>((resolve) => {
       const errorFile = createVinyl("error.scss");
       const stream = sassAsync();
 
-      stream.on("error", sassAsync.logError.bind(stream));
-      stream.on("end", resolve);
+      const logError = vi.fn(sassAsync.logError.bind(stream));
+
+      stream.on("error", logError);
+      stream.on("end", () => {
+        expect(logError).toBeCalled();
+        resolve();
+      });
       stream.write(errorFile);
     }));
 
@@ -176,8 +182,7 @@ describe("async compile", () => {
 
       // Transform file name
       sassFile.contents = Buffer.from(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        `/* Added Dynamically */${(<Buffer>sassFile.contents!).toString()}`,
+        `/* Added Dynamically */${(sassFile.contents as Buffer).toString()}`,
       );
 
       stream.on("data", (cssFile: BufferFile) => {
@@ -208,6 +213,7 @@ describe("async compile", () => {
 
       stream.on("data", (cssFile: BufferFile) => {
         // Expected sources are relative to file.base
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         expect(cssFile.sourceMap.sources).toEqual([
           "includes/_cats.scss",
           "includes/_dogs.sass",
