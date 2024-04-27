@@ -76,7 +76,7 @@
     "@types/gulp-tap": "1.0.5",
     "@types/node": "^20.12.7",
     "@types/vinyl": "2.0.12",
-    "@vitest/coverage-v8": "1.5.1",
+    "@vitest/coverage-v8": "1.5.2",
     "autoprefixer": "10.4.19",
     "commitizen": "4.3.0",
     "cz-git": "1.9.1",
@@ -104,7 +104,7 @@
     "typescript": "5.4.5",
     "typescript-eslint": "7.7.1",
     "vite": "5.2.10",
-    "vitest": "1.5.1"
+    "vitest": "1.5.2"
   },
   "engines": {
     "node": ">=14"
