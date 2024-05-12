@@ -81,7 +81,7 @@
     "commitizen": "4.3.0",
     "cz-git": "1.9.1",
     "del": "7.1.0",
-    "esbuild": "0.21.1",
+    "esbuild": "0.21.2",
     "eslint": "8.57.0",
     "eslint-config-mister-hope": "0.1.0",
     "globule": "1.3.4",
