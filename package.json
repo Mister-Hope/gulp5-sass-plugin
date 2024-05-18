@@ -95,7 +95,7 @@
     "prettier": "3.2.5",
     "rimraf": "5.0.7",
     "rollup": "4.17.2",
-    "rollup-plugin-dts": "6.1.0",
+    "rollup-plugin-dts": "6.1.1",
     "rollup-plugin-esbuild": "6.1.1",
     "standard-version": "9.5.0",
     "typescript": "5.4.5",
