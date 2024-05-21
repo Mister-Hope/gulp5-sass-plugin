@@ -37,15 +37,12 @@
     "lint:check": "eslint . && prettier --check .",
     "packages:check-update": "pnpm dlx npm-check-updates -u --timeout 600000",
     "packages:update": "pnpm up -r",
+    "prepare": "husky",
     "test": "vitest run --coverage"
   },
   "nano-staged": {
-    "*.{js,ts}": "eslint --fix",
-    "*.{js,ts,json,yaml,yml,md}": "prettier --write",
-    "*.wxss": "stylelint --fix",
-    "*.wxml": "prettier --parser html --write",
-    "*.wxs": "prettier --parser babel-flow --write",
-    "package.json": "sort-package-json"
+    "**/*": "prettier --write --ignore-unknown",
+    "*.{js,ts}": "eslint --fix"
   },
   "config": {
     "commitizen": {
@@ -56,7 +53,7 @@
     "picocolors": "^1.0.1",
     "plugin-error": "^2.0.1",
     "replace-ext": "^2.0.0",
-    "sass": "^1.77.1",
+    "sass": "^1.77.2",
     "source-map-js": "^1.2.0",
     "strip-ansi": "^7.1.0",
     "vinyl": "^3.0.0",
