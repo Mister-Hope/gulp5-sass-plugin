@@ -71,7 +71,7 @@
     "@types/gulp-postcss": "8.0.6",
     "@types/gulp-sourcemaps": "0.0.38",
     "@types/gulp-tap": "1.0.5",
-    "@types/node": "20.14.0",
+    "@types/node": "20.14.2",
     "@types/vinyl": "2.0.12",
     "@vitest/coverage-v8": "1.6.0",
     "autoprefixer": "10.4.19",
