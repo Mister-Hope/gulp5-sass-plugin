@@ -176,8 +176,10 @@ describe("sync compile", () => {
       stream.write(sassFile);
     }));
 
-  it.skip("should work with gulp-sourcemaps and a globbed source", () =>
-    new Promise((resolve) => {
+  it("should work with gulp-sourcemaps and a globbed source", async () => {
+    const caller = vi.fn();
+
+    await new Promise((resolve) => {
       gulp
         .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
@@ -186,10 +188,15 @@ describe("sync compile", () => {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(join(__dirname, "results")))
         .on("end", resolve);
-    }));
+    }).catch(caller);
 
-  it.skip("should work with gulp-sourcemaps and autoprefixer", () =>
-    new Promise((resolve) => {
+    expect(caller).not.toBeCalled();
+  });
+
+  it("should work with gulp-sourcemaps and autoprefixer", async () => {
+    const caller = vi.fn();
+
+    await new Promise((resolve) => {
       gulp
         .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
@@ -199,9 +206,12 @@ describe("sync compile", () => {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(join(__dirname, "results")))
         .on("end", resolve);
-    }));
+    }).catch(caller);
 
-  it.skip("should work with empty files", () =>
+    expect(caller).not.toBeCalled();
+  });
+
+  it("should work with empty files", () =>
     new Promise<void>((resolve) => {
       gulp
         .src(join(__dirname, "__fixtures__/scss/empty.scss"))
