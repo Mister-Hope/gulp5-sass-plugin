@@ -73,8 +73,8 @@ importers:
         specifier: 4.3.0
         version: 4.3.0(@types/node@20.14.10)(typescript@5.5.3)
       cz-git:
-        specifier: 1.9.3
-        version: 1.9.3
+        specifier: 1.9.4
+        version: 1.9.4
       del:
         specifier: 7.1.0
         version: 7.1.0
@@ -1326,8 +1326,8 @@ packages:
     resolution: {integrity: sha512-U466fIzU5U22eES5lTNiNbZ+d8dfcHcssH4o7QsdWaCcRs/feIPCxKYSWkYBNs5mny7MvEfwpTLWjvbm94hecw==}
     engines: {node: '>= 10'}
 
-  cz-git@1.9.3:
-    resolution: {integrity: sha512-v7+vYOparImLLo6J5tAsi/cz+EAK7FI/TDnemi11xgEax4k+ZVqxsmkiEc68n+MJLp1l5THhB2KTDhjpW+ellg==}
+  cz-git@1.9.4:
+    resolution: {integrity: sha512-VntWcIEFfW8+7RgwYaRn1r10NhUkl8/8ZdJQRupEdqE7QXBCSjNP8hKSk9zhSLzYAsdXfGEAwiAYJM1T2Qsh8w==}
     engines: {node: '>=v12.20.0'}
 
   d@1.0.2:
@@ -4980,7 +4980,7 @@ snapshots:
       - '@types/node'
       - typescript
 
-  cz-git@1.9.3: {}
+  cz-git@1.9.4: {}
 
   d@1.0.2:
     dependencies:
