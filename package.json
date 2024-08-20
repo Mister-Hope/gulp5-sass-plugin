@@ -97,7 +97,7 @@
     "rollup-plugin-esbuild": "6.1.1",
     "standard-version": "9.5.0",
     "typescript": "5.5.3",
-    "vite": "5.3.3",
+    "vite": "5.4.2",
     "vitest": "2.0.3"
   },
   "engines": {
