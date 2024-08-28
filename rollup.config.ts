@@ -9,7 +9,7 @@ const external = [
   "picocolors",
   "plugin-error",
   "replace-ext",
-  "sass",
+  "sass-embedded",
   "source-map-js",
   "vinyl",
   "vinyl-sourcemaps-apply",

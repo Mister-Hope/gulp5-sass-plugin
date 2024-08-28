@@ -1,6 +1,6 @@
 {
   "name": "gulp5-sass-plugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Gulp plugin for sass",
   "type": "module",
   "keywords": [
@@ -39,6 +39,7 @@
     "packages:check-update": "pnpm dlx npm-check-updates -u --timeout 600000",
     "packages:update": "pnpm up -r",
     "prepare": "husky",
+    "prepublish": "pnpm clean && pnpm build",
     "test": "vitest run --coverage"
   },
   "nano-staged": {
