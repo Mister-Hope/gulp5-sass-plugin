@@ -65,8 +65,8 @@
     "gulp": "^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.4.0",
-    "@commitlint/config-conventional": "19.2.2",
+    "@commitlint/cli": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@types/globule": "1.1.9",
     "@types/gulp": "4.0.17",
