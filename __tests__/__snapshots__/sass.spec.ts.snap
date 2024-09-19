@@ -57,7 +57,7 @@ exports[`sync compile > should compile multiple sass files 1`] = `
 exports[`sync compile > should compile multiple sass files 2`] = `
 ".content-navigation {
   border-color: #3bbfce;
-  color: #2ca2af;
+  color: rgb(43.82, 161.8657142857, 175.28);
 }
 
 .border {

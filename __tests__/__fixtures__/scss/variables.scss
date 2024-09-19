@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "sass:math";
 
 $blue: #3bbfce;
@@ -5,7 +6,7 @@ $margin: 16px;
 
 .content-navigation {
   border-color: $blue;
-  color: darken($blue, 9%);
+  color: color.adjust($blue, $lightness: -9%);
 }
 
 .border {
