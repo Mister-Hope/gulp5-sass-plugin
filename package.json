@@ -104,7 +104,7 @@
   "engines": {
     "node": ">=14"
   },
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@9.11.0",
   "publishConfig": {
     "access": "public"
   }
