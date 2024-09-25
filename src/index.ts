@@ -102,9 +102,10 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
             : file.path;
 
           const relativePath = relative(process.cwd(), filePath);
-          const message = [picocolors.underline(relativePath), error.sassMessage].join(
-            "\n",
-          );
+          const message = [
+            picocolors.underline(relativePath),
+            error.sassMessage
+          ].join("\n");
 
           error.messageFormatted = message;
           error.messageOriginal = error.message;
