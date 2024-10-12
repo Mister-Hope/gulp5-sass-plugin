@@ -2,7 +2,7 @@ import { basename, dirname, extname, relative } from "node:path";
 import { Transform } from "node:stream";
 import { fileURLToPath } from "node:url";
 
-import { underline } from "picocolors";
+import picocolors from "picocolors";
 import PluginError from "plugin-error";
 import replaceExtension from "replace-ext";
 import type { CompileResult, Exception, StringOptions } from "sass";
@@ -102,9 +102,10 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
             : file.path;
 
           const relativePath = relative(process.cwd(), filePath);
-          const message = [underline(relativePath), error.sassMessage].join(
-            "\n",
-          );
+          const message = [
+            picocolors.underline(relativePath),
+            error.sassMessage
+          ].join("\n");
 
           error.messageFormatted = message;
           error.messageOriginal = error.message;
