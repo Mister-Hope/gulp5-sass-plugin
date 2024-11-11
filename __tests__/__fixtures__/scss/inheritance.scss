@@ -1,5 +1,5 @@
-@import "includes/cats";
-@import "includes/dogs";
+@use "includes/cats";
+@use "includes/dogs";
 
 .error {
   border: #f00;
