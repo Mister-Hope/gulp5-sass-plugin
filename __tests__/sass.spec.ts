@@ -5,7 +5,7 @@ import autoprefixer from "autoprefixer";
 import { deleteAsync } from "del";
 import gulp from "gulp";
 import postcss from "gulp-postcss";
-import sourcemaps from "gulp-sourcemaps";
+import { init, write } from "gulp-sourcemaps";
 import type { BufferFile } from "vinyl";
 import type Vinyl from "vinyl";
 import { afterAll, describe, expect, it, vi } from "vitest";
@@ -149,7 +149,45 @@ describe("sync compile", () => {
       });
       stream.write(errorFile);
     }));
+  it("should compile a single sass file if the file name has been changed in the stream", () =>
+    new Promise<void>((resolve) => {
+      const sassFile = createVinyl("mixins.scss");
+      const stream = sass();
 
+      // Transform file name
+      sassFile.path = join(__dirname, "__fixtures__/scss/mixin--changed.scss");
+
+      stream.on("data", (cssFile: BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(cssFile.path).toContain("mixin--changed.css");
+
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
+
+  it("should preserve changes made in-stream to a Sass file", () =>
+    new Promise<void>((resolve) => {
+      const sassFile = createVinyl("mixins.scss");
+      const stream = sass();
+
+      // Transform file name
+      sassFile.contents = Buffer.from(
+        `/* Added Dynamically */${(sassFile.contents as Buffer).toString()}`,
+      );
+
+      stream.on("data", (cssFile: BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
+
+        expect(normalizeEOL(cssFile.contents)).toContain(
+          "/* Added Dynamically */",
+        );
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
   it("should have correct sources", () =>
     new Promise<void>((resolve) => {
       const sassFile = createVinyl("inheritance.scss");
@@ -176,6 +214,42 @@ describe("sync compile", () => {
       stream.write(sassFile);
     }));
 
+  it("should compile a single indented sass file", () =>
+    new Promise<void>((resolve) => {
+      const sassFile = createVinyl("indent.sass");
+      const stream = sass();
+
+      stream.on("data", (cssFile: BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
+
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
+        resolve();
+      });
+      stream.write(sassFile);
+    }));
+
+  it("should parse files in sass and scss", () =>
+    new Promise<void>((resolve) => {
+      const sassFiles = [
+        createVinyl("mixins.scss"),
+        createVinyl("indent.sass"),
+      ];
+      const stream = sass();
+      let mustSee = sassFiles.length;
+
+      stream.on("data", (cssFile: BufferFile) => {
+        expect(typeof cssFile.relative).toEqual("string");
+        expect(typeof cssFile.path).toEqual("string");
+        expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
+
+        mustSee -= 1;
+        if (mustSee <= 0) resolve();
+      });
+
+      sassFiles.forEach((file) => stream.write(file));
+    }));
+
   it("should work with gulp-sourcemaps and a globbed source", async () => {
     const caller = vi.fn();
 
@@ -183,9 +257,9 @@ describe("sync compile", () => {
       gulp
         .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
-        .pipe(sourcemaps.init())
+        .pipe(init())
         .pipe(sass())
-        .pipe(sourcemaps.write())
+        .pipe(write())
         .pipe(gulp.dest(join(__dirname, "results")))
         .on("end", resolve);
     }).catch(caller);
@@ -200,10 +274,10 @@ describe("sync compile", () => {
       gulp
         .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
-        .pipe(sourcemaps.init())
+        .pipe(init())
         .pipe(sass())
         .pipe(postcss([autoprefixer()]))
-        .pipe(sourcemaps.write())
+        .pipe(write())
         .pipe(gulp.dest(join(__dirname, "results")))
         .on("end", resolve);
     }).catch(caller);

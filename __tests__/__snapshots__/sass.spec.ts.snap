@@ -1,6 +1,27 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`sync compile > should compile a single indented sass file 1`] = `
+"body .div {
+  color: blue;
+}"
+`;
+
 exports[`sync compile > should compile a single sass file 1`] = `
+"#data {
+  float: left;
+  margin-left: 10px;
+}
+#data th {
+  text-align: center;
+  font-weight: bold;
+}
+#data td,
+#data th {
+  padding: 2px;
+}"
+`;
+
+exports[`sync compile > should compile a single sass file if the file name has been changed in the stream 1`] = `
 "#data {
   float: left;
   margin-left: 10px;
@@ -64,5 +85,26 @@ exports[`sync compile > should compile multiple sass files 2`] = `
   padding: 8px;
   margin: 8px;
   border-color: #3bbfce;
+}"
+`;
+
+exports[`sync compile > should parse files in sass and scss 1`] = `
+"#data {
+  float: left;
+  margin-left: 10px;
+}
+#data th {
+  text-align: center;
+  font-weight: bold;
+}
+#data td,
+#data th {
+  padding: 2px;
+}"
+`;
+
+exports[`sync compile > should parse files in sass and scss 2`] = `
+"body .div {
+  color: blue;
 }"
 `;

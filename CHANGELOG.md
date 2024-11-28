@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.4](https://github.com/Mister-Hope/gulp5-sass-plugin/compare/v2.0.3...v2.0.4) (2024-11-28)
+
+### Bug Fixes
+
+- **deps:** update dependency picocolors to v1.1.1 ([#859](https://github.com/Mister-Hope/gulp5-sass-plugin/issues/859)) ([0e67bd6](https://github.com/Mister-Hope/gulp5-sass-plugin/commit/0e67bd61dda8a9ab479bfc7a82eabdec55816751))
+- **deps:** update dependency sass to v1.80.6 ([#841](https://github.com/Mister-Hope/gulp5-sass-plugin/issues/841)) ([eee2f7c](https://github.com/Mister-Hope/gulp5-sass-plugin/commit/eee2f7c3c7c69179dc03c51619c8130bff7ad34f))
+- fix cjs require ([fe9a496](https://github.com/Mister-Hope/gulp5-sass-plugin/commit/fe9a49667a21e615058c33d6c5344e1b116b32d6))
+
 ## [3.1.1](https://github.com/Mister-Hope/gulp-sass/compare/v3.1.0...v3.1.1) (2022-11-01)
 
 ### Features

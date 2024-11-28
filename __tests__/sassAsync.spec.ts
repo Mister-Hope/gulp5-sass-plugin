@@ -1,11 +1,22 @@
-import { basename, join } from "node:path";
+import { statSync } from "node:fs";
+import { join } from "node:path";
 
+import autoprefixer from "autoprefixer";
+import { deleteAsync } from "del";
+import gulp from "gulp";
+import postcss from "gulp-postcss";
+import { init, write } from "gulp-sourcemaps";
 import type { BufferFile } from "vinyl";
-import { describe, expect, it, vi } from "vitest";
+import type Vinyl from "vinyl";
+import { afterAll, describe, expect, it, vi } from "vitest";
 
 import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 import type { SassError } from "../src/index.js";
 import { sassAsync } from "../src/index.js";
+
+afterAll(async () => {
+  await deleteAsync(join(__dirname, "results"));
+});
 
 describe("async compile", () => {
   it("should pass file when it isNull()", () =>
@@ -13,45 +24,28 @@ describe("async compile", () => {
       const emptyFile = {
         isNull: (): boolean => true,
       };
-
       const stream = sassAsync();
 
-      stream.on("data", (data: BufferFile) => {
+      stream.on("data", (data: Vinyl) => {
         expect(data.isNull()).toEqual(true);
         resolve();
       });
-
       stream.write(emptyFile);
     }));
 
   it("should emit error when file isStream()", () =>
     new Promise<void>((resolve) => {
+      const stream = sassAsync();
       const streamFile = {
         isNull: (): boolean => false,
         isStream: (): boolean => true,
       };
-      const stream = sassAsync();
 
       stream.on("error", (err) => {
         expect(err.message).toEqual("Streaming not supported");
         resolve();
       });
-
       stream.write(streamFile);
-    }));
-
-  it("should compile an empty sass file", () =>
-    new Promise<void>((resolve) => {
-      const sassFile = createVinyl("empty.scss");
-      const stream = sassAsync();
-
-      stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
-        expect(basename(cssFile.path)).toEqual("empty.css");
-        expect(normalizeEOL(cssFile.contents)).toEqual("");
-        resolve();
-      });
-      stream.write(sassFile);
     }));
 
   it("should compile a single sass file", () =>
@@ -80,11 +74,12 @@ describe("async compile", () => {
       stream.on("data", (cssFile: BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
-
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
+
         mustSee -= 1;
         if (mustSee <= 0) resolve();
       });
+
       sassFiles.forEach((file) => stream.write(file));
     }));
 
@@ -96,11 +91,9 @@ describe("async compile", () => {
       stream.on("data", (cssFile: BufferFile) => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
-
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
-
       stream.write(sassFile);
     }));
 
@@ -156,7 +149,6 @@ describe("async compile", () => {
       });
       stream.write(errorFile);
     }));
-
   it("should compile a single sass file if the file name has been changed in the stream", () =>
     new Promise<void>((resolve) => {
       const sassFile = createVinyl("mixins.scss");
@@ -196,7 +188,6 @@ describe("async compile", () => {
       });
       stream.write(sassFile);
     }));
-
   it("should have correct sources", () =>
     new Promise<void>((resolve) => {
       const sassFile = createVinyl("inheritance.scss");
@@ -212,17 +203,14 @@ describe("async compile", () => {
       const stream = sassAsync();
 
       stream.on("data", (cssFile: BufferFile) => {
-        // Expected sources are relative to file.base
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         expect(cssFile.sourceMap.sources).toEqual([
           "includes/_cats.scss",
           "includes/_dogs.sass",
           "inheritance.scss",
         ]);
-
         resolve();
       });
-
       stream.write(sassFile);
     }));
 
@@ -260,5 +248,55 @@ describe("async compile", () => {
       });
 
       sassFiles.forEach((file) => stream.write(file));
+    }));
+
+  it("should work with gulp-sourcemaps and a globbed source", async () => {
+    const caller = vi.fn();
+
+    await new Promise((resolve) => {
+      gulp
+        .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
+        .on("error", console.error)
+        .pipe(init())
+        .pipe(sassAsync())
+        .pipe(write())
+        .pipe(gulp.dest(join(__dirname, "results")))
+        .on("end", resolve);
+    }).catch(caller);
+
+    expect(caller).not.toBeCalled();
+  });
+
+  it("should work with gulp-sourcemaps and autoprefixer", async () => {
+    const caller = vi.fn();
+
+    await new Promise((resolve) => {
+      gulp
+        .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
+        .on("error", console.error)
+        .pipe(init())
+        .pipe(sassAsync())
+        .pipe(postcss([autoprefixer()]))
+        .pipe(write())
+        .pipe(gulp.dest(join(__dirname, "results")))
+        .on("end", resolve);
+    }).catch(caller);
+
+    expect(caller).not.toBeCalled();
+  });
+
+  it("should work with empty files", () =>
+    new Promise<void>((resolve) => {
+      gulp
+        .src(join(__dirname, "__fixtures__/scss/empty.scss"))
+        .on("error", console.error)
+        .pipe(sassAsync())
+        .pipe(gulp.dest(join(__dirname, "results")))
+        .on("end", () => {
+          const stat = statSync(join(__dirname, "results/empty.css"));
+
+          expect(stat.size).toEqual(0);
+          resolve();
+        });
     }));
 });

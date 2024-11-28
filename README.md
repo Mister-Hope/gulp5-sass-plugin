@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable no-inline-html -->
 
-[![CodeQL](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml) [![Test and coverage](https://github.com/Mister-Hope/gulp-sass/actions/workflows/test.yml/badge.svg)](https://github.com/Mister-Hope/gulp-sass/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/Mister-Hope/gulp-sass/branch/main/graph/badge.svg?token=413OUJ2PSJ)](https://codecov.io/gh/Mister-Hope/gulp-sass)
+[![CodeQL](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml) [![Test and coverage](https://github.com/Mister-Hope/gulp-sass/actions/workflows/test.yml/badge.svg)](https://github.com/Mister-Hope/gulp-sass/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/Mister-Hope/gulp5-sass-plugin/graph/badge.svg?token=413OUJ2PSJ)](https://codecov.io/gh/Mister-Hope/gulp-sass)
 
 Sass plugin for gulp5.
 
@@ -134,13 +134,13 @@ export const build = () =>
 ```js
 const { dest, src, watch } = require("gulp");
 const { sassAsync } = require("gulp5-sass-plugin");
-const sourcemaps = require("gulp-sourcemaps");
+const { init, write } = require("gulp-sourcemaps");
 
 exports.build = () =>
   src("./styles/**/*.scss")
-    .pipe(sourcemaps.init())
+    .pipe(init())
     .pipe(sassAsync({ outputStyle: "compressed" }).on("error", sass.logError))
-    .pipe(sourcemaps.write())
+    .pipe(write())
     .pipe(dest("./css"));
 ```
 
@@ -158,9 +158,6 @@ exports.build = () =>
     .pipe(sourcemaps.write("./maps"))
     .pipe(dest("./css"));
 ```
-
-> [!Warning]
-> Currently we only support `gulp-sourcemaps` with `sassAsync` function.
 
 ## Node Support
 

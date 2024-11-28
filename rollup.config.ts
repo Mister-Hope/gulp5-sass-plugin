@@ -1,8 +1,10 @@
+import { codecovRollupPlugin } from "@codecov/rollup-plugin";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import dts from "rollup-plugin-dts";
+import { defineConfig } from "rollup";
+import { dts } from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
 
-const external = [
+const commonExternals = [
   "node:path",
   "node:stream",
   "node:url",
@@ -15,7 +17,7 @@ const external = [
   "vinyl-sourcemaps-apply",
 ];
 
-export default [
+export default defineConfig([
   {
     input: "./src/index.ts",
     output: [
@@ -25,7 +27,7 @@ export default [
         sourcemap: true,
       },
     ],
-    external,
+    external: commonExternals,
     plugins: [
       nodeResolve({ preferBuiltins: true }),
       esbuild({
@@ -44,12 +46,17 @@ export default [
         sourcemap: true,
       },
     ],
-    external: [...external, "strip-ansi"],
+    external: [...commonExternals, "strip-ansi"],
     plugins: [
       esbuild({
         charset: "utf8",
         minify: true,
         target: "node14",
+      }),
+      codecovRollupPlugin({
+        enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+        bundleName: "main",
+        uploadToken: process.env.CODECOV_TOKEN!,
       }),
     ],
   },
@@ -61,7 +68,7 @@ export default [
         format: "esm",
       },
     ],
-    external,
+    external: commonExternals,
     plugins: [dts()],
   },
-];
+]);
