@@ -97,7 +97,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
         // Handles error message
         const errorHandler = (error: SassError): void => {
-          const filePath = error.span?.url?.pathname
+          const filePath = error.span.url?.pathname
             ? error.span.url.pathname
             : file.path;
 
@@ -128,13 +128,14 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
         // Async Sass render
         void compileStringAsync(content, options)
           .then((result) => callback(null, handleFile(file, result)))
-          .catch((err: SassError) => errorHandler(err));
+          .catch((err: unknown) => errorHandler(err as SassError));
       }
     },
   });
 
 // Log errors nicely
 function logError(this: Transform, error: SassError): void {
+  // eslint-disable-next-line @typescript-eslint/no-base-to-string
   const message = new PluginError(
     "sass",
     error.messageFormatted ?? error.message,

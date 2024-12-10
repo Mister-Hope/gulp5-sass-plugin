@@ -56,7 +56,7 @@ export default defineConfig([
       codecovRollupPlugin({
         enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
         bundleName: "main",
-        uploadToken: process.env.CODECOV_TOKEN!,
+        uploadToken: process.env.CODECOV_TOKEN,
       }),
     ],
   },

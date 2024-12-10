@@ -55,7 +55,7 @@
     "picocolors": "^1.1.1",
     "plugin-error": "^2.0.1",
     "replace-ext": "^2.0.0",
-    "sass": ">= 1.45.0",
+    "sass": "^1.82.0",
     "source-map-js": "^1.2.1",
     "strip-ansi": "^7.1.0",
     "vinyl": "^3.0.0",
@@ -65,7 +65,7 @@
     "gulp": "^5.0.0"
   },
   "devDependencies": {
-    "@codecov/rollup-plugin": "1.5.1",
+    "@codecov/rollup-plugin": "1.6.0",
     "@commitlint/cli": "19.6.0",
     "@commitlint/config-conventional": "19.6.0",
     "@rollup/plugin-node-resolve": "15.3.0",
@@ -80,7 +80,7 @@
     "cz-git": "1.11.0",
     "del": "8.0.0",
     "eslint": "9.16.0",
-    "eslint-config-mister-hope": "0.3.0",
+    "eslint-config-mister-hope": "0.4.0-beta.7",
     "gulp": "5.0.0",
     "gulp-postcss": "10.0.0",
     "gulp-sourcemaps": "3.0.0",

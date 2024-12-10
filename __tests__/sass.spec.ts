@@ -203,7 +203,6 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (cssFile: BufferFile) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         expect(cssFile.sourceMap.sources).toEqual([
           "includes/_cats.scss",
           "includes/_dogs.sass",
