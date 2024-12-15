@@ -80,7 +80,7 @@
     "cz-git": "1.11.0",
     "del": "8.0.0",
     "eslint": "9.17.0",
-    "eslint-config-mister-hope": "0.4.0-beta.7",
+    "eslint-config-mister-hope": "0.4.0",
     "gulp": "5.0.0",
     "gulp-postcss": "10.0.0",
     "gulp-sourcemaps": "3.0.0",
