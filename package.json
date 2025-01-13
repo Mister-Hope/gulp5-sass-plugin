@@ -2,7 +2,6 @@
   "name": "gulp5-sass-plugin",
   "version": "2.0.4",
   "description": "Gulp plugin for sass",
-  "type": "module",
   "keywords": [
     "gulp-plugin",
     "sass",
@@ -17,15 +16,16 @@
   },
   "license": "MIT",
   "author": "Mr.Hope",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
   },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -55,14 +55,11 @@
     "picocolors": "^1.1.1",
     "plugin-error": "^2.0.1",
     "replace-ext": "^2.0.0",
-    "sass": "^1.83.0",
+    "sass": "^1.83.1",
     "source-map-js": "^1.2.1",
     "strip-ansi": "^7.1.0",
     "vinyl": "^3.0.0",
     "vinyl-sourcemaps-apply": "^0.2.1"
-  },
-  "peerDependencies": {
-    "gulp": "^5.0.0"
   },
   "devDependencies": {
     "@codecov/rollup-plugin": "1.7.0",
@@ -74,7 +71,7 @@
     "@types/gulp-sourcemaps": "0.0.38",
     "@types/node": "22.10.5",
     "@types/vinyl": "2.0.12",
-    "@vitest/coverage-v8": "2.1.8",
+    "@vitest/coverage-istanbul": "3.0.0-beta.4",
     "autoprefixer": "10.4.20",
     "commitizen": "4.3.1",
     "cz-git": "1.11.0",
@@ -94,12 +91,15 @@
     "rollup-plugin-esbuild": "6.1.1",
     "standard-version": "9.5.0",
     "typescript": "5.7.3",
-    "vitest": "2.1.8"
+    "vitest": "3.0.0-beta.4"
   },
+  "peerDependencies": {
+    "gulp": "^5.0.0"
+  },
+  "packageManager": "pnpm@10.0.0",
   "engines": {
     "node": ">=14"
   },
-  "packageManager": "pnpm@9.15.1",
   "publishConfig": {
     "access": "public"
   }
