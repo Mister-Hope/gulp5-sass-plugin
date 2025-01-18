@@ -55,7 +55,7 @@
     "picocolors": "^1.1.1",
     "plugin-error": "^2.0.1",
     "replace-ext": "^2.0.0",
-    "sass": "^1.83.1",
+    "sass": "^1.83.4",
     "source-map-js": "^1.2.1",
     "strip-ansi": "^7.1.0",
     "vinyl": "^3.0.0",
@@ -69,9 +69,9 @@
     "@types/gulp": "4.0.17",
     "@types/gulp-postcss": "8.0.6",
     "@types/gulp-sourcemaps": "0.0.38",
-    "@types/node": "22.10.5",
+    "@types/node": "22.10.7",
     "@types/vinyl": "2.0.12",
-    "@vitest/coverage-istanbul": "3.0.0-beta.4",
+    "@vitest/coverage-istanbul": "3.0.2",
     "autoprefixer": "10.4.20",
     "commitizen": "4.3.1",
     "cz-git": "1.11.0",
@@ -91,7 +91,7 @@
     "rollup-plugin-esbuild": "6.1.1",
     "standard-version": "9.5.0",
     "typescript": "5.7.3",
-    "vitest": "3.0.0-beta.4"
+    "vitest": "3.0.2"
   },
   "peerDependencies": {
     "gulp": "^5.0.0"
