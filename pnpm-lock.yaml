@@ -65,7 +65,7 @@ importers:
         version: 3.0.5(vitest@3.0.5(@types/node@22.13.4)(jiti@2.4.2)(sass@1.85.0)(yaml@2.7.0))
       autoprefixer:
         specifier: 10.4.20
-        version: 10.4.20(postcss@8.5.2)
+        version: 10.4.20(postcss@8.5.3)
       commitizen:
         specifier: 4.3.1
         version: 4.3.1(@types/node@22.13.4)(typescript@5.7.3)
@@ -86,7 +86,7 @@ importers:
         version: 5.0.0
       gulp-postcss:
         specifier: 10.0.0
-        version: 10.0.0(jiti@2.4.2)(postcss@8.5.2)
+        version: 10.0.0(jiti@2.4.2)(postcss@8.5.3)
       gulp-sourcemaps:
         specifier: 3.0.0
         version: 3.0.0
@@ -97,8 +97,8 @@ importers:
         specifier: 0.8.0
         version: 0.8.0
       postcss:
-        specifier: 8.5.2
-        version: 8.5.2
+        specifier: 8.5.3
+        version: 8.5.3
       prettier:
         specifier: 3.5.1
         version: 3.5.1
@@ -2685,8 +2685,8 @@ packages:
     resolution: {integrity: sha512-yioayjNbHn6z1/Bywyb2Y4s3yvDAeXGOyxqD+LnVOinq6Mdmd++SW2wUNVzavyyHxd6+DxzWGIuosg6P1Rj8uA==}
     engines: {node: '>=6.0.0'}
 
-  postcss@8.5.2:
-    resolution: {integrity: sha512-MjOadfU3Ys9KYoX0AdkBlFEF1Vx37uCCeN4ZHnmwm9FfpbsGWMZeBLMmmpY+6Ocqod7mkdZ0DT31OlbsFrLlkA==}
+  postcss@8.5.3:
+    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -4356,14 +4356,14 @@ snapshots:
 
   atob@2.1.2: {}
 
-  autoprefixer@10.4.20(postcss@8.5.2):
+  autoprefixer@10.4.20(postcss@8.5.3):
     dependencies:
       browserslist: 4.24.4
       caniuse-lite: 1.0.30001692
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.1
-      postcss: 8.5.2
+      postcss: 8.5.3
       postcss-value-parser: 4.2.0
 
   b4a@1.6.7: {}
@@ -5391,12 +5391,12 @@ snapshots:
       v8flags: 4.0.1
       yargs: 16.2.0
 
-  gulp-postcss@10.0.0(jiti@2.4.2)(postcss@8.5.2):
+  gulp-postcss@10.0.0(jiti@2.4.2)(postcss@8.5.3):
     dependencies:
       fancy-log: 2.0.0
       plugin-error: 2.0.1
-      postcss: 8.5.2
-      postcss-load-config: 5.1.0(jiti@2.4.2)(postcss@8.5.2)
+      postcss: 8.5.3
+      postcss-load-config: 5.1.0(jiti@2.4.2)(postcss@8.5.3)
       vinyl-sourcemaps-apply: 0.2.1
     transitivePeerDependencies:
       - jiti
@@ -6078,13 +6078,13 @@ snapshots:
     dependencies:
       ansi-colors: 1.1.0
 
-  postcss-load-config@5.1.0(jiti@2.4.2)(postcss@8.5.2):
+  postcss-load-config@5.1.0(jiti@2.4.2)(postcss@8.5.3):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.7.0
     optionalDependencies:
       jiti: 2.4.2
-      postcss: 8.5.2
+      postcss: 8.5.3
 
   postcss-value-parser@4.2.0: {}
 
@@ -6093,7 +6093,7 @@ snapshots:
       picocolors: 0.2.1
       source-map: 0.6.1
 
-  postcss@8.5.2:
+  postcss@8.5.3:
     dependencies:
       nanoid: 3.3.8
       picocolors: 1.1.1
@@ -6669,7 +6669,7 @@ snapshots:
   vite@6.0.7(@types/node@22.13.4)(jiti@2.4.2)(sass@1.85.0)(yaml@2.7.0):
     dependencies:
       esbuild: 0.24.2
-      postcss: 8.5.2
+      postcss: 8.5.3
       rollup: 4.34.7
     optionalDependencies:
       '@types/node': 22.13.4
