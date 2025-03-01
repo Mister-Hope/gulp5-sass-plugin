@@ -112,8 +112,8 @@ importers:
         specifier: 6.1.1
         version: 6.1.1(rollup@4.34.8)(typescript@5.7.3)
       rollup-plugin-esbuild:
-        specifier: 6.2.0
-        version: 6.2.0(esbuild@0.24.2)(rollup@4.34.8)
+        specifier: 6.2.1
+        version: 6.2.1(esbuild@0.24.2)(rollup@4.34.8)
       standard-version:
         specifier: 9.5.0
         version: 9.5.0
@@ -2829,8 +2829,8 @@ packages:
       rollup: ^3.29.4 || ^4
       typescript: ^4.5 || ^5.0
 
-  rollup-plugin-esbuild@6.2.0:
-    resolution: {integrity: sha512-LbkHaCahA6ceyWzAd6md2yajNS+HfZmZ5o58ShkZp0cQeZOnZECG2D2xWFNBq5SF6X6pfMK2udkZ+wRtvpzyVQ==}
+  rollup-plugin-esbuild@6.2.1:
+    resolution: {integrity: sha512-jTNOMGoMRhs0JuueJrJqbW8tOwxumaWYq+V5i+PD+8ecSCVkuX27tGW7BXqDgoULQ55rO7IdNxPcnsWtshz3AA==}
     engines: {node: '>=14.18.0'}
     peerDependencies:
       esbuild: '>=0.18.0'
@@ -3192,8 +3192,8 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unplugin-utils@0.2.3:
-    resolution: {integrity: sha512-unB2e2ogZwEoMw/X0Gq1vj2jaRKLmTh9wcSEJggESPllcrZI68uO7B8ykixbXqsSwG8r9T7qaHZudXIC/3qvhw==}
+  unplugin-utils@0.2.4:
+    resolution: {integrity: sha512-8U/MtpkPkkk3Atewj1+RcKIjb5WBimZ/WSLhhR3w6SsIj8XJuKTacSP8g+2JhfSGw0Cb125Y+2zA/IzJZDVbhA==}
     engines: {node: '>=18.12.0'}
 
   unplugin@1.16.1:
@@ -6225,14 +6225,14 @@ snapshots:
     optionalDependencies:
       '@babel/code-frame': 7.26.2
 
-  rollup-plugin-esbuild@6.2.0(esbuild@0.24.2)(rollup@4.34.8):
+  rollup-plugin-esbuild@6.2.1(esbuild@0.24.2)(rollup@4.34.8):
     dependencies:
       debug: 4.4.0
       es-module-lexer: 1.6.0
       esbuild: 0.24.2
       get-tsconfig: 4.10.0
       rollup: 4.34.8
-      unplugin-utils: 0.2.3
+      unplugin-utils: 0.2.4
     transitivePeerDependencies:
       - supports-color
 
@@ -6571,7 +6571,7 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unplugin-utils@0.2.3:
+  unplugin-utils@0.2.4:
     dependencies:
       pathe: 2.0.2
       picomatch: 4.0.2
