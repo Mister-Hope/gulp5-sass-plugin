@@ -97,9 +97,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
         // Handles error message
         const errorHandler = (error: SassError): void => {
-          const filePath = error.span.url?.pathname
-            ? error.span.url.pathname
-            : file.path;
+          const filePath = error.span.url?.pathname ?? file.path;
 
           const relativePath = relative(process.cwd(), filePath);
           const message = [pc.underline(relativePath), error.sassMessage].join(

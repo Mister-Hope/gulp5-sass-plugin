@@ -1,22 +1,19 @@
-import hopeConfig, { config, tsParser } from "eslint-config-mister-hope";
+import { hope } from "eslint-config-mister-hope";
 
-export default config(
-  ...hopeConfig,
-  {
-    ignores: ["**/dist/**", "**/node_modules/**", "coverage/**"],
-  },
-
+export default hope(
   {
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
       parserOptions: {
-        parser: tsParser,
-        tsconfigDirName: import.meta.dirname,
         projectService: {
           allowDefaultProject: ["eslint.config.js"],
         },
       },
+    },
+  },
+  {
+    files: ["__tests__/**/*.spec.ts"],
+    rules: {
+      "no-console": "off",
     },
   },
 );
