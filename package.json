@@ -74,7 +74,7 @@
     "@vitest/coverage-istanbul": "3.0.8",
     "autoprefixer": "10.4.20",
     "del": "8.0.0",
-    "eslint": "9.21.0",
+    "eslint": "9.22.0",
     "eslint-config-mister-hope": "0.8.1",
     "gulp": "5.0.0",
     "gulp-postcss": "10.0.0",
