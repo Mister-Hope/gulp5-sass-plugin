@@ -77,7 +77,7 @@
     "@types/vinyl": "2.0.12",
     "@vitest/coverage-istanbul": "3.1.2",
     "autoprefixer": "10.4.21",
-    "del": "8.0.0",
+    "del": "8.0.1",
     "eslint": "9.25.1",
     "eslint-config-mister-hope": "0.9.1",
     "gulp": "5.0.0",
