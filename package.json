@@ -98,7 +98,7 @@
   "peerDependencies": {
     "gulp": "^5.0.0"
   },
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.18.3",
   "engines": {
     "node": ">=14"
   },
