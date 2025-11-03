@@ -73,7 +73,7 @@
     "@types/gulp": "4.0.17",
     "@types/gulp-postcss": "8.0.6",
     "@types/gulp-sourcemaps": "0.0.38",
-    "@types/node": "24.7.2",
+    "@types/node": "24.10.0",
     "@types/vinyl": "2.0.12",
     "@vitest/coverage-istanbul": "3.2.4",
     "autoprefixer": "10.4.21",
