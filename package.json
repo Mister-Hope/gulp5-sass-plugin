@@ -75,7 +75,7 @@
     "@types/gulp-sourcemaps": "0.0.38",
     "@types/node": "24.7.2",
     "@types/vinyl": "2.0.12",
-    "@vitest/coverage-istanbul": "3.2.4",
+    "@vitest/coverage-istanbul": "4.0.8",
     "autoprefixer": "10.4.21",
     "del": "8.0.1",
     "eslint": "9.37.0",
@@ -93,7 +93,7 @@
     "rollup-plugin-esbuild": "6.2.1",
     "standard-version": "9.5.0",
     "typescript": "5.9.3",
-    "vitest": "3.2.4"
+    "vitest": "4.0.8"
   },
   "peerDependencies": {
     "gulp": "^5.0.0"
