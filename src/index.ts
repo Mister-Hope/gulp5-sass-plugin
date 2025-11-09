@@ -87,7 +87,7 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
         // Ensure `syntax` is `"indented"` if a `.sass` file
         if (extname(file.path) === ".sass") options.syntax = "indented";
 
-        if (!options.loadPaths) options.loadPaths = [];
+        options.loadPaths ??= [];
 
         // Ensure file's parent directory in the include path
         options.loadPaths.unshift(dirname(file.path));
@@ -133,7 +133,6 @@ const main: PrivateGulpSass = (pluginOptions = {}, sync) =>
 
 // Log errors nicely
 function logError(this: Transform, error: SassError): void {
-  // eslint-disable-next-line @typescript-eslint/no-base-to-string
   const message = new PluginError(
     "sass",
     error.messageFormatted ?? error.message,

@@ -3,15 +3,15 @@ import { join } from "node:path";
 
 import autoprefixer from "autoprefixer";
 import { deleteAsync } from "del";
-import gulp from "gulp";
+import { dest, src } from "gulp";
 import postcss from "gulp-postcss";
 import { init, write } from "gulp-sourcemaps";
 import type { BufferFile } from "vinyl";
 import type Vinyl from "vinyl";
 import { afterAll, describe, expect, it, vi } from "vitest";
 
-import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 import type { SassError } from "../src/index.js";
+import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 import { sass } from "../src/index.js";
 
 afterAll(async () => {
@@ -253,13 +253,12 @@ describe("sync compile", () => {
     const caller = vi.fn();
 
     await new Promise((resolve) => {
-      gulp
-        .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
+      src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
         .pipe(init())
         .pipe(sass())
         .pipe(write())
-        .pipe(gulp.dest(join(__dirname, "results")))
+        .pipe(dest(join(__dirname, "results")))
         .on("end", resolve);
     }).catch(caller);
 
@@ -270,14 +269,13 @@ describe("sync compile", () => {
     const caller = vi.fn();
 
     await new Promise((resolve) => {
-      gulp
-        .src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
+      src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
         .pipe(init())
         .pipe(sass())
         .pipe(postcss([autoprefixer()]))
         .pipe(write())
-        .pipe(gulp.dest(join(__dirname, "results")))
+        .pipe(dest(join(__dirname, "results")))
         .on("end", resolve);
     }).catch(caller);
 
@@ -286,11 +284,10 @@ describe("sync compile", () => {
 
   it("should work with empty files", () =>
     new Promise<void>((resolve) => {
-      gulp
-        .src(join(__dirname, "__fixtures__/scss/empty.scss"))
+      src(join(__dirname, "__fixtures__/scss/empty.scss"))
         .on("error", console.error)
         .pipe(sass())
-        .pipe(gulp.dest(join(__dirname, "results")))
+        .pipe(dest(join(__dirname, "results")))
         .on("end", () => {
           const stat = statSync(join(__dirname, "results/empty.css"));
 
