@@ -94,8 +94,8 @@ importers:
         specifier: 8.5.6
         version: 8.5.6
       prettier:
-        specifier: 3.6.2
-        version: 3.6.2
+        specifier: 3.7.2
+        version: 3.7.2
       rimraf:
         specifier: 6.1.2
         version: 6.1.2
@@ -2646,8 +2646,8 @@ packages:
     resolution: {integrity: sha512-E6rsNU1QNJgB3sjj7OANinGncFKuK+164sLXw1/CqBjj/EkXSoSdHCtWQGBNlREIGLnL7IEUEGa08YFVUbrhVg==}
     engines: {node: '>=16'}
 
-  prettier@3.6.2:
-    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+  prettier@3.7.2:
+    resolution: {integrity: sha512-n3HV2J6QhItCXndGa3oMWvWFAgN1ibnS7R9mt6iokScBOC0Ul9/iZORmU2IWUMcyAQaMPjTlY3uT34TqocUxMA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -5882,7 +5882,7 @@ snapshots:
 
   presentable-error@0.0.1: {}
 
-  prettier@3.6.2: {}
+  prettier@3.7.2: {}
 
   process-nextick-args@2.0.1: {}
 
