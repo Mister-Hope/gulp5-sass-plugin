@@ -287,4 +287,27 @@ describe("sync compile", () => {
           resolve();
         });
     }));
+
+  it("should skip files starting with '_'", () =>
+    new Promise<void>((resolve, reject) => {
+      const partialFile = createVinyl("_partial.scss");
+      const stream = sass();
+
+      let hasData = false;
+
+      stream.on("data", () => {
+        hasData = true;
+      });
+
+      stream.on("end", () => {
+        if (hasData) {
+          reject(new Error("Should not emit data for partial"));
+        } else {
+          resolve();
+        }
+      });
+
+      stream.write(partialFile);
+      stream.end();
+    }));
 });

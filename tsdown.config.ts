@@ -11,7 +11,7 @@ export default defineConfig([
     plugins: [
       codecovRollupPlugin({
         enableBundleAnalysis: Boolean(process.env.BUNDLE_ANALYSIS),
-        bundleName: "node",
+        bundleName: "main",
         oidc: {
           useGitHubOIDC: true,
         },
