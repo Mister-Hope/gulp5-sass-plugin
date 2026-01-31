@@ -1,3 +1,6 @@
+// eslint-disable no-console
+// oxlint-disable import/max-dependencies
+
 import { statSync } from "node:fs";
 import { join } from "node:path";
 
@@ -27,7 +30,7 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (data: Vinyl) => {
-        expect(data.isNull()).toEqual(true);
+        expect(data.isNull()).toBeTruthy();
         resolve();
       });
       stream.write(emptyFile);
@@ -64,10 +67,7 @@ describe("sync compile", () => {
 
   it("should compile multiple sass files", () =>
     new Promise<void>((resolve) => {
-      const sassFiles = [
-        createVinyl("mixins.scss"),
-        createVinyl("variables.scss"),
-      ];
+      const sassFiles = [createVinyl("mixins.scss"), createVinyl("variables.scss")];
       const stream = sass();
       let mustSee = sassFiles.length;
 
@@ -123,9 +123,7 @@ describe("sync compile", () => {
         // Error must include line and column error occurs on
         expect(err.messageOriginal).toContain("2:20  root stylesheet");
         // Error must include relativePath property
-        expect(err.message).toContain(
-          join("__tests__", "__fixtures__", "scss", "error.scss"),
-        );
+        expect(err.message).toContain(join("__tests__", "__fixtures__", "scss", "error.scss"));
         resolve();
       });
       stream.write(errorFile);
@@ -142,9 +140,7 @@ describe("sync compile", () => {
         // Error must include line and column error occurs on
         expect(err.messageOriginal).toContain("error.scss 2:20  @use");
         // Error must include relativePath property
-        expect(err.message).toContain(
-          join("__tests__", "__fixtures__", "scss", "error.scss"),
-        );
+        expect(err.message).toContain(join("__tests__", "__fixtures__", "scss", "error.scss"));
         resolve();
       });
       stream.write(errorFile);
@@ -181,9 +177,7 @@ describe("sync compile", () => {
         expect(typeof cssFile.relative).toEqual("string");
         expect(typeof cssFile.path).toEqual("string");
 
-        expect(normalizeEOL(cssFile.contents)).toContain(
-          "/* Added Dynamically */",
-        );
+        expect(normalizeEOL(cssFile.contents)).toContain("/* Added Dynamically */");
         resolve();
       });
       stream.write(sassFile);
@@ -203,6 +197,7 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (cssFile: BufferFile) => {
+        // oxlint-disable-next-line typescript/no-unsafe-member-access
         expect(cssFile.sourceMap.sources).toEqual([
           "includes/_cats.scss",
           "includes/_dogs.sass",
@@ -230,10 +225,7 @@ describe("sync compile", () => {
 
   it("should parse files in sass and scss", () =>
     new Promise<void>((resolve) => {
-      const sassFiles = [
-        createVinyl("mixins.scss"),
-        createVinyl("indent.sass"),
-      ];
+      const sassFiles = [createVinyl("mixins.scss"), createVinyl("indent.sass")];
       const stream = sass();
       let mustSee = sassFiles.length;
 

@@ -3,16 +3,12 @@
   "version": "2.0.4",
   "description": "Gulp plugin for sass",
   "keywords": [
+    "gulp",
     "gulp-plugin",
-    "sass",
-    "gulp"
+    "sass"
   ],
   "bugs": {
     "url": "https://github.com/Mister-Hope/gulp5-sass-plugin/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/Mister-Hope/gulp5-sass-plugin"
   },
   "license": "MIT",
   "author": {
@@ -20,40 +16,39 @@
     "email": "mister-hope@outlook.com",
     "url": "https://mister-hope.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Mister-Hope/gulp5-sass-plugin"
+  },
+  "files": [
+    "dist"
+  ],
   "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "rollup -c rollup.config.ts --configPlugin esbuild",
+    "build": "tsdown --config-loader unrun",
     "changelog": "standard-version --skip.bump --skip.commit --skip.tag",
     "clean": "rimraf dist",
     "commit": "pnpm git-cz",
-    "lint": "eslint --fix . && prettier --check --write .",
-    "lint:check": "eslint . && prettier --check .",
+    "dev": "tsdown --config-loader unrun -w",
+    "lint": "oxlint --fix --type-aware --type-check --report-unused-disable-directives --deny-warnings && oxfmt",
+    "lint:check": "oxlint --type-aware --type-check --report-unused-disable-directives --deny-warnings && oxfmt --check",
     "packages:check-update": "pnpm dlx npm-check-updates -u --timeout 600000",
     "packages:update": "pnpm up -r",
     "prepare": "husky",
     "prepublish": "pnpm clean && pnpm build",
     "test": "vitest --coverage"
-  },
-  "nano-staged": {
-    "**/*": "prettier --write --ignore-unknown",
-    "*.{js,ts}": "eslint --fix"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
   },
   "dependencies": {
     "picocolors": "^1.1.1",
@@ -78,31 +73,35 @@
     "@vitest/coverage-istanbul": "4.0.18",
     "autoprefixer": "10.4.24",
     "del": "8.0.1",
-    "eslint": "9.39.2",
-    "eslint-config-mister-hope": "0.9.6",
     "gulp": "5.0.1",
     "gulp-postcss": "10.0.0",
     "gulp-sourcemaps": "3.0.0",
     "husky": "9.1.7",
     "nano-staged": "0.9.0",
+    "oxfmt": "0.27.0",
+    "oxlint": "1.42.0",
+    "oxlint-tsgolint": "0.11.4",
     "postcss": "8.5.6",
-    "prettier": "3.8.1",
     "rimraf": "6.1.2",
-    "rollup": "4.57.1",
-    "rollup-plugin-dts": "6.3.0",
-    "rollup-plugin-esbuild": "6.2.1",
     "standard-version": "9.5.0",
+    "tsdown": "0.20.1",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   },
   "peerDependencies": {
     "gulp": "^5.0.0"
   },
-  "packageManager": "pnpm@10.28.2",
+  "nano-staged": {
+    "**/*": "oxfmt --no-error-on-unmatched-pattern",
+    "*.{js,ts}": "oxlint --fix --type-aware --type-check --deny-warnings --report-unused-disable-directives"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "engines": {
     "node": ">=14"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "packageManager": "pnpm@10.28.2"
 }

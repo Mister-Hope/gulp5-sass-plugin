@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "extends": ["./.oxlintrc.base.json"],
+  "ignorePatterns": ["coverage/", "dist/", "docs/"],
+  "plugins": ["typescript", "oxc", "jsdoc", "import", "promise", "unicorn", "node"],
+  "rules": {
+    // we use gulp 5 callback in async transform function
+    "promise/no-callback-in-promise": "off",
+    // gulp 5 transform uses callback style
+    "promise/prefer-await-to-callbacks": "off"
+  }
+}

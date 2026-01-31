@@ -55,9 +55,7 @@ import { dest, src, watch } from "gulp";
 import { sass } from "gulp5-sass-plugin";
 
 export const build = () =>
-  src("./styles/**/*.scss")
-    .pipe(sass().on("error", sass.logError))
-    .pipe(dest("./css"));
+  src("./styles/**/*.scss").pipe(sass().on("error", sass.logError)).pipe(dest("./css"));
 
 export const watch = () => watch("./styles/**/*.scss", build);
 ```
@@ -69,9 +67,7 @@ import { dest, src, watch } from "gulp";
 import { sassAsync } from "gulp5-sass-plugin";
 
 export const build = () =>
-  src("./styles/**/*.scss")
-    .pipe(sassAsync().on("error", sassAsync.logError))
-    .pipe(dest("./css"));
+  src("./styles/**/*.scss").pipe(sassAsync().on("error", sassAsync.logError)).pipe(dest("./css"));
 
 export const watch = () => watch("./styles/**/*.scss", build);
 ```
@@ -93,9 +89,7 @@ const { sass } = require("gulp5-sass-plugin");
 const fiber = require("fibers");
 
 const build = () =>
-  src("./styles/**/*.scss")
-    .pipe(sass({ fiber }).on("error", sass.logError))
-    .pipe(dest("./css"));
+  src("./styles/**/*.scss").pipe(sass({ fiber }).on("error", sass.logError)).pipe(dest("./css"));
 
 exports.build = build;
 exports.watch = () => watch("./styles/**/*.scss", build);
@@ -121,9 +115,7 @@ Or this for asynchronous code:
 ```js
 export const build = () =>
   src("./styles/**/*.scss")
-    .pipe(
-      sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError),
-    )
+    .pipe(sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError))
     .pipe(dest("./css"));
 ```
 

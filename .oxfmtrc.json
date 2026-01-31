@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": ["coverage/", "dist/", "__tests__/__fixtures__/scss/error.scss"],
+  "experimentalSortPackageJson": {
+    "sortScripts": true
+  }
+}

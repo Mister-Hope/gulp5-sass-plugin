@@ -5,9 +5,11 @@ export default defineConfig({
     coverage: {
       provider: "istanbul",
       include: ["src/**/*.ts"],
+      reporter: process.env.TEST_REPORT ? ["cobertura", "text"] : ["text", "html"],
     },
-    include: ["**/*.spec.ts"],
-    ...(process.env.CODECOV_TOKEN
+
+    fileParallelism: false,
+    ...(process.env.TEST_REPORT
       ? {
           reporters: ["junit"],
           outputFile: {
