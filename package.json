@@ -1,6 +1,6 @@
 {
   "name": "gulp5-sass-plugin",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "Gulp plugin for sass",
   "keywords": [
     "gulp",
@@ -38,7 +38,7 @@
   },
   "scripts": {
     "build": "tsdown --config-loader unrun",
-    "changelog": "standard-version --skip.bump --skip.commit --skip.tag",
+    "changelog": "commit-and-tag-version --skip.bump --skip.commit --skip.tag",
     "clean": "rimraf dist",
     "commit": "pnpm git-cz",
     "dev": "tsdown --config-loader unrun -w",
@@ -72,6 +72,7 @@
     "@types/vinyl": "2.0.12",
     "@vitest/coverage-istanbul": "4.0.18",
     "autoprefixer": "10.4.24",
+    "commit-and-tag-version": "12.6.1",
     "del": "8.0.1",
     "gulp": "5.0.1",
     "gulp-postcss": "10.0.0",
@@ -83,7 +84,6 @@
     "oxlint-tsgolint": "0.11.4",
     "postcss": "8.5.6",
     "rimraf": "6.1.2",
-    "standard-version": "9.5.0",
     "tsdown": "0.20.3",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
