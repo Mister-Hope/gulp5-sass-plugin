@@ -4,6 +4,8 @@
   "ignorePatterns": ["coverage/", "dist/", "docs/"],
   "plugins": ["typescript", "oxc", "jsdoc", "import", "promise", "unicorn", "node"],
   "rules": {
+    // we are creating a gulp plugin, which is expected to be used in node environment
+    "import/no-nodejs-modules": "off",
     // we use gulp 5 callback in async transform function
     "promise/no-callback-in-promise": "off",
     // gulp 5 transform uses callback style
