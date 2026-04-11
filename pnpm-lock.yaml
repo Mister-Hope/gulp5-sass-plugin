@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@codecov/bundler-plugin-core@1>@actions/core': npm:@actions/core@2
+  '@codecov/bundler-plugin-core@1>@actions/core': npm:@actions/core@3
   '@codecov/bundler-plugin-core@1>@actions/github': npm:@actions/github@8
   vite@7: npm:rolldown-vite@7
 
@@ -121,11 +121,11 @@ importers:
 
 packages:
 
-  '@actions/core@2.0.3':
-    resolution: {integrity: sha512-Od9Thc3T1mQJYddvVPM4QGiLUewdh+3txmDYHHxoNdkqysR1MbCT+rFOtNUxYAz+7+6RIsqipVahY2GJqGPyxA==}
+  '@actions/core@3.0.0':
+    resolution: {integrity: sha512-zYt6cz+ivnTmiT/ksRVriMBOiuoUpDCJJlZ5KPl2/FRdvwU3f7MPh9qftvbkXJThragzUZieit2nyHUyw53Seg==}
 
-  '@actions/exec@2.0.0':
-    resolution: {integrity: sha512-k8ngrX2voJ/RIN6r9xB82NVqKpnMRtxDoiO+g3olkIUpQNqjArXrCQceduQZCQj3P3xm32pChRLqRrtXTlqhIw==}
+  '@actions/exec@3.0.0':
+    resolution: {integrity: sha512-6xH/puSoNBXb72VPlZVm7vQ+svQpFyA96qdDBvhB8eNZOE8LtPf9L4oAsfzK/crCL8YZ+19fKYVnM63Sl+Xzlw==}
 
   '@actions/github@8.0.1':
     resolution: {integrity: sha512-cue7mS+kx1/2Dnc/094pitRUm+0uPXVXYVaqOdZwD15BsXATWYHW3idJDYOlyBc5gJlzAQ/w5YLU4LR8D7hjVg==}
@@ -133,8 +133,11 @@ packages:
   '@actions/http-client@3.0.2':
     resolution: {integrity: sha512-JP38FYYpyqvUsz+Igqlc/JG6YO9PaKuvqjM3iGvaLqFnJ7TFmcLyy2IDrY0bI0qCQug8E9K+elv5ZNfw62ZJzA==}
 
-  '@actions/io@2.0.0':
-    resolution: {integrity: sha512-Jv33IN09XLO+0HS79aaODsvIRyduiF7NY/F6LYeK5oeUmrsz7aFdRphQjFoESF4jS7lMauDOttKALcpapVDIAg==}
+  '@actions/http-client@4.0.0':
+    resolution: {integrity: sha512-QuwPsgVMsD6qaPD57GLZi9sqzAZCtiJT8kVBCDpLtxhL5MydQ4gS+DrejtZZPdIYyB1e95uCK9Luyds7ybHI3g==}
+
+  '@actions/io@3.0.2':
+    resolution: {integrity: sha512-nRBchcMM+QK1pdjO7/idu86rbJI5YHUKCvKs0KxnSYbVe3F51UfGxuZX4Qy/fWlp6l7gWFwIkrOzN+oUK03kfw==}
 
   '@babel/code-frame@7.29.0':
     resolution: {integrity: sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw==}
@@ -1582,11 +1585,13 @@ packages:
   git-raw-commits@3.0.0:
     resolution: {integrity: sha512-b5OHmZ3vAgGrDn/X0kS+9qCfNKWe4K/jFnhwzVWWg0/k5eLa3060tZShrRg8Dja5kPc+YjS0Gc6y7cRr44Lpjw==}
     engines: {node: '>=14'}
+    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
     hasBin: true
 
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
+    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
     hasBin: true
 
   git-remote-origin-url@2.0.0:
@@ -1596,6 +1601,7 @@ packages:
   git-semver-tags@5.0.1:
     resolution: {integrity: sha512-hIvOeZwRbQ+7YEUmCkHqo8FOLQZCEn18yevLHADlFPZY02KJGsu5FZt9YW/lybfK2uhWFI7Qg/07LekJiTv7iA==}
     engines: {node: '>=14'}
+    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
     hasBin: true
 
   gitconfiglocal@1.0.0:
@@ -2490,6 +2496,7 @@ packages:
   rolldown-vite@7.3.1:
     resolution: {integrity: sha512-LYzdNAjRHhF2yA4JUQm/QyARyi216N2rpJ0lJZb8E9FU2y5v6Vk+xq/U4XBOxMefpWixT5H3TslmAHm1rqIq2w==}
     engines: {node: ^20.19.0 || >=22.12.0}
+    deprecated: Use this package to migrate from Vite 7 to Vite 8. For the most recent updates, migrate to Vite 8 once you're ready.
     hasBin: true
     peerDependencies:
       '@types/node': ^20.19.0 || >=22.12.0
@@ -2983,14 +2990,14 @@ packages:
 
 snapshots:
 
-  '@actions/core@2.0.3':
+  '@actions/core@3.0.0':
     dependencies:
-      '@actions/exec': 2.0.0
-      '@actions/http-client': 3.0.2
+      '@actions/exec': 3.0.0
+      '@actions/http-client': 4.0.0
 
-  '@actions/exec@2.0.0':
+  '@actions/exec@3.0.0':
     dependencies:
-      '@actions/io': 2.0.0
+      '@actions/io': 3.0.2
 
   '@actions/github@8.0.1':
     dependencies:
@@ -3007,7 +3014,12 @@ snapshots:
       tunnel: 0.0.6
       undici: 6.23.0
 
-  '@actions/io@2.0.0': {}
+  '@actions/http-client@4.0.0':
+    dependencies:
+      tunnel: 0.0.6
+      undici: 6.23.0
+
+  '@actions/io@3.0.2': {}
 
   '@babel/code-frame@7.29.0':
     dependencies:
@@ -3133,7 +3145,7 @@ snapshots:
 
   '@codecov/bundler-plugin-core@1.9.1':
     dependencies:
-      '@actions/core': 2.0.3
+      '@actions/core': 3.0.0
       '@actions/github': 8.0.1
       chalk: 4.1.2
       semver: 7.7.4
