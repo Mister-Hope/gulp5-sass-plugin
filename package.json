@@ -71,7 +71,7 @@
     "@types/node": "25.2.1",
     "@types/vinyl": "2.0.12",
     "@vitest/coverage-istanbul": "4.0.18",
-    "autoprefixer": "10.4.24",
+    "autoprefixer": "10.5.0",
     "commit-and-tag-version": "12.6.1",
     "del": "8.0.1",
     "gulp": "5.0.1",
