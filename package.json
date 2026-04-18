@@ -61,7 +61,7 @@
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
   "devDependencies": {
-    "@codecov/rollup-plugin": "1.9.1",
+    "@codecov/rollup-plugin": "2.0.1",
     "@commitlint/cli": "20.4.1",
     "@commitlint/config-conventional": "20.4.1",
     "@rollup/plugin-node-resolve": "16.0.3",
