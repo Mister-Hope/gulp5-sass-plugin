@@ -40,60 +40,59 @@
     "build": "tsdown --config-loader unrun",
     "changelog": "commit-and-tag-version --skip.bump --skip.commit --skip.tag",
     "clean": "rimraf dist",
-    "commit": "pnpm git-cz",
     "dev": "tsdown --config-loader unrun -w",
-    "lint": "oxlint --fix --type-aware --type-check --report-unused-disable-directives --deny-warnings && oxfmt",
-    "lint:check": "oxlint --type-aware --type-check --report-unused-disable-directives --deny-warnings && oxfmt --check",
-    "packages:check-update": "pnpm dlx npm-check-updates -u --timeout 600000",
-    "packages:update": "pnpm up -r",
+    "lint": "oxlint --fix --report-unused-disable-directives --deny-warnings && oxfmt",
+    "lint:check": "oxlint --report-unused-disable-directives --deny-warnings && oxfmt --check",
     "prepare": "husky",
-    "prepublish": "pnpm clean && pnpm build",
+    "prepublish": "pnpm run clean && pnpm run build",
     "test": "vitest --coverage"
   },
   "dependencies": {
     "picocolors": "^1.1.1",
     "plugin-error": "^2.0.1",
     "replace-ext": "^2.0.0",
-    "sass": "^1.97.3",
+    "sass": "^1.99.0",
     "source-map-js": "^1.2.1",
-    "strip-ansi": "^7.1.2",
+    "strip-ansi": "^7.2.0",
     "vinyl": "^3.0.1",
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
   "devDependencies": {
-    "@codecov/rollup-plugin": "1.9.1",
-    "@commitlint/cli": "20.4.1",
-    "@commitlint/config-conventional": "20.4.1",
+    "@codecov/rollup-plugin": "2.0.1",
+    "@commitlint/cli": "20.5.0",
+    "@commitlint/config-conventional": "20.5.0",
+    "@mr-hope/tsconfig": "0.0.3",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@types/gulp": "4.0.18",
     "@types/gulp-postcss": "8.0.6",
     "@types/gulp-sourcemaps": "0.0.38",
-    "@types/node": "25.2.1",
+    "@types/node": "25.6.0",
     "@types/vinyl": "2.0.12",
-    "@vitest/coverage-istanbul": "4.0.18",
-    "autoprefixer": "10.4.24",
-    "commit-and-tag-version": "12.6.1",
+    "@vitest/coverage-istanbul": "4.1.4",
+    "autoprefixer": "10.5.0",
+    "commit-and-tag-version": "12.7.1",
     "del": "8.0.1",
     "gulp": "5.0.1",
     "gulp-postcss": "10.0.0",
     "gulp-sourcemaps": "3.0.0",
     "husky": "9.1.7",
-    "nano-staged": "0.9.0",
-    "oxfmt": "0.28.0",
-    "oxlint": "1.43.0",
-    "oxlint-tsgolint": "0.11.4",
-    "postcss": "8.5.6",
-    "rimraf": "6.1.2",
-    "tsdown": "0.20.3",
-    "typescript": "5.9.3",
-    "vitest": "4.0.18"
+    "nano-staged": "1.0.2",
+    "oxc-config-hope": "0.3.0",
+    "oxfmt": "0.46.0",
+    "oxlint": "1.61.0",
+    "oxlint-tsgolint": "0.21.1",
+    "postcss": "8.5.10",
+    "rimraf": "6.1.3",
+    "tsdown": "0.21.9",
+    "typescript": "6.0.3",
+    "vitest": "4.1.4"
   },
   "peerDependencies": {
     "gulp": "^5.0.0"
   },
   "nano-staged": {
     "**/*": "oxfmt --no-error-on-unmatched-pattern",
-    "*.{js,ts}": "oxlint --fix --type-aware --type-check --deny-warnings --report-unused-disable-directives"
+    "*.{js,ts}": "oxlint --fix --report-unused-disable-directives --deny-warnings"
   },
   "commitlint": {
     "extends": [
@@ -103,5 +102,5 @@
   "engines": {
     "node": ">=14"
   },
-  "packageManager": "pnpm@10.29.1"
+  "packageManager": "pnpm@10.33.0"
 }

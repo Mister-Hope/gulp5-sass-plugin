@@ -1,12 +1,6 @@
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - es5-ext
-
-overrides:
-  # FIXME: avoid outdated dependencies introducing vulnerable undici
-  "@codecov/bundler-plugin-core@1>@actions/core": npm:@actions/core@2
-  "@codecov/bundler-plugin-core@1>@actions/github": npm:@actions/github@8
-  vite@7: npm:rolldown-vite@7
+allowBuilds:
+  "@parcel/watcher": true
+  es5-ext: true
 
 packageExtensions:
   "@codecov/rollup-plugin":

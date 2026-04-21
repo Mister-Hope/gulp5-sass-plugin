@@ -31,7 +31,6 @@ export interface BufferFileWithSourceMap extends BufferFile {
  *
  * @param error The Sass error
  * @param file The Vinyl file
- *
  * @returns A standard Gulp Plugin Error
  */
 const createError = (error: SassError, file: BufferFile): PluginError => {
@@ -53,7 +52,6 @@ const createError = (error: SassError, file: BufferFile): PluginError => {
  *
  * @param file The Vinyl file
  * @param result The Sass compile result
- *
  * @returns The transformed Vinyl file
  */
 const handleFile = (
@@ -119,7 +117,6 @@ type PrivateGulpSass = (
  *
  * @param pluginOptions The Sass options
  * @param sync Whether to use synchronous compilation
- *
  * @returns A Transform stream
  */
 const main: PrivateGulpSass = (pluginOptions, sync) =>

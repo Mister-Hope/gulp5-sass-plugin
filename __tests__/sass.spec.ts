@@ -1,5 +1,4 @@
 // eslint-disable no-console
-// oxlint-disable import/max-dependencies
 
 import { statSync } from "node:fs";
 import { join } from "node:path";
@@ -11,11 +10,11 @@ import postcss from "gulp-postcss";
 import { init, write } from "gulp-sourcemaps";
 import type { BufferFile } from "vinyl";
 import type Vinyl from "vinyl";
-import { afterAll, describe, expect, it, vi } from "vitest";
+import { afterAll, describe, expect, expectTypeOf, it, vi } from "vitest";
 
 import type { SassError } from "../src/index.js";
-import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 import { sass } from "../src/index.js";
+import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 
 afterAll(async () => {
   await deleteAsync(join(__dirname, "results"));
@@ -57,8 +56,8 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
-        expect(typeof cssFile.path).toEqual("string");
+        expectTypeOf(cssFile.relative).toBeString();
+        expectTypeOf(cssFile.path).toBeString();
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
@@ -72,15 +71,17 @@ describe("sync compile", () => {
       let mustSee = sassFiles.length;
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
-        expect(typeof cssFile.path).toEqual("string");
+        expectTypeOf(cssFile.relative).toBeString();
+        expectTypeOf(cssFile.path).toBeString();
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
         if (mustSee <= 0) resolve();
       });
 
-      sassFiles.forEach((file) => stream.write(file));
+      sassFiles.forEach((file) => {
+        stream.write(file);
+      });
     }));
 
   it("should compile files with partials in another folder", () =>
@@ -89,8 +90,8 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
-        expect(typeof cssFile.path).toEqual("string");
+        expectTypeOf(cssFile.relative).toBeString();
+        expectTypeOf(cssFile.path).toBeString();
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
       });
@@ -102,11 +103,11 @@ describe("sync compile", () => {
       const errorFile = createVinyl("error.scss");
       const stream = sass();
 
-      const logError = vi.fn(sass.logError.bind(stream));
+      const logError = vi.fn<(error: SassError) => void>(sass.logError.bind(stream));
 
       stream.on("error", logError);
       stream.on("end", () => {
-        expect(logError).toBeCalled();
+        expect(logError).toHaveBeenCalled();
         resolve();
       });
       stream.write(errorFile);
@@ -154,7 +155,7 @@ describe("sync compile", () => {
       sassFile.path = join(__dirname, "__fixtures__/scss/mixin--changed.scss");
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
+        expectTypeOf(cssFile.relative).toBeString();
         expect(cssFile.path).toContain("mixin--changed.css");
 
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
@@ -174,8 +175,8 @@ describe("sync compile", () => {
       );
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
-        expect(typeof cssFile.path).toEqual("string");
+        expectTypeOf(cssFile.relative).toBeString();
+        expectTypeOf(cssFile.path).toBeString();
 
         expect(normalizeEOL(cssFile.contents)).toContain("/* Added Dynamically */");
         resolve();
@@ -197,7 +198,6 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (cssFile: BufferFile) => {
-        // oxlint-disable-next-line typescript/no-unsafe-member-access
         expect(cssFile.sourceMap.sources).toEqual([
           "includes/_cats.scss",
           "includes/_dogs.sass",
@@ -214,8 +214,8 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
-        expect(typeof cssFile.path).toEqual("string");
+        expectTypeOf(cssFile.relative).toBeString();
+        expectTypeOf(cssFile.path).toBeString();
 
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
         resolve();
@@ -230,19 +230,21 @@ describe("sync compile", () => {
       let mustSee = sassFiles.length;
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(typeof cssFile.relative).toEqual("string");
-        expect(typeof cssFile.path).toEqual("string");
+        expectTypeOf(cssFile.relative).toBeString();
+        expectTypeOf(cssFile.path).toBeString();
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
         if (mustSee <= 0) resolve();
       });
 
-      sassFiles.forEach((file) => stream.write(file));
+      sassFiles.forEach((file) => {
+        stream.write(file);
+      });
     }));
 
   it("should work with gulp-sourcemaps and a globbed source", async () => {
-    const caller = vi.fn();
+    const caller = vi.fn<() => void>();
 
     await new Promise((resolve) => {
       src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
@@ -254,11 +256,11 @@ describe("sync compile", () => {
         .on("end", resolve);
     }).catch(caller);
 
-    expect(caller).not.toBeCalled();
+    expect(caller).not.toHaveBeenCalled();
   });
 
   it("should work with gulp-sourcemaps and autoprefixer", async () => {
-    const caller = vi.fn();
+    const caller = vi.fn<() => void>();
 
     await new Promise((resolve) => {
       src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
@@ -271,7 +273,7 @@ describe("sync compile", () => {
         .on("end", resolve);
     }).catch(caller);
 
-    expect(caller).not.toBeCalled();
+    expect(caller).not.toHaveBeenCalled();
   });
 
   it("should work with empty files", () =>
@@ -300,11 +302,8 @@ describe("sync compile", () => {
       });
 
       stream.on("end", () => {
-        if (hasData) {
-          reject(new Error("Should not emit data for partial"));
-        } else {
-          resolve();
-        }
+        if (hasData) reject(new Error("Should not emit data for partial"));
+        else resolve();
       });
 
       stream.write(partialFile);

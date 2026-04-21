@@ -3,6 +3,8 @@ import { join } from "node:path";
 
 import Vinyl from "vinyl";
 
+const __dirname = import.meta.dirname;
+
 export const createVinyl = (filename: string, contents?: Buffer): Vinyl => {
   const base = join(__dirname, "scss");
   const filePath = join(base, filename);

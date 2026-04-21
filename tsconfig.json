@@ -1,7 +1,4 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "./dist"
-  },
+  "extends": "@mr-hope/tsconfig/bundler.json",
   "include": ["**/*.ts"]
 }
