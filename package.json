@@ -61,7 +61,7 @@
     "@codecov/rollup-plugin": "2.0.1",
     "@commitlint/cli": "20.5.0",
     "@commitlint/config-conventional": "20.5.0",
-    "@mr-hope/tsconfig": "0.0.3",
+    "@mr-hope/tsconfig": "0.0.4",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@types/gulp": "4.0.18",
     "@types/gulp-postcss": "8.0.6",
