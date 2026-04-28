@@ -15,11 +15,12 @@ import type { SassError } from "../src/index.js";
 import { sassAsync } from "../src/index.js";
 import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 
-afterAll(async () => {
-  await deleteAsync(join(__dirname, "results"));
-});
-
 describe("async compile", () => {
+  // oxlint-disable-next-line vitest/no-hooks
+  afterAll(async () => {
+    await deleteAsync(join(__dirname, "results"));
+  });
+
   it("should pass file when it isNull()", () =>
     new Promise<void>((resolve) => {
       const emptyFile = {
@@ -75,6 +76,7 @@ describe("async compile", () => {
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
+        // oxlint-disable-next-line vitest/no-conditional-in-test
         if (mustSee <= 0) resolve();
       });
 
@@ -188,10 +190,10 @@ describe("async compile", () => {
 
       sassFile.sourceMap = JSON.stringify({
         version: "3",
-        file: "__fixtures__/scss/subdir/multilevelimport.scss",
+        file: "__fixtures__/scss/subdir/multi-level-import.scss",
         names: [],
         mappings: "",
-        sources: ["__fixtures__/scss/subdir/multilevelimport.scss"],
+        sources: ["__fixtures__/scss/subdir/multi-level-import.scss"],
         sourcesContent: ["@import ../inheritance;"],
       });
       const stream = sassAsync();
@@ -234,6 +236,7 @@ describe("async compile", () => {
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
+        // oxlint-disable-next-line vitest/no-conditional-in-test
         if (mustSee <= 0) resolve();
       });
 
@@ -290,7 +293,7 @@ describe("async compile", () => {
     }));
 
   it("should skip files starting with '_'", () =>
-    new Promise<void>((resolve, reject) => {
+    new Promise<void>((resolve) => {
       const partialFile = createVinyl("_partial.scss");
       const stream = sassAsync();
 
@@ -301,8 +304,8 @@ describe("async compile", () => {
       });
 
       stream.on("end", () => {
-        if (hasData) reject(new Error("Should not emit data for partial"));
-        else resolve();
+        expect(hasData).toBeFalsy();
+        resolve();
       });
 
       stream.write(partialFile);

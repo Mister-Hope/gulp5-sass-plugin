@@ -16,11 +16,12 @@ import type { SassError } from "../src/index.js";
 import { sass } from "../src/index.js";
 import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 
-afterAll(async () => {
-  await deleteAsync(join(__dirname, "results"));
-});
-
 describe("sync compile", () => {
+  // oxlint-disable-next-line vitest/no-hooks
+  afterAll(async () => {
+    await deleteAsync(join(__dirname, "results"));
+  });
+
   it("should pass file when it isNull()", () =>
     new Promise<void>((resolve) => {
       const emptyFile = {
@@ -76,6 +77,7 @@ describe("sync compile", () => {
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
+        // oxlint-disable-next-line vitest/no-conditional-in-test
         if (mustSee <= 0) resolve();
       });
 
@@ -189,10 +191,10 @@ describe("sync compile", () => {
 
       sassFile.sourceMap = JSON.stringify({
         version: "3",
-        file: "__fixtures__/scss/subdir/multilevelimport.scss",
+        file: "__fixtures__/scss/subdir/multi-level-import.scss",
         names: [],
         mappings: "",
-        sources: ["__fixtures__/scss/subdir/multilevelimport.scss"],
+        sources: ["__fixtures__/scss/subdir/multi-level-import.scss"],
         sourcesContent: ["@import ../inheritance;"],
       });
       const stream = sass();
@@ -235,6 +237,7 @@ describe("sync compile", () => {
         expect(normalizeEOL(cssFile.contents)).toMatchSnapshot();
 
         mustSee -= 1;
+        // oxlint-disable-next-line vitest/no-conditional-in-test
         if (mustSee <= 0) resolve();
       });
 
@@ -291,7 +294,7 @@ describe("sync compile", () => {
     }));
 
   it("should skip files starting with '_'", () =>
-    new Promise<void>((resolve, reject) => {
+    new Promise<void>((resolve) => {
       const partialFile = createVinyl("_partial.scss");
       const stream = sass();
 
@@ -302,8 +305,8 @@ describe("sync compile", () => {
       });
 
       stream.on("end", () => {
-        if (hasData) reject(new Error("Should not emit data for partial"));
-        else resolve();
+        expect(hasData).toBeFalsy();
+        resolve();
       });
 
       stream.write(partialFile);
