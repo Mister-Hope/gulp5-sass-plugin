@@ -4,7 +4,7 @@ import { normalizeEOL } from "./__fixtures__/index.js";
 
 describe("test helpers", () => {
   it("should normalize EOL", () => {
-    expect(normalizeEOL("foo\r\nbar")).toEqual("foo\nbar");
-    expect(normalizeEOL("foo\nbar")).toEqual("foo\nbar");
+    expect(normalizeEOL("foo\r\nbar")).toBe("foo\nbar");
+    expect(normalizeEOL("foo\nbar")).toBe("foo\nbar");
   });
 });

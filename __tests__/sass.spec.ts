@@ -45,7 +45,7 @@ describe("sync compile", () => {
       };
 
       stream.on("error", (err) => {
-        expect(err.message).toEqual("Streaming not supported");
+        expect(err.message).toBe("Streaming not supported");
         resolve();
       });
       stream.write(streamFile);
@@ -109,6 +109,7 @@ describe("sync compile", () => {
 
       stream.on("error", logError);
       stream.on("end", () => {
+        // oxlint-disable-next-line vitest/prefer-called-with
         expect(logError).toHaveBeenCalled();
         resolve();
       });
@@ -200,7 +201,7 @@ describe("sync compile", () => {
       const stream = sass();
 
       stream.on("data", (cssFile: BufferFile) => {
-        expect(cssFile.sourceMap.sources).toEqual([
+        expect(cssFile.sourceMap.sources).toStrictEqual([
           "includes/_cats.scss",
           "includes/_dogs.sass",
           "inheritance.scss",
@@ -288,7 +289,7 @@ describe("sync compile", () => {
         .on("end", () => {
           const stat = statSync(join(__dirname, "results/empty.css"));
 
-          expect(stat.size).toEqual(0);
+          expect(stat.size).toBe(0);
           resolve();
         });
     }));

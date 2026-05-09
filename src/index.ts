@@ -63,8 +63,8 @@ const handleFile = (
 
   // Build Source Maps!
   if (result.sourceMap) {
-    const proto = /^file:\/\/?/;
-    const leadingSlash = /^\//;
+    const proto = /^file:\/\/?/u;
+    const leadingSlash = /^\//u;
     const sassMap = result.sourceMap;
     const base = resolve(file.cwd, file.base);
 
