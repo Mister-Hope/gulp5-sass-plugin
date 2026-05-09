@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable no-inline-html -->
 
-[![CodeQL](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml) [![Test and coverage](https://github.com/Mister-Hope/gulp-sass/actions/workflows/test.yml/badge.svg)](https://github.com/Mister-Hope/gulp-sass/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/Mister-Hope/gulp5-sass-plugin/graph/badge.svg?token=413OUJ2PSJ)](https://codecov.io/gh/Mister-Hope/gulp-sass)
+[![CodeQL](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Mister-Hope/gulp-sass/actions/workflows/codeql-analysis.yml) [![codecov](https://codecov.io/gh/Mister-Hope/gulp5-sass-plugin/graph/badge.svg?token=413OUJ2PSJ)](https://codecov.io/gh/Mister-Hope/gulp-sass)
 
 Sass plugin for gulp5.
 
