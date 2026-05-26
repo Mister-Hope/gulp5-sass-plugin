@@ -2,6 +2,14 @@ allowBuilds:
   "@parcel/watcher": true
   es5-ext: true
 
+configDependencies:
+  pacquet: "^0.2.9"
+
+enableGlobalVirtualStore: true
+
+minimumReleaseAgeExclude:
+  - oxc-config-hope
+
 packageExtensions:
   "@codecov/rollup-plugin":
     peerDependenciesMeta:
