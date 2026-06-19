@@ -302,7 +302,7 @@ importers:
         version: 2.0.1
       '@commitlint/cli':
         specifier: 21.0.1
-        version: 21.0.1(@types/node@25.9.1)(conventional-commits-parser@6.4.0)(typescript@6.0.3)
+        version: 21.0.1(@types/node@25.9.4)(conventional-commits-parser@6.4.0)(typescript@6.0.3)
       '@commitlint/config-conventional':
         specifier: 21.0.1
         version: 21.0.1
@@ -322,8 +322,8 @@ importers:
         specifier: 0.0.38
         version: 0.0.38
       '@types/node':
-        specifier: 25.9.1
-        version: 25.9.1
+        specifier: 25.9.4
+        version: 25.9.4
       '@types/vinyl':
         specifier: 2.0.12
         version: 2.0.12
@@ -377,7 +377,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 4.1.7
-        version: 4.1.7(@types/node@25.9.1)(@vitest/coverage-istanbul@4.1.7)(vite@8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))
+        version: 4.1.7(@types/node@25.9.4)(@vitest/coverage-istanbul@4.1.7)(vite@8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))
 
 packages:
 
@@ -1228,6 +1228,9 @@ packages:
 
   '@types/node@25.9.1':
     resolution: {integrity: sha512-xfrlY7UD5rMJk3ZVJP8BNzS28J36YJg+xp+LPXV1TdWxr8uMH5A860QNxYDGQe/ylDSgjxE52Q9VnO7p75tJxg==}
+
+  '@types/node@25.9.4':
+    resolution: {integrity: sha512-dszCsrKb5U7ZsVZBWiHFklTloVl0mSEnWH/iZXfZUlI4rzCUnsvGmgqfuVRHL54ugE7/wRuxEIXRa2iMZ+BG6g==}
 
   '@types/picomatch@4.0.3':
     resolution: {integrity: sha512-iG0T6+nYJ9FAPmx9SsUlnwcq1ZVRuCXcVEvWnntoPlrOpwtSTKNDC9uVAxTsC3PUvJ+99n4RpAcNgBbHX3JSnQ==}
@@ -3064,11 +3067,11 @@ snapshots:
       '@codecov/bundler-plugin-core': 2.0.1
       unplugin: 1.16.1
 
-  '@commitlint/cli@21.0.1(@types/node@25.9.1)(conventional-commits-parser@6.4.0)(typescript@6.0.3)':
+  '@commitlint/cli@21.0.1(@types/node@25.9.4)(conventional-commits-parser@6.4.0)(typescript@6.0.3)':
     dependencies:
       '@commitlint/format': 21.0.1
       '@commitlint/lint': 21.0.1
-      '@commitlint/load': 21.0.1(@types/node@25.9.1)(typescript@6.0.3)
+      '@commitlint/load': 21.0.1(@types/node@25.9.4)(typescript@6.0.3)
       '@commitlint/read': 21.0.1(conventional-commits-parser@6.4.0)
       '@commitlint/types': 21.0.1
       tinyexec: 1.2.2
@@ -3113,14 +3116,14 @@ snapshots:
       '@commitlint/rules': 21.0.1
       '@commitlint/types': 21.0.1
 
-  '@commitlint/load@21.0.1(@types/node@25.9.1)(typescript@6.0.3)':
+  '@commitlint/load@21.0.1(@types/node@25.9.4)(typescript@6.0.3)':
     dependencies:
       '@commitlint/config-validator': 21.0.1
       '@commitlint/execute-rule': 21.0.1
       '@commitlint/resolve-extends': 21.0.1
       '@commitlint/types': 21.0.1
       cosmiconfig: 9.0.1(typescript@6.0.3)
-      cosmiconfig-typescript-loader: 6.3.0(@types/node@25.9.1)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3)
+      cosmiconfig-typescript-loader: 6.3.0(@types/node@25.9.4)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3)
       es-toolkit: 1.46.1
       is-plain-obj: 4.1.0
       picocolors: 1.1.1
@@ -3631,6 +3634,10 @@ snapshots:
     dependencies:
       undici-types: 7.24.6
 
+  '@types/node@25.9.4':
+    dependencies:
+      undici-types: 7.24.6
+
   '@types/picomatch@4.0.3': {}
 
   '@types/resolve@1.20.2': {}
@@ -3670,7 +3677,7 @@ snapshots:
       magicast: 0.5.3
       obug: 2.1.1
       tinyrainbow: 3.1.0
-      vitest: 4.1.7(@types/node@25.9.1)(@vitest/coverage-istanbul@4.1.7)(vite@8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))
+      vitest: 4.1.7(@types/node@25.9.4)(@vitest/coverage-istanbul@4.1.7)(vite@8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -3683,13 +3690,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.7(vite@8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))':
+  '@vitest/mocker@4.1.7(vite@8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.7
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0)
+      vite: 8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.7':
     dependencies:
@@ -3924,9 +3931,9 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@6.3.0(@types/node@25.9.1)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3):
+  cosmiconfig-typescript-loader@6.3.0(@types/node@25.9.4)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3):
     dependencies:
-      '@types/node': 25.9.1
+      '@types/node': 25.9.4
       cosmiconfig: 9.0.1(typescript@6.0.3)
       jiti: 2.6.1
       typescript: 6.0.3
@@ -5130,7 +5137,7 @@ snapshots:
       - bare-abort-controller
       - react-native-b4a
 
-  vite@8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0):
+  vite@8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -5138,16 +5145,16 @@ snapshots:
       rolldown: 1.0.2
       tinyglobby: 0.2.16
     optionalDependencies:
-      '@types/node': 25.9.1
+      '@types/node': 25.9.4
       fsevents: 2.3.3
       jiti: 2.6.1
       sass: 1.100.0
       yaml: 2.9.0
 
-  vitest@4.1.7(@types/node@25.9.1)(@vitest/coverage-istanbul@4.1.7)(vite@8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0)):
+  vitest@4.1.7(@types/node@25.9.4)(@vitest/coverage-istanbul@4.1.7)(vite@8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.7
-      '@vitest/mocker': 4.1.7(vite@8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))
+      '@vitest/mocker': 4.1.7(vite@8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.7
       '@vitest/runner': 4.1.7
       '@vitest/snapshot': 4.1.7
@@ -5164,10 +5171,10 @@ snapshots:
       tinyexec: 1.2.2
       tinyglobby: 0.2.16
       tinyrainbow: 3.1.0
-      vite: 8.0.14(@types/node@25.9.1)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0)
+      vite: 8.0.14(@types/node@25.9.4)(jiti@2.6.1)(sass@1.100.0)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 25.9.1
+      '@types/node': 25.9.4
       '@vitest/coverage-istanbul': 4.1.7(vitest@4.1.7)
     transitivePeerDependencies:
       - msw
