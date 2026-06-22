@@ -77,7 +77,7 @@
     "nano-staged": "1.0.2",
     "oxc-config-hope": "0.3.6",
     "oxfmt": "0.51.0",
-    "oxlint": "1.66.0",
+    "oxlint": "1.71.0",
     "oxlint-tsgolint": "0.23.0",
     "postcss": "8.5.15",
     "rimraf": "6.1.3",
