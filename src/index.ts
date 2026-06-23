@@ -1,4 +1,4 @@
-import { basename, dirname, extname, relative, resolve, sep } from "node:path";
+import path from "node:path";
 import { Transform } from "node:stream";
 
 import picocolors from "picocolors";
@@ -36,7 +36,7 @@ export interface BufferFileWithSourceMap extends BufferFile {
 const createError = (error: SassError, file: BufferFile): PluginError => {
   const filePath = error.span.url?.pathname ?? file.path;
 
-  const relativePath = relative(process.cwd(), filePath);
+  const relativePath = path.relative(process.cwd(), filePath);
   const message = `${picocolors.underline(relativePath)}\n${error.message}`;
 
   error.messageFormatted = message;
@@ -66,10 +66,10 @@ const handleFile = (
     const proto = /^file:\/\/?/u;
     const leadingSlash = /^\//u;
     const sassMap = result.sourceMap;
-    const base = resolve(file.cwd, file.base);
+    const base = path.resolve(file.cwd, file.base);
 
     // Convert from absolute path to relative as in gulp-sass 5.0.0
-    sassMap.file ??= file.history[0].replace(base + sep, "").replace(proto, "");
+    sassMap.file ??= file.history[0].replace(base + path.sep, "").replace(proto, "");
 
     // Transform to relative file paths as in gulp-sass 5.0.0
     sassMap.sources = sassMap.sources.map((src) => {
@@ -139,7 +139,7 @@ const main: PrivateGulpSass = (pluginOptions, sync) =>
 
       if (file.isBuffer()) {
         // skip those files that start with '_'
-        if (basename(file.path).startsWith("_")) {
+        if (path.basename(file.path).startsWith("_")) {
           callback();
 
           return;
@@ -154,12 +154,12 @@ const main: PrivateGulpSass = (pluginOptions, sync) =>
         }
 
         // Ensure `syntax` is `"indented"` if a `.sass` file
-        if (extname(file.path) === ".sass") options.syntax = "indented";
+        if (path.extname(file.path) === ".sass") options.syntax = "indented";
 
         options.loadPaths ??= [];
 
         // Ensure file's parent directory in the include path
-        options.loadPaths.unshift(dirname(file.path));
+        options.loadPaths.unshift(path.dirname(file.path));
 
         // Generate Source Maps if the source-map plugin is present
         // oxlint-disable-next-line typescript/strict-boolean-expressions
@@ -208,7 +208,7 @@ export type SassOptions = StringOptions<"sync">;
 
 export interface GulpSass {
   (pluginOptions?: StringOptions<"sync">): Transform;
-  logError(error: SassError): void;
+  logError: (error: SassError) => void;
 }
 
 // Sync Sass render
@@ -220,7 +220,7 @@ export type SassAsyncOptions = StringOptions<"async">;
 
 export interface GulpSassAsync {
   (pluginOptions?: StringOptions<"async">, sync?: boolean): Transform;
-  logError(error: SassError): void;
+  logError: (error: SassError) => void;
 }
 
 // Main Gulp Sass function

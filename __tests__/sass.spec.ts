@@ -1,7 +1,7 @@
 // eslint-disable no-console
 
 import { statSync } from "node:fs";
-import { join } from "node:path";
+import path from "node:path";
 
 import autoprefixer from "autoprefixer";
 import { deleteAsync } from "del";
@@ -19,7 +19,7 @@ import { createVinyl, normalizeEOL } from "./__fixtures__/index.js";
 describe("sync compile", () => {
   // oxlint-disable-next-line vitest/no-hooks
   afterAll(async () => {
-    await deleteAsync(join(__dirname, "results"));
+    await deleteAsync(path.join(__dirname, "results"));
   });
 
   it("should pass file when it isNull()", () =>
@@ -127,7 +127,7 @@ describe("sync compile", () => {
         // Error must include line and column error occurs on
         expect(err.messageOriginal).toContain("2:20  root stylesheet");
         // Error must include relativePath property
-        expect(err.message).toContain(join("__tests__", "__fixtures__", "scss", "error.scss"));
+        expect(err.message).toContain(path.join("__tests__", "__fixtures__", "scss", "error.scss"));
         resolve();
       });
       stream.write(errorFile);
@@ -144,7 +144,7 @@ describe("sync compile", () => {
         // Error must include line and column error occurs on
         expect(err.messageOriginal).toContain("error.scss 2:20  @use");
         // Error must include relativePath property
-        expect(err.message).toContain(join("__tests__", "__fixtures__", "scss", "error.scss"));
+        expect(err.message).toContain(path.join("__tests__", "__fixtures__", "scss", "error.scss"));
         resolve();
       });
       stream.write(errorFile);
@@ -155,7 +155,7 @@ describe("sync compile", () => {
       const stream = sass();
 
       // Transform file name
-      sassFile.path = join(__dirname, "__fixtures__/scss/mixin--changed.scss");
+      sassFile.path = path.join(__dirname, "__fixtures__/scss/mixin--changed.scss");
 
       stream.on("data", (cssFile: BufferFile) => {
         expectTypeOf(cssFile.relative).toBeString();
@@ -251,12 +251,12 @@ describe("sync compile", () => {
     const caller = vi.fn<() => void>();
 
     await new Promise((resolve) => {
-      src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
+      src(path.join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
         .pipe(init())
         .pipe(sass())
         .pipe(write())
-        .pipe(dest(join(__dirname, "results")))
+        .pipe(dest(path.join(__dirname, "results")))
         .on("end", resolve);
     }).catch(caller);
 
@@ -267,13 +267,13 @@ describe("sync compile", () => {
     const caller = vi.fn<() => void>();
 
     await new Promise((resolve) => {
-      src(join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
+      src(path.join(__dirname, "__fixtures__/scss/globbed/**/*.scss"))
         .on("error", console.error)
         .pipe(init())
         .pipe(sass())
         .pipe(postcss([autoprefixer()]))
         .pipe(write())
-        .pipe(dest(join(__dirname, "results")))
+        .pipe(dest(path.join(__dirname, "results")))
         .on("end", resolve);
     }).catch(caller);
 
@@ -282,12 +282,12 @@ describe("sync compile", () => {
 
   it("should work with empty files", () =>
     new Promise<void>((resolve) => {
-      src(join(__dirname, "__fixtures__/scss/empty.scss"))
+      src(path.join(__dirname, "__fixtures__/scss/empty.scss"))
         .on("error", console.error)
         .pipe(sass())
-        .pipe(dest(join(__dirname, "results")))
+        .pipe(dest(path.join(__dirname, "results")))
         .on("end", () => {
-          const stat = statSync(join(__dirname, "results/empty.css"));
+          const stat = statSync(path.join(__dirname, "results/empty.css"));
 
           expect(stat.size).toBe(0);
           resolve();
