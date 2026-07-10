@@ -1,0 +1,43 @@
+name: issue-labeled
+
+on:
+  issues:
+    types:
+      - labeled
+
+permissions:
+  issues: write
+
+jobs:
+  issue-invalid:
+    name: close invalid issue
+    if: github.event.label.name == 'invalid'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment and close invalid issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          printf 'Hello @%s. This issue is marked as `invalid` and closed. Please follow the issue template.\n' "${ISSUE_AUTHOR}" > "${RUNNER_TEMP}/invalid-comment.md"
+
+          gh issue comment "${ISSUE_NUMBER}" --repo "${GH_REPO}" --body-file "${RUNNER_TEMP}/invalid-comment.md"
+          gh issue close "${ISSUE_NUMBER}" --repo "${GH_REPO}"
+
+  issue-need-reproduction:
+    name: need reproduction
+    if: github.event.label.name == 'need reproduction'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on need reproduction issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          printf 'Hello @%s. Please provide a [minimal reproduction](https://stackoverflow.com/help/minimal-reproducible-example) using a GitHub repository or [vuepress.vuejs.org/new](https://vuepress.vuejs.org/new). Issues marked with `need reproduction` will be closed if they have no activity within 7 days.\n' "${ISSUE_AUTHOR}" > "${RUNNER_TEMP}/need-reproduction-comment.md"
+
+          gh issue comment "${ISSUE_NUMBER}" --repo "${GH_REPO}" --body-file "${RUNNER_TEMP}/need-reproduction-comment.md"
