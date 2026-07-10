@@ -3,7 +3,7 @@ allowBuilds:
   es5-ext: true
 
 configDependencies:
-  pacquet: "^0.11.10"
+  pacquet: ^0.11.12
 
 enableGlobalVirtualStore: true
 
@@ -18,6 +18,13 @@ packageExtensions:
   "@codecov/rollup-plugin":
     peerDependenciesMeta:
       rollup:
+        optional: true
+
+  conventional-changelog-preset-loader:
+    peerDependencies:
+      conventional-changelog-conventionalcommits: ^10.0.0
+    peerDependenciesMeta:
+      "conventional-changelog-core":
         optional: true
 
 trustPolicyExclude:
