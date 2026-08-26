@@ -2,9 +2,6 @@ allowBuilds:
   "@parcel/watcher": true
   es5-ext: true
 
-configDependencies:
-  pacquet: ^0.11.12
-
 enableGlobalVirtualStore: true
 
 minimumReleaseAgeExclude:

@@ -149,6 +149,7 @@ describe("sync compile", () => {
       });
       stream.write(errorFile);
     }));
+
   it("should compile a single sass file if the file name has been changed in the stream", () =>
     new Promise<void>((resolve) => {
       const sassFile = createVinyl("mixins.scss");
@@ -186,6 +187,7 @@ describe("sync compile", () => {
       });
       stream.write(sassFile);
     }));
+
   it("should have correct sources", () =>
     new Promise<void>((resolve) => {
       const sassFile = createVinyl("inheritance.scss");
