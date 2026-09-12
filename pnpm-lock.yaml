@@ -338,8 +338,8 @@ importers:
         specifier: 0.0.38
         version: 0.0.38
       '@types/node':
-        specifier: 22.20.1
-        version: 22.20.1
+        specifier: 22.20.2
+        version: 22.20.2
       '@types/vinyl':
         specifier: 2.0.12
         version: 2.0.12
@@ -402,7 +402,7 @@ importers:
         version: 0.3.1
       vitest:
         specifier: 4.1.11
-        version: 4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))
+        version: 4.1.11(@types/node@22.20.2)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0))
 
 packages:
 
@@ -1264,8 +1264,8 @@ packages:
   '@types/gulp@4.0.18':
     resolution: {integrity: sha512-IqkYa4sXkwH2uwqO2aXYOoAisJpLX13BPaS6lmEAoG4BbgOay3qqGQFsT9LMSSQVMQlEKU7wTUW0sPV46V0olw==}
 
-  '@types/node@22.20.1':
-    resolution: {integrity: sha512-EANqOCF9QFyra+4pfxUcX9STKJpCLjMbObVzljIJomAWSnuSIEAvyzEU53GaajbXJEgdh0iEcPL+DGvpUd4k1Q==}
+  '@types/node@22.20.2':
+    resolution: {integrity: sha512-xlvWf4Vs9n1PEVYwP1n4vvG07M6y8WgvJ2t0vbrWTmijsIHp1cS+uJ2kMIRdY3nHZK0nCYKrPeD171+SzF4/zw==}
 
   '@types/picomatch@4.0.3':
     resolution: {integrity: sha512-iG0T6+nYJ9FAPmx9SsUlnwcq1ZVRuCXcVEvWnntoPlrOpwtSTKNDC9uVAxTsC3PUvJ+99n4RpAcNgBbHX3JSnQ==}
@@ -3724,28 +3724,28 @@ snapshots:
 
   '@types/glob-stream@8.0.3':
     dependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       '@types/picomatch': 4.0.3
       '@types/streamx': 2.9.5
 
   '@types/gulp-postcss@8.0.6':
     dependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       '@types/vinyl': 2.0.12
 
   '@types/gulp-sourcemaps@0.0.38':
     dependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       '@types/vinyl': 2.0.12
 
   '@types/gulp@4.0.18':
     dependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       '@types/undertaker': 1.2.12
       '@types/vinyl-fs': 3.0.8
       chokidar: 3.6.0
 
-  '@types/node@22.20.1':
+  '@types/node@22.20.2':
     dependencies:
       undici-types: 6.21.0
 
@@ -3755,26 +3755,26 @@ snapshots:
 
   '@types/streamx@2.9.5':
     dependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
 
   '@types/undertaker-registry@1.0.4': {}
 
   '@types/undertaker@1.2.12':
     dependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       '@types/undertaker-registry': 1.0.4
       async-done: 1.3.2
 
   '@types/vinyl-fs@3.0.8':
     dependencies:
       '@types/glob-stream': 8.0.3
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       '@types/vinyl': 2.0.12
 
   '@types/vinyl@2.0.12':
     dependencies:
       '@types/expect': 1.20.4
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     optional: true
@@ -3848,7 +3848,7 @@ snapshots:
       magicast: 0.5.4
       obug: 2.1.4
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))
+      vitest: 4.1.11(@types/node@22.20.2)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -3861,13 +3861,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))':
+  '@vitest/mocker@4.1.11(vite@8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0)
+      vite: 8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.11':
     dependencies:
@@ -5329,7 +5329,7 @@ snapshots:
       - bare-abort-controller
       - react-native-b4a
 
-  vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0):
+  vite@8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.7
@@ -5337,15 +5337,15 @@ snapshots:
       rolldown: 1.1.5
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       fsevents: 2.3.3
       sass: 1.103.1
       yaml: 2.9.0
 
-  vitest@4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0)):
+  vitest@4.1.11(@types/node@22.20.2)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))
+      '@vitest/mocker': 4.1.11(vite@8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11
@@ -5362,10 +5362,10 @@ snapshots:
       tinyexec: 1.3.0
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vite: 8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0)
+      vite: 8.1.3(@types/node@22.20.2)(sass@1.103.1)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 22.20.1
+      '@types/node': 22.20.2
       '@vitest/coverage-istanbul': 4.1.11(supports-color@7.2.0)(vitest@4.1.11)
     transitivePeerDependencies:
       - msw
