@@ -305,7 +305,7 @@ importers:
         version: 2.0.0
       sass:
         specifier: ^1.103.1
-        version: 1.103.1
+        version: 1.104.1
       source-map-js:
         specifier: ^1.2.1
         version: 1.2.1
@@ -402,7 +402,7 @@ importers:
         version: 0.3.1
       vitest:
         specifier: 4.1.11
-        version: 4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))
+        version: 4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0))
 
 packages:
 
@@ -2672,8 +2672,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  sass@1.103.1:
-    resolution: {integrity: sha512-9icZURbP51S6S0QGoyaeqk9uB06GNWxsFYWfH5RgpFgqK5FA8tJcM3AdVxrZEVJ7dz+L87nG95gBKf4VuaMHGw==}
+  sass@1.104.1:
+    resolution: {integrity: sha512-yDA+1aIG3EHgN4V/BvuhCvu61FF6hEd4e+9DxikUm9U0CAGuvdIZ/UYy7qbOxjhbbWQraoyLlMuzdRGOSV5Bmw==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -3848,7 +3848,7 @@ snapshots:
       magicast: 0.5.4
       obug: 2.1.4
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))
+      vitest: 4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -3861,13 +3861,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.1
 
-  '@vitest/mocker@4.1.11(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))':
+  '@vitest/mocker@4.1.11(vite@8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.11
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0)
+      vite: 8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.11':
     dependencies:
@@ -5029,7 +5029,7 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass@1.103.1:
+  sass@1.104.1:
     dependencies:
       chokidar: 5.0.0
       immutable: 5.1.9
@@ -5329,7 +5329,7 @@ snapshots:
       - bare-abort-controller
       - react-native-b4a
 
-  vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0):
+  vite@8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.7
@@ -5339,13 +5339,13 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.20.1
       fsevents: 2.3.3
-      sass: 1.103.1
+      sass: 1.104.1
       yaml: 2.9.0
 
-  vitest@4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0)):
+  vitest@4.1.11(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.11)(vite@8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.11
-      '@vitest/mocker': 4.1.11(vite@8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0))
+      '@vitest/mocker': 4.1.11(vite@8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.11
       '@vitest/runner': 4.1.11
       '@vitest/snapshot': 4.1.11
@@ -5362,7 +5362,7 @@ snapshots:
       tinyexec: 1.3.0
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
-      vite: 8.1.3(@types/node@22.20.1)(sass@1.103.1)(yaml@2.9.0)
+      vite: 8.1.3(@types/node@22.20.1)(sass@1.104.1)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.20.1
