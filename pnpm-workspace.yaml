@@ -1,18 +1,8 @@
+virtualStoreType: global
+
 allowBuilds:
   "@parcel/watcher": true
   es5-ext: true
-
-configDependencies:
-  pacquet: ^0.11.12
-
-enableGlobalVirtualStore: true
-
-minimumReleaseAgeExclude:
-  - "@oxfmt/*"
-  - "@oxlint/*"
-  - oxc-config-hope
-  - oxfmt
-  - oxlint
 
 packageExtensions:
   "@codecov/rollup-plugin":
@@ -27,6 +17,13 @@ packageExtensions:
       "conventional-changelog-core":
         optional: true
 
-trustPolicyExclude:
-  # node types
-  - undici-types@6.21.0
+minimumReleaseAgeExclude:
+  - "@oxfmt/*"
+  - "@oxlint/*"
+  - oxc-config-hope
+  - oxfmt
+  - oxlint
+minimumReleaseAgeExcludePrune: true
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 720
+trustPolicyExcludePrune: true
