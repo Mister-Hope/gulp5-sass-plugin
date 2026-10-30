@@ -3,7 +3,5 @@ dist/
 node_modules/
 .npmrc
 
-__tests__/results/
-
 .DS_Store
 

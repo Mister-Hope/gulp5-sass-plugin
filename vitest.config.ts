@@ -14,7 +14,6 @@ export default defineConfig({
       },
     },
 
-    fileParallelism: false,
     ...(process.env.TEST_REPORT
       ? {
           reporters: ["junit"],
