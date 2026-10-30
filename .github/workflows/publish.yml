@@ -19,7 +19,8 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/setup@v3
         with:
-          runtime: node@^24.22.1
+          runtime: node@^26.13.0
+          require-lockfile: true
 
       - name: Check tag matches package version
         run: |
@@ -29,9 +30,6 @@ jobs:
             exit 1
           fi
           echo "Tag $GITHUB_REF_NAME matches package.json version $version"
-
-      - name: Install Deps
-        run: pnpm ci
 
       - name: Build project
         run: pnpm run build
