@@ -76,6 +76,8 @@ Note that we provide a useful function called `logError` on these 2 transform fu
 
 See the demo above for usage.
 
+Be aware that `logError` is designed to be used as a stream `error` listener: it prints the error and ends the current stream (matching `gulp-sass`). Files that were not processed yet in the same stream are dropped, so make sure the error is fixed before re-running the task.
+
 ### Partials
 
 Files whose basename starts with `_` are treated as Sass partials and are skipped: they are not compiled and not emitted to the output stream, matching the upstream [gulp-sass][] behavior.
