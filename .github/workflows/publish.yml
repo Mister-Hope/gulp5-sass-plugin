@@ -31,9 +31,6 @@ jobs:
           fi
           echo "Tag $GITHUB_REF_NAME matches package.json version $version"
 
-      - name: Build project
-        run: pnpm run build
-
       - name: Linter test
         run: pnpm run lint:check
 
