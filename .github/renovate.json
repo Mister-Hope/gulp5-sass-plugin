@@ -7,7 +7,8 @@
   "packageRules": [
     {
       "matchDepNames": ["@types/node"],
-      "matchUpdateTypes": ["patch"]
+      "matchUpdateTypes": ["patch"],
+      "automerge": false
     },
     {
       "automerge": true,

@@ -15,9 +15,7 @@ We strongly recommend you to use this plugin instead of [gulp-sass][] or [gulp-d
 
 ### gulp-sass
 
-[gulp-sass][] is still using node-sass by default, and it has been deprecated for quite a long while.
-
-Also, node-sass will take a long time to built during installation.
+[gulp-sass][] has been using Dart Sass instead of node-sass since version 5, and gulp-sass 6 no longer bundles node-sass at all, so it is still a maintained and reasonable choice.
 
 ### gulp-dart-sass
 
@@ -78,35 +76,31 @@ Note that we provide a useful function called `logError` on these 2 transform fu
 
 See the demo above for usage.
 
+### Partials
+
+Files whose basename starts with `_` are treated as Sass partials and are skipped: they are not compiled and not emitted to the output stream, matching the upstream [gulp-sass][] behavior.
+
 <details>
-<summary><strong>Performance</strong></summary>
+<summary><strong>Sync or async?</strong></summary>
 
-Note that **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks. To avoid this overhead, you can use the [`fibers`](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path. To enable this, pass the `Fiber` class to the `fiber` option:
+The synchronous version (`sass`) is faster for most use cases and is recommended by default, since synchronous compilation is roughly twice as fast as asynchronous compilation by default.
 
-```js
-const { dest, src, watch } = require("gulp");
-const { sass } = require("gulp5-sass-plugin");
-const fiber = require("fibers");
+Use the asynchronous version (`sassAsync`) only when you need asynchronous [custom importers or custom functions](https://sass-lang.com/documentation/js-api/) — that's the only thing async compilation gives you here.
 
-const build = () =>
-  src("./styles/**/*.scss").pipe(sass({ fiber }).on("error", sass.logError)).pipe(dest("./css"));
-
-exports.build = build;
-exports.watch = () => watch("./styles/**/*.scss", build);
-```
+Note that there is no `fiber` option anymore. The [`fibers`](https://www.npmjs.com/package/fibers) package is not compatible with modern Node.js, and modern Dart Sass ignores a `fiber` option entirely.
 
 </details>
 
 ## Options
 
-You should pass in options just like you would for [Dart Sass][] `compileString` api. They will be passed along just as if you were using `sass`. We also export `SassOption` and `SassAsyncOption` interface in declaration files.
+You should pass in options just like you would for [Dart Sass][] `compileString` api. They will be passed along just as if you were using `sass`. We also export the `SassOptions` and `SassAsyncOptions` types in the declaration files.
 
 For example:
 
 ```js
 export const build = () =>
   src("./styles/**/*.scss")
-    .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(sass({ style: "compressed" }).on("error", sass.logError))
     .pipe(dest("./css"));
 ```
 
@@ -115,7 +109,7 @@ Or this for asynchronous code:
 ```js
 export const build = () =>
   src("./styles/**/*.scss")
-    .pipe(sassAsync({ outputStyle: "compressed" }).on("error", sassAsync.logError))
+    .pipe(sassAsync({ style: "compressed" }).on("error", sassAsync.logError))
     .pipe(dest("./css"));
 ```
 
@@ -131,7 +125,7 @@ const { init, write } = require("gulp-sourcemaps");
 exports.build = () =>
   src("./styles/**/*.scss")
     .pipe(init())
-    .pipe(sassAsync({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(sassAsync({ style: "compressed" }).on("error", sassAsync.logError))
     .pipe(write())
     .pipe(dest("./css"));
 ```
@@ -146,14 +140,14 @@ const sourcemaps = require("gulp-sourcemaps");
 exports.build = () =>
   src("./styles/**/*.scss")
     .pipe(sourcemaps.init())
-    .pipe(sassAsync({ outputStyle: "compressed" }).on("error", sass.logError))
+    .pipe(sassAsync({ style: "compressed" }).on("error", sassAsync.logError))
     .pipe(sourcemaps.write("./maps"))
     .pipe(dest("./css"));
 ```
 
 ## Node Support
 
-Since sass only supports Node.js 14 and above, we also only support Node.js 14 and above.
+`gulp5-sass-plugin` requires Node.js 20.19.0 or above, matching the requirement of the `sass` (Dart Sass) dependency. Node.js 14/16/18 are not supported.
 
 ## Issues
 

@@ -21,11 +21,26 @@ jobs:
         with:
           runtime: node@^24.22.1
 
+      - name: Check tag matches package version
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if ! test "v$version" = "$GITHUB_REF_NAME"; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version (expected v$version)"
+            exit 1
+          fi
+          echo "Tag $GITHUB_REF_NAME matches package.json version $version"
+
       - name: Install Deps
         run: pnpm ci
 
       - name: Build project
         run: pnpm run build
+
+      - name: Linter test
+        run: pnpm run lint:check
+
+      - name: Unit test
+        run: pnpm run test
 
       - name: Publish to npm
         run: pnpm publish --no-git-checks

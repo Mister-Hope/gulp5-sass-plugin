@@ -6,7 +6,7 @@ export default defineConfig([
     entry: "./src/index.ts",
     outDir: "./dist",
     format: ["cjs", "esm"],
-    target: "node14",
+    target: "node20",
     dts: true,
     plugins: [
       codecovRollupPlugin({

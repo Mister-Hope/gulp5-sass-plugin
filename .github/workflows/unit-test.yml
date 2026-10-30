@@ -52,3 +52,4 @@ jobs:
         uses: codecov/codecov-action@v7
         with:
           use_oidc: true
+          files: ./coverage/cobertura-coverage.xml

@@ -12,13 +12,3 @@ declare module "vinyl-sourcemaps-apply" {
 
   export = applySourceMap;
 }
-
-// declare module "vinyl" {
-//   interface File {
-//     sourceMap?: {
-//       sourcesContent?: string[];
-//     };
-//   }
-
-//   namespace File {}
-// }

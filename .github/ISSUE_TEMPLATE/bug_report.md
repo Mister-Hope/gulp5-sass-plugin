@@ -17,4 +17,4 @@ If applicable, add screenshots to help explain your problem.
 **Additional context**
 Add any other context about the problem here. Especially the issue occurs in certain OS, browser or configuration.
 
-<!-- Please be aware that the plugin ONLY support LTS version of Node and force you to use sass. -->
+<!-- Please be aware that the plugin requires Node.js 20.19.0 or above and always uses Dart Sass (sass). -->
