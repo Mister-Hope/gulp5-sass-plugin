@@ -78,7 +78,7 @@ export const capturePluginError = async (
   const error = await captureError(context, input, options);
 
   if (!(error instanceof PluginError))
-    throw new Error(`Expected the plugin to emit a PluginError, got ${String(error)}`);
+    throw new TypeError(`Expected the plugin to emit a PluginError, got ${String(error)}`);
 
   return error as PluginError & SassError;
 };
