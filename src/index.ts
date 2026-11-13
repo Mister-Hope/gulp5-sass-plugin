@@ -292,6 +292,9 @@ const renderSync = ({ callback, content, file, options }: RenderOptions): void =
  * @param renderOptions The render options
  */
 const renderAsync = ({ callback, content, file, options, stream }: AsyncRenderOptions): void => {
+  // Only the compilation itself is treated as a Sass error, so the rejection
+  // handler must not catch errors thrown by the fulfillment handler.
+  // oxlint-disable-next-line promise/prefer-catch
   void compileStringAsync(content, options).then(
     (result) => {
       let outputFile: BufferFileWithSourceMap;
