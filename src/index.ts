@@ -59,22 +59,29 @@ const decodeSourcePath = (source: string): string => {
 };
 
 /**
- * Convert an absolute path to a path relative to the Vinyl base directory
+ * Convert a source path to a path relative to a directory
  *
- * @param sourcePath The absolute path
+ * Sources that are not absolute paths, such as custom importer URLs, are returned unchanged. Files
+ * inside the Vinyl base directory stay base relative, while files outside of it are resolved
+ * against the compiled file's directory as in v2.0.4, instead of becoming absolute paths with a
+ * stripped leading slash (#1038).
+ *
+ * @param sourcePath The source path
  * @param base The Vinyl base directory
- * @returns The path relative to `base`
+ * @param fileDir The directory of the file being compiled
+ * @returns The path relative to the base or to the file directory
  */
-const toBaseRelative = (sourcePath: string, base: string): string => {
-  const normalizedPath = sourcePath.replaceAll("\\", "/");
-  const normalizedBase = base.replaceAll("\\", "/");
+const toRelativeSource = (sourcePath: string, base: string, fileDir: string): string => {
+  if (!path.isAbsolute(sourcePath)) return sourcePath.replaceAll("\\", "/");
 
-  if (normalizedPath === normalizedBase) return "";
+  const relativeToBase = path.relative(base, sourcePath);
 
-  if (normalizedPath.startsWith(`${normalizedBase}/`))
-    return normalizedPath.slice(normalizedBase.length + 1);
-
-  return normalizedPath.replace(/^\//u, "");
+  // `path.relative` cannot produce a relative path across Windows volumes, so
+  // such sources stay absolute here; they are kept as-is rather than dropping
+  // the leading slash
+  return (
+    relativeToBase.split(path.sep)[0] === ".." ? path.relative(fileDir, sourcePath) : relativeToBase
+  ).replaceAll("\\", "/");
 };
 
 /**
@@ -158,16 +165,18 @@ const handleFile = (
     const base = path.resolve(file.cwd, file.base);
 
     // Transform to relative file paths as in gulp-sass 5.0.0
-    sassMap.sources = sassMap.sources.map((src) => {
-      const sourcePath = src.startsWith("data:")
+    sassMap.sources = sassMap.sources.map((src) =>
+      src.startsWith("data:")
         ? // The current file and its content are included as a
           // data:<encoded file contents> URL in the new Sass JS API.
           // Map it to the original file name (first history entry).
-          file.history[0]
-        : decodeSourcePath(src);
-
-      return toBaseRelative(sourcePath, base);
-    });
+          path.relative(base, file.history[0]).replaceAll("\\", "/")
+        : // Files inside the base stay base relative, and files outside of it
+          // are resolved against the emitted file's directory as v2.0.4 did,
+          // so they stay relative instead of becoming absolute machine-specific
+          // paths (#1038).
+          toRelativeSource(decodeSourcePath(src), base, path.dirname(file.path)),
+    );
 
     // Preserve sources content provided by an earlier plugin when Sass
     // doesn't include it itself

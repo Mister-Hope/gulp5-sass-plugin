@@ -1,3 +1,4 @@
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import type Vinyl from "vinyl";
@@ -132,17 +133,57 @@ export const defineSourceMapTests = (context: SassSuiteContext): void => {
     expect(sourceMap.sources[0]).toBe("example.com/styles/_importer.scss");
   });
 
-  it("should handle sources outside of the file base directory", async () => {
-    const sassFile = createVinyl("inheritance.scss");
+  it("should keep sources outside of the file base directory relative", async () => {
+    const paths = context.getPaths();
+
+    const nestedDir = path.join(paths.entriesDir, "nested");
+
+    await mkdir(nestedDir, { recursive: true });
+
+    const sassFile = createVinylAt(
+      path.join(nestedDir, "outside-base.scss"),
+      '@use "../../d1/vars";\n.outside {\n  color: vars.$result;\n}\n',
+    );
+
+    // Keep the base above the file so that the imported file is outside of it
+    // while the emitted CSS lives in a nested directory
+    sassFile.base = paths.entriesDir;
 
     enableSourceMap(sassFile);
-    sassFile.base = path.join(path.dirname(sassFile.path), "includes", "_cats.scss");
 
     const sourceMap = getSourceMap(await compileOne(context, sassFile));
 
-    expect(sourceMap.sources[0]).toBe("");
-    expect(sourceMap.sources.slice(1).map((source: string) => path.basename(source))).toStrictEqual(
-      ["_dogs.sass", "inheritance.scss"],
+    expect(sourceMap.file).toBe(path.join("nested", "outside-base.css"));
+    // The entry stays relative to the base; the imported file outside of the
+    // base is resolved against the compiled file's directory as in v2.0.4,
+    // not turned into an absolute path (#1038)
+    expect(sourceMap.sources).toStrictEqual(["nested/outside-base.scss", "../../d1/_vars.scss"]);
+  });
+
+  it("should keep nested sources inside the file base directory relative to the base", async () => {
+    const paths = context.getPaths();
+
+    const nestedDir = path.join(paths.entriesDir, "nested");
+    const sharedDir = path.join(paths.entriesDir, "shared");
+
+    await mkdir(nestedDir, { recursive: true });
+    await mkdir(sharedDir, { recursive: true });
+    await writeFile(path.join(sharedDir, "_vars.scss"), "$result: red;\n");
+
+    const sassFile = createVinylAt(
+      path.join(nestedDir, "inside-base.scss"),
+      '@use "../shared/vars";\n.inside {\n  color: vars.$result;\n}\n',
     );
+
+    sassFile.base = paths.entriesDir;
+
+    enableSourceMap(sassFile);
+
+    const sourceMap = getSourceMap(await compileOne(context, sassFile));
+
+    expect(sourceMap.file).toBe(path.join("nested", "inside-base.css"));
+    // Sources inside the base keep the layout gulp-sass and gulp-sourcemaps
+    // expect, so their sourcesContent can still be resolved from the base
+    expect(sourceMap.sources).toStrictEqual(["nested/inside-base.scss", "shared/_vars.scss"]);
   });
 };
