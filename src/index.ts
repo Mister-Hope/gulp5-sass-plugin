@@ -292,31 +292,38 @@ const renderSync = ({ callback, content, file, options }: RenderOptions): void =
  * @param renderOptions The render options
  */
 const renderAsync = ({ callback, content, file, options, stream }: AsyncRenderOptions): void => {
-  void compileStringAsync(content, options).then(
-    (result) => {
-      let outputFile: BufferFileWithSourceMap;
+  void (async (): Promise<void> => {
+    let result: CompileResult;
 
-      try {
-        outputFile = handleFile(file, result);
-      } catch (err: unknown) {
-        callback(createNonSassError(err));
-
-        return;
-      }
-
-      try {
-        callback(null, outputFile);
-      } catch (err: unknown) {
-        // A downstream consumer (e.g. a `data` listener) threw while the file
-        // was pushed. End the stream with the original error instead of
-        // turning it into an unhandled rejection and hanging the task.
-        stream.destroy(err instanceof Error ? err : new Error(String(err)));
-      }
-    },
-    (err: unknown) => {
+    // Only the compilation itself is treated as a Sass error: errors thrown by
+    // `handleFile` or by stream consumers must not be reported as Sass errors.
+    try {
+      result = await compileStringAsync(content, options);
+    } catch (err: unknown) {
       callback(createError(err, file));
-    },
-  );
+
+      return;
+    }
+
+    let outputFile: BufferFileWithSourceMap;
+
+    try {
+      outputFile = handleFile(file, result);
+    } catch (err: unknown) {
+      callback(createNonSassError(err));
+
+      return;
+    }
+
+    try {
+      callback(null, outputFile);
+    } catch (err: unknown) {
+      // A downstream consumer (e.g. a `data` listener) threw while the file
+      // was pushed. End the stream with the original error instead of
+      // turning it into an unhandled rejection and hanging the task.
+      stream.destroy(err instanceof Error ? err : new Error(String(err)));
+    }
+  })();
 };
 
 type PrivateGulpSass = (
