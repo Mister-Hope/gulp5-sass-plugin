@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.2.0](https://github.com/Mister-Hope/gulp5-sass-plugin/compare/v2.1.0...v2.2.0) (2026-11-21)
+
+### Features
+
+- improve test coverage ([b7f4b3c](https://github.com/Mister-Hope/gulp5-sass-plugin/commit/b7f4b3cfb8a4a2ff996c8642742a47a83152deba))
+
+### Bug Fixes
+
+- keep sourcemap sources outside the base relative ([#1121](https://github.com/Mister-Hope/gulp5-sass-plugin/issues/1121)) ([33626a2](https://github.com/Mister-Hope/gulp5-sass-plugin/commit/33626a27782efc3e65da2d1decbd6bd3413bc5bb))
+
 ## [2.1.0](https://github.com/Mister-Hope/gulp5-sass-plugin/compare/v2.0.3...v2.1.0) (2026-02-07)
 
 ### Bug Fixes
