@@ -1,20 +1,62 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
+    inputs:
+      bump:
+        type: choice
+        description: Version bump
+        options:
+          - auto
+          - patch
+          - minor
+          - major
+          - prepatch
+          - preminor
+          - premajor
+          - prerelease
+          - none
+        default: auto
+      preid:
+        type: string
+        description: Prerelease identifier (e.g. beta), used by prerelease, prepatch, preminor and premajor bumps
+      dist_tag:
+        type: string
+        description: npm dist-tag (required for prereleases, defaults to latest)
+      dryrun:
+        type: boolean
+        description: Run checks and a publish dry run without updating the changelog, committing, pushing, publishing or creating a GitHub Release
+        default: false
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
 
 jobs:
   publish:
     name: Publish Package
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
+      - name: Check if user is allowed to release
+        if: ${{ github.actor != 'Mister-Hope' }}
+        run: |
+          echo "You are not allowed to release."
+          exit 1
+
+      - name: Check branch
+        if: ${{ github.ref_name != 'main' }}
+        run: |
+          echo "Releases must run from main."
+          exit 1
+
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/setup@v3
@@ -22,20 +64,152 @@ jobs:
           runtime: node@^26.13.0
           require-lockfile: true
 
-      - name: Check tag matches package version
-        run: |
-          version="$(node -p "require('./package.json').version")"
-          if ! test "v$version" = "$GITHUB_REF_NAME"; then
-            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version (expected v$version)"
-            exit 1
-          fi
-          echo "Tag $GITHUB_REF_NAME matches package.json version $version"
-
       - name: Linter test
         run: pnpm run lint:check
 
       - name: Unit test
         run: pnpm run test
 
+      - name: Build project
+        run: pnpm run build
+
+      - name: Config git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Resolve version bump
+        id: bump
+        env:
+          BUMP_INPUT: ${{ inputs.bump }}
+        run: |
+          if [ "$BUMP_INPUT" = "auto" ]; then
+            BUMP="$(node scripts/release-bump.ts)"
+          else
+            BUMP="$BUMP_INPUT"
+          fi
+
+          echo "bump=$BUMP" >> "$GITHUB_OUTPUT"
+          echo "Version bump: $BUMP"
+
+      - name: Bump version
+        if: ${{ inputs.bump != 'none' }}
+        env:
+          BUMP: ${{ steps.bump.outputs.bump }}
+          PREID: ${{ inputs.preid }}
+        run: |
+          ARGS=(--no-commit-hooks --no-git-tag-version --no-git-checks)
+
+          if [ -n "$PREID" ]; then
+            pnpm version "$BUMP" --preid "$PREID" "${ARGS[@]}"
+          else
+            pnpm version "$BUMP" "${ARGS[@]}"
+          fi
+
+      - name: Show release version
+        id: version
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Releasing v$VERSION"
+
+      - name: Update CHANGELOG.md
+        if: ${{ !inputs.dryrun && inputs.bump != 'none' }}
+        run: |
+          # `conventional-changelog -i/-o` writes the generated release above the existing
+          # content, which would push the `# Changelog` header below the new release.
+          # Generate the section on its own (empty input file) and insert it after the header.
+          pnpm run changelog -- -i /dev/null --stdout > "$RUNNER_TEMP/changelog-section.md"
+          node scripts/insert-changelog.ts "$RUNNER_TEMP/changelog-section.md"
+          # The generator emits `*` bullets; keep the file consistent with oxfmt --check.
+          pnpm exec oxfmt CHANGELOG.md
+
+      - name: Commit release commit and tag
+        if: ${{ !inputs.dryrun && inputs.bump != 'none' }}
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          git add CHANGELOG.md package.json
+          git commit -m "chore: release v$VERSION"
+          git tag -a "v$VERSION" -m "v$VERSION"
+
+      - name: Resolve npm dist-tag
+        id: dist-tag
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          DIST_TAG: ${{ inputs.dist_tag }}
+        run: |
+          if [ -n "$DIST_TAG" ]; then
+            echo "tag=$DIST_TAG" >> "$GITHUB_OUTPUT"
+            echo "Publishing v$VERSION with dist-tag $DIST_TAG"
+          elif [[ "$VERSION" == *-* ]]; then
+            echo "::error::v$VERSION is a prerelease, so dist_tag must be set (e.g. next); otherwise pnpm publishes it as latest."
+            exit 1
+          else
+            echo "tag=latest" >> "$GITHUB_OUTPUT"
+            echo "Publishing v$VERSION with dist-tag latest"
+          fi
+
+      - name: Push release commit and tag
+        if: ${{ !inputs.dryrun && inputs.bump != 'none' }}
+        run: git push origin "HEAD:${GITHUB_REF_NAME}" --follow-tags
+
+      - name: Publish to npm (dry run)
+        if: ${{ inputs.dryrun }}
+        env:
+          TAG: ${{ steps.dist-tag.outputs.tag }}
+        run: pnpm publish --dry-run --no-git-checks --tag "$TAG"
+
       - name: Publish to npm
-        run: pnpm publish --no-git-checks
+        if: ${{ !inputs.dryrun }}
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          TAG: ${{ steps.dist-tag.outputs.tag }}
+        run: |
+          # `bump = none` may retry a release that only partially completed, so skip an
+          # already published version instead of failing the workflow.
+          # `|| echo 000` keeps the failure path explainable if curl itself fails (DNS, timeout).
+          STATUS="$(curl -s --max-time 20 -o /dev/null -w '%{http_code}' "https://registry.npmjs.org/gulp5-sass-plugin/$VERSION" || echo 000)"
+
+          case "$STATUS" in
+            200)
+              echo "v$VERSION is already published on npm; skipping."
+              ;;
+            404)
+              pnpm publish --no-git-checks --provenance --tag "$TAG"
+              ;;
+            *)
+              echo "::error::Could not check gulp5-sass-plugin@$VERSION on the npm registry (HTTP $STATUS)."
+              exit 1
+              ;;
+          esac
+
+      - name: Create or update GitHub Release
+        if: ${{ !inputs.dryrun }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          NOTES="$RUNNER_TEMP/release-notes.md"
+
+          awk -v ver="$VERSION" '
+            index($0, "## [" ver "]") == 1 { found = 1; next }
+            found && /^## \[/ { exit }
+            found { print }
+          ' CHANGELOG.md > "$NOTES"
+
+          if grep -q '[^[:space:]]' "$NOTES"; then
+            if gh release view "v$VERSION" >/dev/null 2>&1; then
+              gh release edit "v$VERSION" --notes-file "$NOTES"
+            else
+              gh release create "v$VERSION" --verify-tag --title "v$VERSION" --notes-file "$NOTES"
+            fi
+          elif ! gh release view "v$VERSION" >/dev/null 2>&1; then
+            gh release create "v$VERSION" --verify-tag --title "v$VERSION" --generate-notes
+          fi
+
+          if [[ "$VERSION" == *-* ]]; then
+            gh release edit "v$VERSION" --prerelease
+          else
+            gh release edit "v$VERSION" --latest
+          fi
