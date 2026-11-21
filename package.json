@@ -79,7 +79,7 @@
     "oxfmt": "0.75.0",
     "oxlint": "1.90.0",
     "oxlint-tsgolint": "7.0.2005",
-    "postcss": "8.5.32",
+    "postcss": "8.5.33",
     "rimraf": "6.1.4",
     "source-map-js": "^1.2.2",
     "tsdown": "0.23.7",
